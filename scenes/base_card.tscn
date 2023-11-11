@@ -1,9 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://17uh7nnayp77"]
+[gd_scene load_steps=4 format=3 uid="uid://17uh7nnayp77"]
+
+[ext_resource type="Texture2D" uid="uid://bhq1yjd7esv4s" path="res://assets/card_base/card_base_front.png" id="1_muloj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qli0p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_muloj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbtnw"]
-size = Vector2(60, 80)
+size = Vector2(160, 220)
 
 [node name="BaseCard" type="Area2D"]
 
