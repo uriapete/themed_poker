@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://17uh7nnayp77"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qli0p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbtnw"]
+size = Vector2(60, 80)
+
+[node name="BaseCard" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qli0p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wbtnw")
