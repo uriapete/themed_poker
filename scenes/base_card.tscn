@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://17uh7nnayp77"]
+[gd_scene load_steps=6 format=3 uid="uid://17uh7nnayp77"]
 
 [ext_resource type="Script" path="res://scenes/BaseCard.cs" id="1_qn0aa"]
 [ext_resource type="Texture2D" uid="uid://d5qfenku4iod" path="res://assets/card_base/card_base_back.png" id="1_xj5mg"]
+[ext_resource type="Texture2D" uid="uid://bhq1yjd7esv4s" path="res://assets/card_base/card_base_front.png" id="3_0towb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qli0p"]
 animations = [{
@@ -10,7 +11,15 @@ animations = [{
 "texture": ExtResource("1_xj5mg")
 }],
 "loop": true,
-"name": &"default",
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0towb")
+}],
+"loop": true,
+"name": &"front",
 "speed": 5.0
 }]
 
@@ -22,6 +31,7 @@ script = ExtResource("1_qn0aa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qli0p")
+animation = &"front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_wbtnw")
