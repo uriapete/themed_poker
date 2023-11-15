@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://17uh7nnayp77"]
+[gd_scene load_steps=7 format=3 uid="uid://17uh7nnayp77"]
 
 [ext_resource type="Script" path="res://scenes/BaseCard.cs" id="1_qn0aa"]
 [ext_resource type="Texture2D" uid="uid://d5qfenku4iod" path="res://assets/card_base/card_base_back.png" id="1_xj5mg"]
@@ -26,6 +26,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbtnw"]
 size = Vector2(160, 220)
 
+[sub_resource type="SystemFont" id="SystemFont_5ygoc"]
+
 [node name="BaseCard" type="Area2D"]
 script = ExtResource("1_qn0aa")
 
@@ -35,3 +37,13 @@ animation = &"back"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_wbtnw")
+
+[node name="ValueLabel" type="Label" parent="."]
+visible = false
+offset_left = -37.0
+offset_top = -87.0
+offset_right = 36.0
+offset_bottom = 91.0
+theme_override_fonts/font = SubResource("SystemFont_5ygoc")
+theme_override_font_sizes/font_size = 128
+text = "0"
