@@ -27,23 +27,25 @@ animations = [{
 size = Vector2(160, 220)
 
 [sub_resource type="SystemFont" id="SystemFont_5ygoc"]
+font_names = PackedStringArray("Calibri")
 
 [node name="BaseCard" type="Area2D"]
 script = ExtResource("1_qn0aa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qli0p")
-animation = &"back"
+animation = &"front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_wbtnw")
 
 [node name="ValueLabel" type="Label" parent="."]
-visible = false
-offset_left = -37.0
-offset_top = -87.0
-offset_right = 36.0
-offset_bottom = 91.0
+offset_left = -34.0
+offset_top = -54.0
+offset_right = 31.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("SystemFont_5ygoc")
 theme_override_font_sizes/font_size = 128
 text = "0"
