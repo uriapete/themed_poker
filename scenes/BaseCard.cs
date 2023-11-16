@@ -29,6 +29,13 @@ public partial class BaseCard : Area2D
     //var for: is card currently flipping?
     protected bool Flipping = false;
 
+    //fn for flipping
+    //protected for now, but may turn public if necessary
+    protected void flip()
+    {
+
+    }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
