@@ -20,7 +20,8 @@ public partial class BaseCard : Area2D
         back = 1,
     }
 
-    }
+    protected Sides TargetSide;
+    protected bool Flipping = false;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
