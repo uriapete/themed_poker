@@ -14,6 +14,13 @@ public partial class BaseCard : Area2D
         protected set;
     } = 0;
 
+    enum Sides
+    {
+        front,
+        back,
+
+    }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
