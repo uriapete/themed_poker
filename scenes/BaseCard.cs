@@ -14,13 +14,19 @@ public partial class BaseCard : Area2D
         protected set;
     } = 0;
 
+    //enum for strong typing sides
+    //all lower case to match animation names, which follow gdscript naming conventions
+    //are signed for easy flipping
     protected enum Sides
     {
         front = -1,
         back = 1,
     }
 
+    //var for: what side are we flipping to?
     protected Sides TargetSide;
+
+    //var for: is card currently flipping?
     protected bool Flipping = false;
 
     // Called when the node enters the scene tree for the first time.
