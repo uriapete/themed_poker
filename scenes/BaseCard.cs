@@ -16,8 +16,9 @@ public partial class BaseCard : Area2D
 
     protected enum Sides
     {
-        front,
-        back,
+        front = -1,
+        back = 1,
+    }
 
     }
 
