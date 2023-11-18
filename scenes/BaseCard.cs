@@ -25,7 +25,7 @@ public partial class BaseCard : Area2D
     }
 
     //var for: what side are we flipping to?
-    protected Sides TargetSide;
+    protected Sides TargetSide { get; set; }
 
     //var for: is card currently flipping?
     protected bool Flipping = false;
