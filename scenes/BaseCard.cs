@@ -17,7 +17,7 @@ public partial class BaseCard : Area2D
     //enum for strong typing sides
     //all lower case to match animation names, which follow gdscript naming conventions
     //are signed for easy flipping
-    protected enum Sides
+    public enum Sides
     {
         front = -1,
         back = 1,
