@@ -58,9 +58,10 @@ public partial class BaseCard : Area2D
 
     //fn for flipping
     //protected for now, but may turn public if necessary
-    protected void flip()
+    protected void Flip()
     {
-
+        TargetSide = (Sides)(-1 * (int)CurrentSide);
+        Flipping = true;
     }
 
     // Called when the node enters the scene tree for the first time.
@@ -69,7 +70,7 @@ public partial class BaseCard : Area2D
         // on card ready, write the proper value of the card to the label
         // remember, the label is temporary, once we confirm all the basic logic is working, we can replace the label with actual images
         Label valueLabel = GetNode<Label>("ValueLabel");
-        valueLabel.Text = this.Value.ToString();
+        valueLabel.Text = Value.ToString();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
