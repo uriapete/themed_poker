@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 // BaseCard script, meant as a basic template for displayed cards
 // this will probs be inherited
@@ -28,6 +29,22 @@ public partial class BaseCard : Area2D
 
     //var for: is card currently flipping?
     protected bool Flipping = false;
+
+    public Sides CurrentSide
+    {
+        get
+        {
+            AnimatedSprite2D animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+            Sides result;
+            /*bool tryParse=*/ Enum.TryParse<Sides>(animatedSprite2D.Animation, out result);
+            return result;
+        }
+        protected set
+        {
+            AnimatedSprite2D animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+            animatedSprite2D.Animation = value.ToString();
+        }
+    }
 
     //fn for flipping
     //protected for now, but may turn public if necessary
