@@ -30,18 +30,28 @@ public partial class BaseCard : Area2D
     //var for: is card currently flipping?
     protected bool Flipping = false;
 
+    //var for easy getting and setting current side without getting node
     public Sides CurrentSide
     {
         get
         {
+            //get the node
             AnimatedSprite2D animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-            Sides result;
-            /*bool tryParse=*/ Enum.TryParse<Sides>(animatedSprite2D.Animation, out result);
+
+            //parse the string anim value into sides
+            _ = Enum.TryParse(animatedSprite2D.Animation, out Sides result);
+
+            //then result
             return result;
         }
+
+        //we don't want just anything setting the anim, so protected it is
         protected set
         {
+            //get node
             AnimatedSprite2D animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
+            //set the value, stringifying the enum value
             animatedSprite2D.Animation = value.ToString();
         }
     }
