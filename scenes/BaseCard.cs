@@ -58,10 +58,27 @@ public partial class BaseCard : Area2D
 
     //fn for flipping
     //protected for now, but may turn public if necessary
-    protected void Flip()
+    protected void BeginFlip()
     {
         TargetSide = (Sides)(-1 * (int)CurrentSide);
         Flipping = true;
+        //AnimationPlayer;
+        Tween tween = GetTree().CreateTween();
+        tween.TweenProperty(this, "scale", Vector2.Down, 0.2f);
+        tween.Connect("finished", new Callable(this,MethodName.FinishFlip));
+    }
+
+    protected void FinishFlip()
+    {
+        CurrentSide = TargetSide;
+        Tween tween = GetTree().CreateTween();
+        tween.TweenProperty(this, "scale", Vector2.One, 0.2f);
+        tween.Connect("finished",new Callable(this,MethodName.CompleteFlip));
+    }
+
+    protected void CompleteFlip()
+    {
+        Flipping=false;
     }
 
     // Called when the node enters the scene tree for the first time.
@@ -71,10 +88,15 @@ public partial class BaseCard : Area2D
         // remember, the label is temporary, once we confirm all the basic logic is working, we can replace the label with actual images
         Label valueLabel = GetNode<Label>("ValueLabel");
         valueLabel.Text = Value.ToString();
+        Flipping=false;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
+        if (Input.IsActionPressed("ui_accept") && !Flipping)
+        {
+            BeginFlip();
+        }
     }
 }
