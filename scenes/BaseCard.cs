@@ -15,6 +15,9 @@ public partial class BaseCard : Area2D
         protected set;
     } = 0;
 
+    //how long it takes for a complete flip in secs
+    [Export] public float FlipDuration { get; protected set; } = 0.2f;
+
     //enum for strong typing sides
     //all lower case to match animation names, which follow gdscript naming conventions
     //are signed for easy flipping
@@ -64,7 +67,7 @@ public partial class BaseCard : Area2D
         Flipping = true;
         //AnimationPlayer;
         Tween tween = GetTree().CreateTween();
-        tween.TweenProperty(this, "scale", Vector2.Down, 0.2f);
+        tween.TweenProperty(this, "scale", Vector2.Down, FlipDuration/2);
         tween.Connect("finished", new Callable(this,MethodName.FinishFlip));
     }
 
@@ -72,7 +75,7 @@ public partial class BaseCard : Area2D
     {
         CurrentSide = TargetSide;
         Tween tween = GetTree().CreateTween();
-        tween.TweenProperty(this, "scale", Vector2.One, 0.2f);
+        tween.TweenProperty(this, "scale", Vector2.One, FlipDuration/2);
         tween.Connect("finished",new Callable(this,MethodName.CompleteFlip));
     }
 
