@@ -18,6 +18,8 @@ public partial class BaseCard : Area2D
     //how long it takes for a complete flip in secs
     [Export] public float FlipDuration { get; protected set; } = 0.2f;
 
+    [Export] public CanvasItem ValueDisplayNode { get; protected set; }
+
     //enum for strong typing sides
     //all lower case to match animation names, which follow gdscript naming conventions
     //are signed for easy flipping
@@ -85,10 +87,10 @@ public partial class BaseCard : Area2D
         switch (CurrentSide)
         {
             case Sides.front:
-                GetNode<Label>("ValueLabel").Show();
+                ValueDisplayNode.Show();
                 break;
             case Sides.back:
-                GetNode<Label>("ValueLabel").Hide();
+                ValueDisplayNode.Hide();
                 break;
         }
 
