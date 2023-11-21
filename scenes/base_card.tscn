@@ -28,6 +28,7 @@ size = Vector2(160, 220)
 
 [sub_resource type="SystemFont" id="SystemFont_5ygoc"]
 font_names = PackedStringArray("Calibri")
+subpixel_positioning = 0
 
 [sub_resource type="Animation" id="Animation_dmh6r"]
 resource_name = "flip_first_half"
