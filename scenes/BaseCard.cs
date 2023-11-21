@@ -18,6 +18,7 @@ public partial class BaseCard : Area2D
     //how long it takes for a complete flip in secs
     [Export] public float FlipDuration { get; protected set; } = 0.2f;
 
+    //node to use for the card's front side
     [Export] public CanvasItem ValueDisplayNode { get; protected set; }
 
     //enum for strong typing sides
