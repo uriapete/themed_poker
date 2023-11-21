@@ -27,9 +27,6 @@ public partial class BaseCard : Area2D
         back = 1,
     }
 
-    //var for: what side are we flipping to?
-    protected Sides TargetSide { get; set; }
-
     //var for: is card currently flipping?
     protected bool Flipping = false;
 
@@ -61,19 +58,31 @@ public partial class BaseCard : Area2D
 
     //fn for flipping
     //protected for now, but may turn public if necessary
+    //when starting flip, you MUST call this!
     protected void BeginFlip()
     {
-        TargetSide = (Sides)(-1 * (int)CurrentSide);
+        //set this bool so in case to stop something from running during flip
         Flipping = true;
-        //AnimationPlayer;
+
+        //create a tween for the animation
         Tween tween = GetTree().CreateTween();
-        tween.TweenProperty(this, "scale", Vector2.Down, FlipDuration/2);
-        tween.Connect("finished", new Callable(this,MethodName.FinishFlip));
+
+        //make this node x-scale to 0
+        tween.TweenProperty(this, "scale", Vector2.Down, FlipDuration / 2);
+
+        //run FinishFlip when done
+        tween.Connect("finished", new Callable(this, MethodName.FinishFlip));
     }
 
+    //fn after first flip tween is done
+    //this fn SHOULD NOT BE CALLED BY ANYTHING OTHER THAN BEGINFLIP'S TWEEN!!!
     protected void FinishFlip()
     {
-        switch (TargetSide)
+        //switch current side
+        CurrentSide = (Sides)(-1 * (int)CurrentSide);
+
+        //hide or show face value sprite depending on current side
+        switch (CurrentSide)
         {
             case Sides.front:
                 GetNode<Label>("ValueLabel").Show();
@@ -82,15 +91,22 @@ public partial class BaseCard : Area2D
                 GetNode<Label>("ValueLabel").Hide();
                 break;
         }
-        CurrentSide = TargetSide;
+
+        //create the next tween
         Tween tween = GetTree().CreateTween();
-        tween.TweenProperty(this, "scale", Vector2.One, FlipDuration/2);
-        tween.Connect("finished",new Callable(this,MethodName.CompleteFlip));
+
+        //scale the node back to normal
+        tween.TweenProperty(this, "scale", Vector2.One, FlipDuration / 2);
+
+        //now run CompleteFlip once done
+        tween.Connect("finished", new Callable(this, MethodName.CompleteFlip));
     }
 
+    //fn to complete the flip
+    //DO NOT CALL! ONLY THE TWEEN CREATED IN FINISHFLIP SHOULD CALL THIS!!!
     protected void CompleteFlip()
     {
-        Flipping=false;
+        Flipping = false;
     }
 
     // Called when the node enters the scene tree for the first time.
@@ -100,12 +116,13 @@ public partial class BaseCard : Area2D
         // remember, the label is temporary, once we confirm all the basic logic is working, we can replace the label with actual images
         Label valueLabel = GetNode<Label>("ValueLabel");
         valueLabel.Text = Value.ToString();
-        Flipping=false;
+        Flipping = false;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
+        //this code is for testing
         if (Input.IsActionPressed("ui_accept") && !Flipping)
         {
             BeginFlip();
