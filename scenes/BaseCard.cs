@@ -73,6 +73,15 @@ public partial class BaseCard : Area2D
 
     protected void FinishFlip()
     {
+        switch (TargetSide)
+        {
+            case Sides.front:
+                GetNode<Label>("ValueLabel").Show();
+                break;
+            case Sides.back:
+                GetNode<Label>("ValueLabel").Hide();
+                break;
+        }
         CurrentSide = TargetSide;
         Tween tween = GetTree().CreateTween();
         tween.TweenProperty(this, "scale", Vector2.One, FlipDuration/2);
