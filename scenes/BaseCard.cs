@@ -115,10 +115,8 @@ public partial class BaseCard : Area2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        // on card ready, write the proper value of the card to the label
-        // remember, the label is temporary, once we confirm all the basic logic is working, we can replace the label with actual images
-        Label valueLabel = GetNode<Label>("ValueLabel");
-        valueLabel.Text = Value.ToString();
+        //it is now up to the individual node script of ValueDisplayNode to have their value render fn implemented locally
+        ValueDisplayNode.Call("RenderValue",Value);
         Flipping = false;
     }
 
