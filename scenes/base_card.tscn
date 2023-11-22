@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://17uh7nnayp77"]
+[gd_scene load_steps=7 format=3 uid="uid://17uh7nnayp77"]
 
 [ext_resource type="Script" path="res://scenes/BaseCard.cs" id="1_qn0aa"]
 [ext_resource type="Texture2D" uid="uid://d5qfenku4iod" path="res://assets/card_base/card_base_back.png" id="1_xj5mg"]
@@ -37,13 +37,14 @@ ValueDisplayNode = NodePath("ValueLabel")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qli0p")
-animation = &"front"
+animation = &"back"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_wbtnw")
 
 [node name="ValueLabel" type="Label" parent="."]
+visible = false
 offset_left = -34.0
 offset_top = -54.0
 offset_right = 31.0
