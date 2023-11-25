@@ -1,15 +1,15 @@
 [gd_scene load_steps=8 format=3 uid="uid://17uh7nnayp77"]
 
-[ext_resource type="Script" path="res://scenes/BaseCard.cs" id="1_qn0aa"]
-[ext_resource type="Texture2D" uid="uid://d5qfenku4iod" path="res://assets/card_base/card_base_back.png" id="1_xj5mg"]
-[ext_resource type="Texture2D" uid="uid://bhq1yjd7esv4s" path="res://assets/card_base/card_base_front.png" id="3_0towb"]
-[ext_resource type="Script" path="res://scenes/ValueLabel.cs" id="4_0v5ty"]
+[ext_resource type="Script" path="res://scenes/base_card/BaseCard.cs" id="1_330c5"]
+[ext_resource type="Texture2D" uid="uid://d5qfenku4iod" path="res://assets/card_base/card_base_back.png" id="2_xnicw"]
+[ext_resource type="Texture2D" uid="uid://bhq1yjd7esv4s" path="res://assets/card_base/card_base_front.png" id="3_htrnb"]
+[ext_resource type="Script" path="res://scenes/base_card/ValueLabel.cs" id="4_f7exu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qli0p"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_xj5mg")
+"texture": ExtResource("2_xnicw")
 }],
 "loop": true,
 "name": &"back",
@@ -17,7 +17,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_0towb")
+"texture": ExtResource("3_htrnb")
 }],
 "loop": true,
 "name": &"front",
@@ -32,7 +32,7 @@ font_names = PackedStringArray("Calibri")
 subpixel_positioning = 0
 
 [node name="BaseCard" type="Area2D" node_paths=PackedStringArray("ValueDisplayNode")]
-script = ExtResource("1_qn0aa")
+script = ExtResource("1_330c5")
 FlipDuration = 0.15
 ValueDisplayNode = NodePath("ValueLabel")
 
@@ -57,4 +57,4 @@ text = "E"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1
-script = ExtResource("4_0v5ty")
+script = ExtResource("4_f7exu")
