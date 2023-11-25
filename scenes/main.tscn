@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://fpt4kiy0e160"]
+[gd_scene load_steps=4 format=3 uid="uid://fpt4kiy0e160"]
 
 [ext_resource type="PackedScene" uid="uid://b2s8xrt5xcxgt" path="res://scenes/non_functional/card_stack.tscn" id="1_ajaik"]
 [ext_resource type="Script" path="res://scenes/main.cs" id="1_gt1de"]
+[ext_resource type="PackedScene" uid="uid://17uh7nnayp77" path="res://scenes/base_card/base_card.tscn" id="2_b7l1x"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_gt1de")
+CardScene = ExtResource("2_b7l1x")
+HouseHandStartPosition = Vector2(540, 170)
+PlayerHandStartPosition = Vector2(540, 850)
 
 [node name="CardStack" parent="." instance=ExtResource("1_ajaik")]
 position = Vector2(190, 170)
