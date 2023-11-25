@@ -3,9 +3,9 @@ using System;
 
 public partial class main : Node2D
 {
-    [Export] public PackedScene CardScene { get;protected set; }
-    [Export] public Vector2 HouseHandStartPosition { get;protected set; }
-    [Export] public Vector2 PlayerHandStartPosition { get; protected set; }
+    [Export] public PackedScene CardScene { get;private set; }
+    [Export] public Vector2 HouseHandStartPosition { get;private set; }
+    [Export] public Vector2 PlayerHandStartPosition { get; private set; }
 
     public Vector2 CardStackPosition
     {
