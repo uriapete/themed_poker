@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2s8xrt5xcxgt"]
+
+[ext_resource type="Texture2D" uid="uid://d5qfenku4iod" path="res://assets/card_base/card_base_back.png" id="1_578al"]
+
+[node name="CardStack" type="Node2D"]
+position = Vector2(10, -10)
+
+[node name="CardBack" type="Sprite2D" parent="."]
+position = Vector2(-20, 20)
+texture = ExtResource("1_578al")
+
+[node name="CardBack2" type="Sprite2D" parent="."]
+position = Vector2(-15, 15)
+texture = ExtResource("1_578al")
+
+[node name="CardBack3" type="Sprite2D" parent="."]
+position = Vector2(-10, 10)
+texture = ExtResource("1_578al")
+
+[node name="CardBack4" type="Sprite2D" parent="."]
+position = Vector2(-5, 5)
+texture = ExtResource("1_578al")
+
+[node name="CardBack5" type="Sprite2D" parent="."]
+texture = ExtResource("1_578al")
