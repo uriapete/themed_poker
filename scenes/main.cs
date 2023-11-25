@@ -3,6 +3,9 @@ using System;
 
 public partial class main : Node2D
 {
+    [Export] public Vector2 HouseHandStartPosition { get;protected set; }
+    [Export] public Vector2 PlayerHandStartPosition { get; protected set; }
+
     public Vector2 CardStackPosition
     {
         get
