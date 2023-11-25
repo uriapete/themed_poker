@@ -3,6 +3,14 @@ using System;
 
 public partial class main : Node2D
 {
+    public Vector2 CardStackPosition
+    {
+        get
+        {
+            Node2D cardStack = GetNode<Node2D>("CardStack");
+            return cardStack.Position;
+        }
+    }
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
