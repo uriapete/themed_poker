@@ -13,3 +13,5 @@ metadata/_edit_group_ = true
 texture = SubResource("PlaceholderTexture2D_ue5vl")
 
 [node name="HandCards" type="Node2D" parent="."]
+
+[connection signal="child_entered_tree" from="HandCards" to="." method="OnCardEnteredHand"]
