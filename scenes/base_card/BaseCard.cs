@@ -59,8 +59,17 @@ public partial class BaseCard : Area2D
         }
     }
 
-    //fn for flipping
-    //protected for now, but may turn public if necessary
+    //public fn for flipping
+    public int Flip(Sides? side)
+    {
+        if (side == CurrentSide)
+        {
+            return 1;
+        }
+        BeginFlip();
+        return 0;
+    }
+
     //when starting flip, you MUST call this!
     protected void BeginFlip()
     {
