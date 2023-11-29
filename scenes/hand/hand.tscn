@@ -11,3 +11,5 @@ metadata/_edit_group_ = true
 
 [node name="HandSprite" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_ue5vl")
+
+[connection signal="child_entered_tree" from="." to="." method="OnChildEnteredTree"]

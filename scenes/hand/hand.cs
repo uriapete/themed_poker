@@ -13,4 +13,12 @@ public partial class hand : Node2D
     public override void _Process(double delta)
     {
     }
+
+    // Cards will come into the hand as children of this node. We must:
+    // Move the cards to hand's position
+    // Flip if necessary
+    public void OnChildEnteredTree(Node node)
+    {
+
+    }
 }
