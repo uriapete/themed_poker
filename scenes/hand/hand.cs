@@ -9,6 +9,9 @@ public partial class hand : Node2D
     // value whichcontrols wheter cards are selectable
     [Export] public bool Selectable { get; protected set; } = false;
 
+    // value which controls how long cards take to move into position when they first enter hand
+    [Export] public float CardMoveTime { get; protected set; } = 0.5f;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
