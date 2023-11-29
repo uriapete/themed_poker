@@ -3,6 +3,12 @@ using System;
 
 public partial class hand : Node2D
 {
+    // value which controls whether entire hand is revealed
+    [Export] public bool Revealed { get; protected set; } = false;
+
+    // value whichcontrols wheter cards are selectable
+    [Export] public bool Selectable { get; protected set; } = false;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
