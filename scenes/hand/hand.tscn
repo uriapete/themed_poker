@@ -11,5 +11,3 @@ metadata/_edit_group_ = true
 
 [node name="HandSprite" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_ue5vl")
-
-[node name="HandCards" type="Node2D" parent="."]
