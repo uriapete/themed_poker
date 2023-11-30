@@ -26,11 +26,47 @@ public partial class hand : Node2D
     public override void _Ready()
     {
         GetNode<Sprite2D>("HandSprite").QueueFree();
+        CardsInQueue += ProcessCardsInQueue;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
+        if (!ProcessingQueue && CardQueue.GetChildCount() > 0)
+        {
+            EmitSignal(SignalName.CardsInQueue);
+        }
+    }
+
+    protected void ProcessCardsInQueue()
+    {
+        ProcessingQueue=true;
+        foreach (var card in CardQueue.GetChildren())
+        {
+            if(card is not BaseCard)
+            {
+                card.QueueFree();
+                continue;
+            }
+            BaseCard newCard = (BaseCard)card;
+            MoveCardToHand(newCard, HandContainer.GetChildCount(), Revealed ? BaseCard.Sides.front: BaseCard.Sides.back);
+        }
+        ProcessingQueue = false;
+    }
+
+    protected void MoveCardToHand(BaseCard card, int idxPosition, BaseCard.Sides flipToSide=BaseCard.Sides.back)
+    {
+        card.Reparent(HandContainer);
+        Tween tween = GetTree().CreateTween();
+        tween.TweenProperty(card, "position", new Vector2(Position.X + (idxPosition * CardPositionHorizonalOffset),Position.Y), CardMoveTime);
+
+        switch (flipToSide)
+        {
+            case BaseCard.Sides.front:
+                card.Flip(BaseCard.Sides.front); break;
+            case BaseCard.Sides.back:
+                card.Flip(BaseCard.Sides.back); break;
+        }
     }
 
     // Cards will come into the hand as children of this node. We must:
