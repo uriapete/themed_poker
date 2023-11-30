@@ -7,6 +7,7 @@ size = Vector2(160, 220)
 
 [node name="Hand" type="Node2D" node_paths=PackedStringArray("CardQueue", "HandContainer")]
 script = ExtResource("1_hqfa8")
+CardPositionHorizonalOffset = 170
 CardQueue = NodePath("NewCardQueue")
 HandContainer = NodePath("HandCards")
 metadata/_edit_group_ = true
