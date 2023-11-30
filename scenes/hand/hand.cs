@@ -12,6 +12,10 @@ public partial class hand : Node2D
     // value which controls how long cards take to move into position when they first enter hand
     [Export] public float CardMoveTime { get; protected set; } = 0.5f;
 
+    [Export] public CanvasItem CardQueue { get; protected set; }
+
+    [Export] public CanvasItem HandContainer { get; protected set; }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
