@@ -15,7 +15,7 @@ public partial class hand : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        GetNode<Sprite2D>("HandSprite").Free();
+        GetNode<Sprite2D>("HandSprite").QueueFree();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
