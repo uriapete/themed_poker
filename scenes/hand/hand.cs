@@ -16,6 +16,8 @@ public partial class hand : Node2D
 
     [Export] public CanvasItem HandContainer { get; protected set; }
 
+    [Signal] public delegate void CardsInQueueEventHandler();
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
