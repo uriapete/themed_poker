@@ -68,30 +68,4 @@ public partial class hand : Node2D
                 card.Flip(BaseCard.Sides.back); break;
         }
     }
-
-    // Cards will come into the hand as children of this node. We must:
-    // Move the cards to hand's position
-    // Flip if necessary
-    public int OnCardEnteredHand(Node node)
-    {
-        if(node is not BaseCard)
-    {
-            node.Free();
-            return 1;
-        }
-
-        BaseCard newCard=(BaseCard)node;
-
-        Tween tween = GetTree().CreateTween().SetParallel();
-        tween.TweenProperty(newCard,"position",Position,CardMoveTime);
-
-        switch (Revealed)
-        {
-            case true:
-                newCard.Flip(BaseCard.Sides.front); break;
-            case false:
-                newCard.Flip(BaseCard.Sides.back); break;
-        }
-        return 0;
-    }
 }
