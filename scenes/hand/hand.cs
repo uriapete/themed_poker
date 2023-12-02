@@ -49,7 +49,7 @@ public partial class hand : Node2D
 
     public void AddCardToQueue(BaseCard card)
     {
-        if(HandContainer.GetChildCount(false)>=CardLimit)
+        if(CardCount>=CardLimit)
         {
             return;
         }
