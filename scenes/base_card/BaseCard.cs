@@ -60,14 +60,14 @@ public partial class BaseCard : Area2D
     }
 
     //public fn for flipping
-    public int Flip(Sides? side)
+    public void Flip(Sides? side)
     {
         if (side == CurrentSide)
         {
-            return 1;
+            return;
         }
         BeginFlip();
-        return 0;
+        return;
     }
 
     //when starting flip, you MUST call this!
