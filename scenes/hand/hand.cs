@@ -4,7 +4,7 @@ using System;
 public partial class hand : Node2D
 {
     // value which controls whether entire hand is revealed
-    [Export] public bool Revealed { get; protected set; } = false;
+    [Export] public BaseCard.Sides Side { get; protected set; } = BaseCard.Sides.back;
 
     // value whichcontrols wheter cards are selectable
     [Export] public bool Selectable { get; protected set; } = false;
@@ -49,7 +49,7 @@ public partial class hand : Node2D
                 continue;
             }
             BaseCard newCard = (BaseCard)card;
-            MoveCardToHand(newCard, HandContainer.GetChildCount(), Revealed ? BaseCard.Sides.front: BaseCard.Sides.back);
+            MoveCardToHand(newCard, HandContainer.GetChildCount(), Side);
         }
         ProcessingQueue = false;
     }
