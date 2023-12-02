@@ -24,6 +24,13 @@ public partial class hand : Node2D
 
     protected bool ProcessingQueue { get; set; } = false;
 
+    public int CardCount { 
+        get
+        {
+            return HandContainer.GetChildCount();
+        }
+    }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
