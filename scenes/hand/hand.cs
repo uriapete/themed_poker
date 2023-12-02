@@ -42,6 +42,10 @@ public partial class hand : Node2D
 
     public void AddCardToQueue(BaseCard card)
     {
+        if(HandContainer.GetChildCount(false)>=CardLimit)
+        {
+            return;
+        }
         card.Reparent(CardQueue);
     }
 
