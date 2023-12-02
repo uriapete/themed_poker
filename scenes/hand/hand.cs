@@ -61,7 +61,7 @@ public partial class hand : Node2D
         ProcessingQueue=true;
         foreach (var card in CardQueue.GetChildren())
         {
-            if(card is not BaseCard)
+            if((card is not BaseCard) || (CardCount >= CardLimit))
             {
                 card.QueueFree();
                 continue;
