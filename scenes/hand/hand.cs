@@ -38,6 +38,11 @@ public partial class hand : Node2D
         }
     }
 
+    public void AddCardToQueue(BaseCard card)
+    {
+        card.Reparent(CardQueue);
+    }
+
     protected void ProcessCardsInQueue()
     {
         ProcessingQueue=true;
