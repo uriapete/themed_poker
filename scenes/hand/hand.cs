@@ -60,6 +60,20 @@ public partial class hand : Node2D
         }
     }
 
+    // method to flip all cards
+    /// <summary>
+    /// for each card in the hand, flip it to the provided side
+    /// </summary>
+    /// <param name="side"></param>
+    public void FlipAll(BaseCard.Sides side)
+    {
+        Side = side;
+        foreach (BaseCard card in HandContainer.GetChildren())
+        {
+            card.Flip(side);
+        }
+    }
+
     //method to add a card to queue
     /// <summary>
     /// if hand is full, do nothing
