@@ -9,6 +9,8 @@ public partial class hand : Node2D
     // value whichcontrols wheter cards are selectable
     [Export] public bool Selectable { get; protected set; } = false;
 
+    [Export] public UInt16 CardLimit { get; protected set; } = 5;
+
     // value which controls how long cards take to move into position when they first enter hand
     [Export] public float CardMoveTime { get; protected set; } = 0.5f;
 
