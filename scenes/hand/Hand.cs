@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class hand : Node2D
+public partial class Hand : Node2D
 {
     // value which controls whether entire hand is revealed
     [Export] public BaseCard.Sides Side { get; protected set; } = BaseCard.Sides.back;
@@ -85,7 +85,7 @@ public partial class hand : Node2D
         tween.TweenProperty(card, "position", new Vector2(Position.X + (newIdxPos * CardPositionHorizonalOffset), Position.Y), CardMoveTime);
 
         switch (Side)
-            {
+        {
             case BaseCard.Sides.front:
                 card.Flip(BaseCard.Sides.front); break;
             case BaseCard.Sides.back:
@@ -107,7 +107,7 @@ public partial class hand : Node2D
     public bool MoveCardToHand(BaseCard card, BaseCard.Sides flipToSide, int idxPosition)
     {
         if(CardCount >= CardLimit)
-    {
+        {
             return false;
         }
         card.Reparent(HandContainer);
