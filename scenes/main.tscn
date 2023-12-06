@@ -16,7 +16,7 @@ PlayerHandNode = NodePath("PlayerHand")
 position = Vector2(190, 170)
 
 [node name="HouseHand" parent="." instance=ExtResource("4_3lg1f")]
-position = Vector2(500, 170)
+position = Vector2(650, 170)
 
 [node name="PlayerHand" parent="." instance=ExtResource("4_3lg1f")]
-position = Vector2(500, 850)
+position = Vector2(650, 900)
