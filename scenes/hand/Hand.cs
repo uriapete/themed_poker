@@ -87,10 +87,10 @@ public partial class Hand : Node2D
         {
             return false;
         }
-        int newIdxPos = CardCount;
+        int idxPosition = CardCount;
         card.Reparent(HandContainer);
         Tween tween = GetTree().CreateTween();
-        tween.TweenProperty(card, "position", new Vector2(Position.X + (newIdxPos * CardPositionHorizonalOffset), Position.Y), CardMoveTime);
+        tween.TweenProperty(card, "position", new Vector2((idxPosition * CardPositionHorizonalOffset), 0), CardMoveTime);
 
         switch (Side)
         {
@@ -120,7 +120,7 @@ public partial class Hand : Node2D
         }
         card.Reparent(HandContainer);
         Tween tween = GetTree().CreateTween();
-        tween.TweenProperty(card, "position", new Vector2(Position.X + (idxPosition * CardPositionHorizonalOffset), Position.Y), CardMoveTime);
+        tween.TweenProperty(card, "position", new Vector2((idxPosition * CardPositionHorizonalOffset), 0), CardMoveTime);
 
         switch (flipToSide)
         {
