@@ -53,6 +53,14 @@ public partial class Hand : Node2D
     /// for each card in the hand, flip it to the provided side
     /// </summary>
     /// <param name="side"></param>
+    public void FlipAll()
+    {
+        Side = (BaseCard.Sides)(-1*(int)Side);
+        foreach (BaseCard card in HandContainer.GetChildren())
+        {
+            card.Flip(Side);
+        }
+    }
     public void FlipAll(BaseCard.Sides side)
     {
         Side = side;
