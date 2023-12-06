@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class main : Node2D
+public partial class Main : Node2D
 {
     [Export] public PackedScene CardScene { get;private set; }
     [Export] public Node2D HouseHandNode { get;private set; }
