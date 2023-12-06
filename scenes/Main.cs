@@ -4,8 +4,8 @@ using System;
 public partial class Main : Node2D
 {
     [Export] public PackedScene CardScene { get;private set; }
-    [Export] public Node2D HouseHandNode { get;private set; }
-    [Export] public Node2D PlayerHandNode { get; private set; }
+    [Export] public Hand HouseHandNode { get;private set; }
+    [Export] public Hand PlayerHandNode { get; private set; }
 
     public Vector2 CardStackPosition
     {
