@@ -5,9 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://17uh7nnayp77" path="res://scenes/base_card/base_card.tscn" id="2_b7l1x"]
 [ext_resource type="PackedScene" uid="uid://btctlexwlwdlv" path="res://scenes/hand/hand.tscn" id="4_3lg1f"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("HouseHandNode", "PlayerHandNode")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("CardStack", "HouseHandNode", "PlayerHandNode")]
 script = ExtResource("1_15e3l")
 CardScene = ExtResource("2_b7l1x")
+CardStack = NodePath("CardStack")
 HouseHandNode = NodePath("HouseHand")
 PlayerHandNode = NodePath("PlayerHand")
 
