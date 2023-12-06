@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://btctlexwlwdlv"]
 
-[ext_resource type="Script" path="res://scenes/hand/hand.cs" id="1_hqfa8"]
+[ext_resource type="Script" path="res://scenes/hand/Hand.cs" id="1_yljmd"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ue5vl"]
 size = Vector2(160, 220)
 
 [node name="Hand" type="Node2D" node_paths=PackedStringArray("HandContainer")]
-script = ExtResource("1_hqfa8")
+script = ExtResource("1_yljmd")
 CardPositionHorizonalOffset = 170
 HandContainer = NodePath("HandCards")
 metadata/_edit_group_ = true
