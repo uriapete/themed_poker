@@ -79,9 +79,10 @@ public partial class hand : Node2D
         {
             return false;
         }
+        int newIdxPos = CardCount;
         card.Reparent(HandContainer);
         Tween tween = GetTree().CreateTween();
-        tween.TweenProperty(card, "position", new Vector2(Position.X + (CardCount * CardPositionHorizonalOffset), Position.Y), CardMoveTime);
+        tween.TweenProperty(card, "position", new Vector2(Position.X + (newIdxPos * CardPositionHorizonalOffset), Position.Y), CardMoveTime);
 
         switch (Side)
             {
