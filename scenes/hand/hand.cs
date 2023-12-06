@@ -18,14 +18,9 @@ public partial class hand : Node2D
     // value for difference of horizontal positions between cards
     [Export] public UInt16 CardPositionHorizonalOffset { get; protected set; } = 160;
 
-    // node that holds card queue
-    [Export] public CanvasItem CardQueue { get; protected set; }
-
     // node that holds cards in hand
     [Export] public CanvasItem HandContainer { get; protected set; }
 
-    // signal to indicate cards in queue
-    [Signal] public delegate void CardsInQueueEventHandler();
 
     protected bool ProcessingQueue { get; set; } = false;
 
@@ -46,18 +41,11 @@ public partial class hand : Node2D
     public override void _Ready()
     {
         GetNode<Sprite2D>("HandSprite").QueueFree();
-        CardsInQueue += ProcessCardsInQueue;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
-        // if queue is not being processed and there are cards in queue,
-        // emit signal that cards are in queue
-        if (!ProcessingQueue && CardQueue.GetChildCount() > 0)
-        {
-            EmitSignal(SignalName.CardsInQueue);
-        }
     }
 
     // method to flip all cards
@@ -74,54 +62,53 @@ public partial class hand : Node2D
         }
     }
 
-    //method to add a card to queue
+    //method for moving the card to hand
+    //overloaded method
+    //overload 1:
     /// <summary>
     /// if hand is full, do nothing
-    /// else, move the card to queue
+    /// else:
+    /// reparent node to hand
+    /// animate moving card to proper position
+    /// flip card to current side
     /// </summary>
     /// <param name="card"></param>
-    public void AddCardToQueue(BaseCard card)
+    public bool MoveCardToHand(BaseCard card)
     {
         if (CardCount >= CardLimit)
         {
-            return;
+            return false;
         }
-        card.Reparent(CardQueue);
-    }
+        card.Reparent(HandContainer);
+        Tween tween = GetTree().CreateTween();
+        tween.TweenProperty(card, "position", new Vector2(Position.X + (CardCount * CardPositionHorizonalOffset), Position.Y), CardMoveTime);
 
-    // method to process cards in queue
-    /// <summary>
-    /// for each card:
-    ///     delete if node is not a card node or hand is full
-    ///     else, move card to hand
-    /// </summary>
-    protected void ProcessCardsInQueue()
-    {
-        ProcessingQueue = true;
-        foreach (var card in CardQueue.GetChildren())
-        {
-            if ((card is not BaseCard) || (CardCount >= CardLimit))
+        switch (Side)
             {
-                card.QueueFree();
-                continue;
-            }
-            BaseCard newCard = (BaseCard)card;
-            MoveCardToHand(newCard, HandContainer.GetChildCount(), Side);
+            case BaseCard.Sides.front:
+                card.Flip(BaseCard.Sides.front); break;
+            case BaseCard.Sides.back:
+                card.Flip(BaseCard.Sides.back); break;
         }
-        ProcessingQueue = false;
+        return true;
     }
-
-    //method for moving the card to hand
     /// <summary>
+    /// if hand is full, do nothing
+    /// else:
     /// reparent node to hand
     /// animate moving card to proper position
     /// flip card to provided side arg
     /// </summary>
     /// <param name="card"></param>
-    /// <param name="idxPosition"></param>
     /// <param name="flipToSide"></param>
-    protected void MoveCardToHand(BaseCard card, int idxPosition, BaseCard.Sides flipToSide = BaseCard.Sides.back)
+    /// <param name="idxPosition"></param>
+    /// <returns></returns>
+    public bool MoveCardToHand(BaseCard card, BaseCard.Sides flipToSide, int idxPosition)
     {
+        if(CardCount >= CardLimit)
+    {
+            return false;
+        }
         card.Reparent(HandContainer);
         Tween tween = GetTree().CreateTween();
         tween.TweenProperty(card, "position", new Vector2(Position.X + (idxPosition * CardPositionHorizonalOffset), Position.Y), CardMoveTime);
@@ -133,5 +120,6 @@ public partial class hand : Node2D
             case BaseCard.Sides.back:
                 card.Flip(BaseCard.Sides.back); break;
         }
+        return true;
     }
 }
