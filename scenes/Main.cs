@@ -5,6 +5,8 @@ public partial class Main : Node2D
 {
     [Export] public PackedScene CardScene { get;private set; }
     [Export] public Node2D CardStack { get; private set; }
+    [Export] public UInt16 NumberOfValues { get; private set; } = 6;
+    [Export] public UInt16 CardsPerValue { get; private set; } = 5;
     [Export] public Hand HouseHandNode { get;private set; }
     [Export] public Hand PlayerHandNode { get; private set; }
 
