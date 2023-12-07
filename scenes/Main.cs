@@ -10,6 +10,7 @@ public partial class Main : Node2D
     [Export] public UInt16 CardsPerValue { get; private set; } = 5;
     [Export] public Hand HouseHandNode { get;private set; }
     [Export] public Hand PlayerHandNode { get; private set; }
+    [Export] public float DealCardDelay { get; private set; } = .1f;
 
     public List<BaseCard> Cards { get; private set; }=new List<BaseCard>();
     public List<BaseCard> CardPile {  get; private set; }
