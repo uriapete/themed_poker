@@ -13,6 +13,7 @@ public partial class Main : Node2D
 
     public List<BaseCard> Cards { get; private set; }=new List<BaseCard>();
     public List<BaseCard> CardPile {  get; private set; }
+    public Random Rand { get; private set; }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -26,6 +27,7 @@ public partial class Main : Node2D
                 newCard.Value=i; Cards.Add(newCard);
             }
         }
+        Rand = new Random(DateTime.Now.Millisecond);
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
