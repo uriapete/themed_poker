@@ -35,10 +35,10 @@ public partial class Main : Node2D
     {
     }
 
-    public void QueueFreeAllCardsInPlay()
+    public void RemoveAllCardsInPlay()
     {
-        HouseHandNode.QueueFreeAllCards();
-        PlayerHandNode.QueueFreeAllCards();
+        PlayerHandNode.RemoveAllCards();
+        HouseHandNode.RemoveAllCards();
     }
 
     public void ShufflePile()
