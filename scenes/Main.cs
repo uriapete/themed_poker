@@ -35,6 +35,12 @@ public partial class Main : Node2D
     {
     }
 
+    public void QueueFreeAllCardsInPlay()
+    {
+        HouseHandNode.QueueFreeAllCards();
+        PlayerHandNode.QueueFreeAllCards();
+    }
+
     public void NewPile()
     {
         CardPile = Cards;
