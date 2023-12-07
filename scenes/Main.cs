@@ -36,6 +36,31 @@ public partial class Main : Node2D
     {
     }
 
+    public async void NewGame()
+    {
+        NewPile();
+        for (int i = 0; HouseHandNode.CardCount < HouseHandNode.CardLimit; i+=2)
+        {
+            if(HouseHandNode.CardCount > 0)
+            {
+                await ToSignal(GetTree().CreateTimer(DealCardDelay,false), SceneTreeTimer.SignalName.Timeout);
+            }
+            BaseCard newHouseCard = CardPile[i];
+            CardPile.Remove(newHouseCard);
+            BaseCard newPlayerCard = CardPile[i+1];
+            CardPile.Remove(newPlayerCard);
+
+            newHouseCard.Position = Vector2.Zero;
+            CardStack.AddChild(newHouseCard);
+            HouseHandNode.MoveCardToHand(newHouseCard);
+
+            newPlayerCard.Position = Vector2.Zero;
+            CardStack.AddChild(newPlayerCard) ;
+            PlayerHandNode.MoveCardToHand(newPlayerCard);
+        }
+
+    }
+
     public void RemoveAllCardsInPlay()
     {
         PlayerHandNode.RemoveAllCards();
