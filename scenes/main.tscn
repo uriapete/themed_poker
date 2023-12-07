@@ -11,6 +11,7 @@ CardScene = ExtResource("2_b7l1x")
 CardStack = NodePath("CardStack")
 HouseHandNode = NodePath("HouseHand")
 PlayerHandNode = NodePath("PlayerHand")
+DealCardDelay = 0.5
 
 [node name="CardStack" parent="." instance=ExtResource("1_ajaik")]
 position = Vector2(190, 170)
