@@ -34,4 +34,16 @@ public partial class Main : Node2D
     public override void _Process(double delta)
     {
     }
+
+    public void NewPile()
+    {
+        CardPile = Cards;
+        for (int i = CardPile.Count-1; i > 0; i--)
+        {
+            BaseCard currCard = CardPile[i];
+            int swapWithIdx=Rand.Next(0, i);
+            CardPile[i]=CardPile[swapWithIdx];
+            CardPile[swapWithIdx]=currCard;
+        }
+    }
 }
