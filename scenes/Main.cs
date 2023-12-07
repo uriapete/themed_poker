@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Main : Node2D
 {
@@ -9,6 +10,8 @@ public partial class Main : Node2D
     [Export] public UInt16 CardsPerValue { get; private set; } = 5;
     [Export] public Hand HouseHandNode { get;private set; }
     [Export] public Hand PlayerHandNode { get; private set; }
+
+    public List<BaseCard> Cards { get; private set; }=new List<BaseCard>();
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
