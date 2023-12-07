@@ -12,6 +12,7 @@ public partial class Main : Node2D
     [Export] public Hand PlayerHandNode { get; private set; }
 
     public List<BaseCard> Cards { get; private set; }=new List<BaseCard>();
+    public List<BaseCard> CardPile {  get; private set; }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
