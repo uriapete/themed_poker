@@ -129,15 +129,15 @@ public partial class Hand : Node2D
         return true;
     }
 
-    //method for queuefree all cards
+    //method for removing all cards
     /// <summary>
-    /// for each child in HandContainer, queuefree
+    /// for each child in HandContainer, remove
     /// </summary>
-    public void QueueFreeAllCards()
+    public void RemoveAllCards()
     {
         foreach (var card in HandContainer.GetChildren())
         {
-            card.QueueFree();
+            HandContainer.RemoveChild(card);
         }
     }
 }
