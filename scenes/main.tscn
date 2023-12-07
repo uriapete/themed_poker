@@ -20,3 +20,4 @@ position = Vector2(650, 170)
 
 [node name="PlayerHand" parent="." instance=ExtResource("4_3lg1f")]
 position = Vector2(650, 900)
+Side = -1
