@@ -21,9 +21,6 @@ public partial class Hand : Node2D
     // node that holds cards in hand
     [Export] public CanvasItem HandContainer { get; protected set; }
 
-
-    protected bool ProcessingQueue { get; set; } = false;
-
     // getter for amt of cards in hand
     public int CardCount
     {
