@@ -16,6 +16,15 @@ public partial class Main : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        base._Ready();
+        for (int i = 0; i < NumberOfValues; i++)
+        {
+            for (int j = 0; j < CardsPerValue; j++)
+            {
+                BaseCard newCard=CardScene.Instantiate<BaseCard>();
+                newCard.Value=i; Cards.Add(newCard);
+            }
+        }
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
