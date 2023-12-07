@@ -54,7 +54,7 @@ public partial class Main : Node2D
 
     public void NewPile()
     {
-        QueueFreeAllCardsInPlay();
+        RemoveAllCardsInPlay();
         CardPile=new List<BaseCard>(Cards);
         ShufflePile();
     }
