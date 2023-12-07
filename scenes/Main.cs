@@ -54,6 +54,7 @@ public partial class Main : Node2D
 
     public void NewPile()
     {
+        QueueFreeAllCardsInPlay();
         CardPile = Cards;
         for (int i = CardPile.Count-1; i > 0; i--)
         {
