@@ -12,8 +12,8 @@ public partial class BaseCard : Area2D
     public int Value
     {
         get;
-        protected set;
-    } = 0;
+        set;
+    }
 
     //how long it takes for a complete flip in secs
     [Export] public float FlipDuration { get; protected set; } = 0.2f;
