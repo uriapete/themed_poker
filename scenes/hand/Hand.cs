@@ -128,4 +128,16 @@ public partial class Hand : Node2D
         }
         return true;
     }
+
+    //method for queuefree all cards
+    /// <summary>
+    /// for each child in HandContainer, queuefree
+    /// </summary>
+    public void QueueFreeAllCards()
+    {
+        foreach (var card in HandContainer.GetChildren())
+        {
+            card.QueueFree();
+        }
+    }
 }
