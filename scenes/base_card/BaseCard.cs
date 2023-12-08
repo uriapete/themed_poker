@@ -146,4 +146,16 @@ public partial class BaseCard : Area2D
     {
         MouseInside=false;
     }
+
+    public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
+    {
+        if(@event is InputEventMouseButton)
+        {
+            InputEventMouseButton e = @event as InputEventMouseButton;
+            if(e.ButtonIndex == MouseButton.Left&&e.Pressed&&MouseInside)
+            {
+                EmitSignal(SignalName.Click,this);
+            }
+        }
+    }
 }
