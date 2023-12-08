@@ -21,6 +21,8 @@ public partial class BaseCard : Area2D
     //node to use for the card's front side
     [Export] public CanvasItem ValueDisplayNode { get; protected set; }
 
+    protected bool MouseInside { get; set; }
+
     //enum for strong typing sides
     //all lower case to match animation names, which follow gdscript naming conventions
     //are signed for easy flipping
