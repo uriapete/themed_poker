@@ -7,7 +7,7 @@ public partial class Hand : Node2D
     [Export] public BaseCard.Sides Side { get; protected set; } = BaseCard.Sides.back;
 
     // value whichcontrols wheter cards are selectable
-    [Export] public bool Selectable { get; protected set; } = false;
+    [Export] public bool Selectable { get; set; } = false;
 
     // value for limit of cards that can be in a hand
     [Export] public UInt16 CardLimit { get; protected set; } = 5;
