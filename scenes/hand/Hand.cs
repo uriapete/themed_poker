@@ -121,6 +121,7 @@ public partial class Hand : Node2D
             return false;
         }
         card.Reparent(HandContainer);
+        card.Click += OnCardClick;
         Tween tween = GetTree().CreateTween();
         tween.TweenProperty(card, "position", new Vector2((idxPosition * CardPositionHorizonalOffset), 0), CardMoveTime);
 
@@ -140,8 +141,9 @@ public partial class Hand : Node2D
     /// </summary>
     public void RemoveAllCards()
     {
-        foreach (var card in HandContainer.GetChildren())
+        foreach (BaseCard card in HandContainer.GetChildren())
         {
+            card.Click-= OnCardClick;
             HandContainer.RemoveChild(card);
         }
     }
