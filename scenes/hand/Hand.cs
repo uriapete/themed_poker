@@ -67,6 +67,11 @@ public partial class Hand : Node2D
         }
     }
 
+    public void OnCardClick(BaseCard card)
+    {
+
+    }
+
     //method for moving the card to hand
     //overloaded method
     //overload 1:
