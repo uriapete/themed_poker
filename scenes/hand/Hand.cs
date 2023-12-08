@@ -73,6 +73,11 @@ public partial class Hand : Node2D
 
     protected void SelectCard(BaseCard card)
     {
+        bool removed= SelectedCards.Remove(card);
+        if(!removed)
+        {
+            SelectedCards.Add(card);
+        }
     }
 
     public void OnCardClick(BaseCard card)
