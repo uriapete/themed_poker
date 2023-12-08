@@ -82,7 +82,11 @@ public partial class Hand : Node2D
 
     public void OnCardClick(BaseCard card)
     {
-
+        if (!Selectable)
+        {
+            return;
+        }
+        SelectCard(card);
     }
 
     //method for moving the card to hand
