@@ -147,7 +147,7 @@ public partial class BaseCard : Area2D
         MouseInside=false;
     }
 
-    public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
+    public override void _Input(InputEvent @event)
     {
         if(@event is InputEventMouseButton)
         {
