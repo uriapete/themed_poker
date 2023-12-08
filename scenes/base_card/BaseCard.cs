@@ -23,6 +23,8 @@ public partial class BaseCard : Area2D
 
     protected bool MouseInside { get; set; }
 
+    [Signal] public delegate void ClickEventHandler(BaseCard card);
+
     //enum for strong typing sides
     //all lower case to match animation names, which follow gdscript naming conventions
     //are signed for easy flipping
