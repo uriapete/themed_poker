@@ -58,7 +58,7 @@ public partial class Main : Node2D
             CardStack.AddChild(newPlayerCard) ;
             PlayerHandNode.MoveCardToHand(newPlayerCard);
         }
-
+        PlayerHandNode.Selectable= true;
     }
 
     public void RemoveAllCardsInPlay()
