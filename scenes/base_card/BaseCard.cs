@@ -135,4 +135,13 @@ public partial class BaseCard : Area2D
     public override void _Process(double delta)
     {
     }
+
+    protected void OnMouseEntered()
+    {
+        MouseInside = true;
+    }
+    protected void OnMouseExited()
+    {
+        MouseInside=false;
+    }
 }
