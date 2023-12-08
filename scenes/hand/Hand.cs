@@ -95,6 +95,7 @@ public partial class Hand : Node2D
         }
         int idxPosition = CardCount;
         card.Reparent(HandContainer);
+        card.Click += OnCardClick;
         Tween tween = GetTree().CreateTween();
         tween.TweenProperty(card, "position", new Vector2((idxPosition * CardPositionHorizonalOffset), 0), CardMoveTime);
 
