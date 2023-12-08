@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Hand : Node2D
 {
@@ -21,6 +22,8 @@ public partial class Hand : Node2D
     // node that holds cards in hand
     [Export] public CanvasItem HandContainer { get; protected set; }
 
+    public List<BaseCard> SelectedCards { get; protected set; }
+
     // getter for amt of cards in hand
     public int CardCount
     {
@@ -38,6 +41,7 @@ public partial class Hand : Node2D
     public override void _Ready()
     {
         GetNode<Sprite2D>("HandSprite").QueueFree();
+        SelectedCards = new List<BaseCard>();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
