@@ -71,6 +71,10 @@ public partial class Hand : Node2D
         }
     }
 
+    protected void SelectCard(BaseCard card)
+    {
+    }
+
     public void OnCardClick(BaseCard card)
     {
 
