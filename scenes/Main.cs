@@ -12,7 +12,7 @@ public partial class Main : Node2D
     [Export] public Hand PlayerHandNode { get; private set; }
     [Export] public float DealCardDelay { get; private set; } = .1f;
 
-    public List<BaseCard> Cards { get; private set; }=new List<BaseCard>();
+    public List<BaseCard> Cards { get; private set; }
     public List<BaseCard> CardPile {  get; private set; }
     public Random Rand { get; private set; }
 
@@ -20,6 +20,7 @@ public partial class Main : Node2D
     public override void _Ready()
     {
         base._Ready();
+        Cards = new List<BaseCard>();
         for (int i = 0; i < NumberOfValues; i++)
         {
             for (int j = 0; j < CardsPerValue; j++)
