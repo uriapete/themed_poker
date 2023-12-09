@@ -23,3 +23,5 @@ position = Vector2(650, 170)
 position = Vector2(650, 900)
 Side = -1
 Selectable = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
