@@ -50,6 +50,15 @@ public partial class Main : Node2D
     {
     }
 
+    public BaseCard SpawnCardInStack()
+    {
+        BaseCard newCard = CardPile[0];
+        CardPile.Remove(newCard);
+        newCard.Position = Vector2.Zero;
+        CardStack.AddChild(newCard);
+        return newCard;
+    }
+
     public async void NewGame()
     {
         NewPile();
