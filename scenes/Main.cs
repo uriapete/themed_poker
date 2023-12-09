@@ -77,6 +77,7 @@ public partial class Main : Node2D
 
     public void RemoveAllCardsInPlay()
     {
+        DisablePlayerSelect();
         PlayerHandNode.RemoveAllCards();
         HouseHandNode.RemoveAllCards();
     }
