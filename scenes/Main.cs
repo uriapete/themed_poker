@@ -11,6 +11,7 @@ public partial class Main : Node2D
     [Export] public Hand HouseHandNode { get;private set; }
     [Export] public Hand PlayerHandNode { get; private set; }
     [Export] public float DealCardDelay { get; private set; } = .1f;
+    [Export] public BaseButton DrawHoldButton { get; private set; }
 
     public List<BaseCard> Cards { get; private set; }
     public List<BaseCard> CardPile {  get; private set; }
