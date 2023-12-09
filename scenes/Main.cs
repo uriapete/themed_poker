@@ -55,10 +55,6 @@ public partial class Main : Node2D
         NewPile();
         for (int i = 0; HouseHandNode.CardCount < HouseHandNode.CardLimit; i+=2)
         {
-            if(HouseHandNode.CardCount > 0)
-            {
-                await ToSignal(GetTree().CreateTimer(DealCardDelay,false), SceneTreeTimer.SignalName.Timeout);
-            }
             BaseCard newHouseCard = CardPile[i];
             CardPile.Remove(newHouseCard);
             BaseCard newPlayerCard = CardPile[i+1];
@@ -71,6 +67,8 @@ public partial class Main : Node2D
             newPlayerCard.Position = Vector2.Zero;
             CardStack.AddChild(newPlayerCard) ;
             PlayerHandNode.MoveCardToHand(newPlayerCard);
+
+            await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
         }
         AllowPlayerSelect();
     }
