@@ -44,6 +44,12 @@ public partial class Main : Node2D
         PlayerHandNode.Selectable = true;
     }
 
+    public void DisablePlayerSelect()
+    {
+        DrawHoldButton.Hide();
+        PlayerHandNode.Selectable = false;
+    }
+
     public async void NewGame()
     {
         NewPile();
