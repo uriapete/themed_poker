@@ -26,7 +26,8 @@ Selectable = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Button" type="Button" parent="HUD"]
+[node name="DrawHoldButton" type="Button" parent="HUD"]
+visible = false
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
