@@ -160,6 +160,31 @@ public partial class Hand : Node2D
         return true;
     }
 
+    public BaseCard[] RemoveCards(params int[] idxs)
+    {
+        BaseCard[] removedCards= new BaseCard[idxs.Length];
+        int i = 0;
+        foreach (int idx in idxs)
+        {
+            BaseCard card = (BaseCard)HandContainer.GetChildren()[idx];
+            card.Click -= OnCardClick;
+            RemoveChild(card);
+            card.Position = Vector2.Zero;
+            removedCards[i++] = card;
+        }
+        return removedCards;
+    }
+    public BaseCard[] RemoveCards(params BaseCard[] cards)
+    {
+        foreach(var card in cards)
+        {
+            card.Click -= OnCardClick;
+            RemoveChild(card);
+            card.Position = Vector2.Zero;
+        }
+        return cards;
+    }
+
     //method for removing all cards
     /// <summary>
     /// for each child in HandContainer, remove
