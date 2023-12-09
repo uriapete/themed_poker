@@ -50,18 +50,6 @@ public partial class Main : Node2D
     {
     }
 
-    public void AllowPlayerSelect()
-    {
-        DrawHoldButton.Show();
-        PlayerHandNode.Selectable = true;
-    }
-
-    public void DisablePlayerSelect()
-    {
-        DrawHoldButton.Hide();
-        PlayerHandNode.Selectable = false;
-    }
-
     public async void NewGame()
     {
         NewPile();
@@ -82,12 +70,12 @@ public partial class Main : Node2D
 
             await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
         }
-        AllowPlayerSelect();
+        PlayerSelectionsEnabled = true;
     }
 
     public void RemoveAllCardsInPlay()
     {
-        DisablePlayerSelect();
+        PlayerSelectionsEnabled = false;
         PlayerHandNode.RemoveAllCards();
         HouseHandNode.RemoveAllCards();
     }
