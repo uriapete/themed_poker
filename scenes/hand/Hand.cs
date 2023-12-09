@@ -159,15 +159,12 @@ public partial class Hand : Node2D
         }
         return true;
     }
-    public BaseCard[] RemoveCards(params BaseCard[] cards)
+    public BaseCard RemoveCard(BaseCard card)
     {
-        foreach(var card in cards)
-        {
-            card.Click -= OnCardClick;
-            RemoveChild(card);
-            card.Position = Vector2.Zero;
-        }
-        return cards;
+        card.Click -= OnCardClick;
+        RemoveChild(card);
+        card.Position = Vector2.Zero;
+        return card;
     }
 
     //method for removing all cards
@@ -178,7 +175,7 @@ public partial class Hand : Node2D
     {
         foreach (BaseCard card in HandContainer.GetChildren())
         {
-            RemoveCards(card);
+            RemoveCard(card);
         }
     }
 }
