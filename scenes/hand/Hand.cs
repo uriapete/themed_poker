@@ -80,6 +80,11 @@ public partial class Hand : Node2D
         if(!removed)
         {
             SelectedCards.Add(card);
+            card.Position=new Vector2(card.Position.X, card.Position.Y-SelectedCardVerticalOffset);
+        }
+        else
+        {
+            card.Position = new Vector2(card.Position.X, 0);
         }
     }
 
