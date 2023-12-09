@@ -136,10 +136,9 @@ public partial class Hand : Node2D
     /// flip card to provided side arg
     /// </summary>
     /// <param name="card"></param>
-    /// <param name="flipToSide"></param>
     /// <param name="idxPosition"></param>
     /// <returns></returns>
-    public bool MoveCardToHand(BaseCard card, BaseCard.Sides flipToSide, int idxPosition)
+    public bool MoveCardToHand(BaseCard card, int idxPosition)
     {
         if(CardCount >= CardLimit)
         {
@@ -151,7 +150,7 @@ public partial class Hand : Node2D
         Tween tween = GetTree().CreateTween();
         tween.TweenProperty(card, "position", new Vector2((card.GetIndex() * CardPositionHorizonalOffset), 0), CardMoveTime);
 
-        switch (flipToSide)
+        switch (Side)
         {
             case BaseCard.Sides.front:
                 card.Flip(BaseCard.Sides.front); break;
