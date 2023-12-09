@@ -193,8 +193,7 @@ public partial class Hand : Node2D
     {
         foreach (BaseCard card in HandContainer.GetChildren())
         {
-            card.Click-= OnCardClick;
-            HandContainer.RemoveChild(card);
+            RemoveCards(card);
         }
     }
 }
