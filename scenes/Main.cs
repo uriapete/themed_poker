@@ -38,6 +38,12 @@ public partial class Main : Node2D
     {
     }
 
+    public void AllowPlayerSelect()
+    {
+        DrawHoldButton.Show();
+        PlayerHandNode.Selectable = true;
+    }
+
     public async void NewGame()
     {
         NewPile();
