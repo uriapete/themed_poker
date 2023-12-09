@@ -17,6 +17,18 @@ public partial class Main : Node2D
     public List<BaseCard> CardPile {  get; private set; }
     public Random Rand { get; private set; }
 
+    public bool PlayerSelectionsEnabled
+    {
+        get
+        {
+            return PlayerHandNode.Selectable && DrawHoldButton.Visible && !DrawHoldButton.Disabled;
+        }
+        private set
+        {
+            PlayerHandNode.Selectable=value; DrawHoldButton.Visible=value; DrawHoldButton.Disabled=!value;
+        }
+    }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
