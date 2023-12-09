@@ -50,6 +50,11 @@ public partial class Main : Node2D
     {
     }
 
+    public void ExecuteGame()
+    {
+
+    }
+
     public async void DrawSelectedCards(Hand hand)
     {
         int[] idxs = new int[hand.SelectedCards.Count];
