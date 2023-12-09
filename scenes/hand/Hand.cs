@@ -162,7 +162,7 @@ public partial class Hand : Node2D
     public BaseCard RemoveCard(BaseCard card)
     {
         card.Click -= OnCardClick;
-        RemoveChild(card);
+        HandContainer.RemoveChild(card);
         card.Position = Vector2.Zero;
         return card;
     }
