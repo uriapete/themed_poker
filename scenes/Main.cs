@@ -43,6 +43,7 @@ public partial class Main : Node2D
                 newCard.Value=i; Cards.Add(newCard);
             }
         }
+        DrawHoldButton.Pressed += ExecuteGame;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
