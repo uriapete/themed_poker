@@ -22,6 +22,9 @@ public partial class Hand : Node2D
     // node that holds cards in hand
     [Export] public CanvasItem HandContainer { get; protected set; }
 
+    // vertical offset for selected cards - how much selected cards are trans'd up
+    [Export] public float SelectedCardVerticalOffset {  get; protected set; } = 120;
+
     public List<BaseCard> SelectedCards { get; protected set; }
 
     // getter for amt of cards in hand
