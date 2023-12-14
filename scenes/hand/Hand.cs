@@ -129,6 +129,16 @@ public partial class Hand : Node2D
         return true;
     }
 
+    public void MoveCard(BaseCard card, int newPos)
+    {
+        if(card.GetParent()!=HandContainer)
+        {
+            return;
+        }
+        card.Position = new Vector2(newPos * CardPositionHorizonalOffset,card.Position.Y);
+
+    }
+
     public BaseCard RemoveCard(BaseCard card)
     {
         card.Click -= OnCardClick;
