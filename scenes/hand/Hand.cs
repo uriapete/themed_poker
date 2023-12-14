@@ -45,6 +45,7 @@ public partial class Hand : Node2D
     {
         GetNode<Sprite2D>("HandSprite").QueueFree();
         SelectedCards = new List<BaseCard>();
+        HandContainer.ChildOrderChanged += RepositionAllCards;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
