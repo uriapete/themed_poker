@@ -129,6 +129,14 @@ public partial class Hand : Node2D
         return true;
     }
 
+    public void RepositionAllCards()
+    {
+        foreach(BaseCard card in HandContainer.GetChildren())
+        {
+            MoveCard(card,card.GetIndex());
+        }
+    }
+
     public void MoveCard(BaseCard card, int newPos)
     {
         if(card.GetParent()!=HandContainer)
