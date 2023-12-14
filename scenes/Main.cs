@@ -53,7 +53,7 @@ public partial class Main : Node2D
 
     public void ExecuteGame()
     {
-
+        DrawSelectedCards(PlayerHandNode);
     }
 
     public async void DrawSelectedCards(Hand hand)
