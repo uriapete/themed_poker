@@ -128,37 +128,7 @@ public partial class Hand : Node2D
         }
         return true;
     }
-    /// <summary>
-    /// if hand is full, do nothing
-    /// else:
-    /// reparent node to hand
-    /// animate moving card to proper position
-    /// flip card to provided side arg
-    /// </summary>
-    /// <param name="card"></param>
-    /// <param name="idxPosition"></param>
-    /// <returns></returns>
-    public bool MoveCardToHand(BaseCard card, int idxPosition)
-    {
-        if(CardCount >= CardLimit)
-        {
-            return false;
-        }
-        card.Reparent(HandContainer);
-        HandContainer.MoveChild(card, idxPosition);
-        card.Click += OnCardClick;
-        Tween tween = GetTree().CreateTween();
-        tween.TweenProperty(card, "position", new Vector2((card.GetIndex() * CardPositionHorizonalOffset), 0), CardMoveTime);
 
-        switch (Side)
-        {
-            case BaseCard.Sides.front:
-                card.Flip(BaseCard.Sides.front); break;
-            case BaseCard.Sides.back:
-                card.Flip(BaseCard.Sides.back); break;
-        }
-        return true;
-    }
     public BaseCard RemoveCard(BaseCard card)
     {
         card.Click -= OnCardClick;
