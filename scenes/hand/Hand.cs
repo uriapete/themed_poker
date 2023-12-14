@@ -4,30 +4,49 @@ using System.Collections.Generic;
 
 public partial class Hand : Node2D
 {
-    // value which controls whether entire hand is revealed
+    /// <summary>
+    /// Value for which side the entire hand is.
+    /// </summary>
     [Export] public BaseCard.Sides Side { get; protected set; } = BaseCard.Sides.back;
 
-    // value whichcontrols wheter cards are selectable
+    /// <summary>
+    /// Value for whether cards are selectable or not.
+    /// </summary>
     [Export] public bool Selectable { get; set; } = false;
 
-    // value for limit of cards that can be in a hand
+    /// <summary>
+    /// Value for the limit of cards that can be in a hand.
+    /// </summary>
     [Export] public UInt16 CardLimit { get; protected set; } = 5;
 
-    // value which controls how long cards take to move into position when they first enter hand
+    /// <summary>
+    /// Value that controls how long cards take to move into position.
+    /// </summary>
     [Export] public float CardMoveTime { get; protected set; } = 0.5f;
 
-    // value for difference of horizontal positions between cards
+    /// <summary>
+    /// Value for the difference of horizontal positions between cards.
+    /// </summary>
     [Export] public UInt16 CardPositionHorizonalOffset { get; protected set; } = 160;
 
-    // node that holds cards in hand
+    /// <summary>
+    /// Node that holds the cards.
+    /// </summary>
     [Export] public CanvasItem HandContainer { get; protected set; }
 
-    // vertical offset for selected cards - how much selected cards are trans'd up
-    [Export] public float SelectedCardVerticalOffset {  get; protected set; } = 120;
+    /// <summary>
+    /// Value for the vertical offset for selected cards.
+    /// </summary>
+    [Export] public float SelectedCardVerticalOffset { get; protected set; } = 120;
 
+    /// <summary>
+    /// List for cards that are selected.
+    /// </summary>
     public List<BaseCard> SelectedCards { get; protected set; }
 
-    // getter for amt of cards in hand
+    /// <summary>
+    /// Getter for how many cards are in this hand.
+    /// </summary>
     public int CardCount
     {
         get
@@ -36,10 +55,8 @@ public partial class Hand : Node2D
         }
     }
 
-    // Called when the node enters the scene tree for the first time.
     /// <summary>
-    /// delete the place holder sprite
-    /// connect signal CardsInQueue to method ProcessCardsInQueue
+    /// Called when the node enters the scene tree for the first time.
     /// </summary>
     public override void _Ready()
     {
@@ -48,24 +65,29 @@ public partial class Hand : Node2D
         HandContainer.ChildOrderChanged += RepositionAllCards;
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    /// <summary>
+    /// Called every frame. 'delta' is the elapsed time since the previous frame.
+    /// </summary>
+    /// <param name="delta"></param>
     public override void _Process(double delta)
     {
     }
 
-    // method to flip all cards
     /// <summary>
-    /// for each card in the hand, flip it to the provided side
+    /// Flips all cards over.
     /// </summary>
-    /// <param name="side"></param>
     public void FlipAll()
     {
-        Side = (BaseCard.Sides)(-1*(int)Side);
+        Side = (BaseCard.Sides)(-1 * (int)Side);
         foreach (BaseCard card in HandContainer.GetChildren())
         {
             card.Flip(Side);
         }
     }
+    /// <summary>
+    /// Flips all cards to provided side.
+    /// </summary>
+    /// <param name="side"></param>
     public void FlipAll(BaseCard.Sides side)
     {
         Side = side;
@@ -75,13 +97,17 @@ public partial class Hand : Node2D
         }
     }
 
+    /// <summary>
+    /// Either adds or removes selected card to/from the selected list, and positions it accordingly.
+    /// </summary>
+    /// <param name="card"></param>
     protected void SelectCard(BaseCard card)
     {
-        bool removed= SelectedCards.Remove(card);
-        if(!removed)
+        bool removed = SelectedCards.Remove(card);
+        if (!removed)
         {
             SelectedCards.Add(card);
-            card.Position=new Vector2(card.Position.X, card.Position.Y-SelectedCardVerticalOffset);
+            card.Position = new Vector2(card.Position.X, card.Position.Y - SelectedCardVerticalOffset);
         }
         else
         {
@@ -89,6 +115,10 @@ public partial class Hand : Node2D
         }
     }
 
+    /// <summary>
+    /// Selects card on click if hand is selectable.
+    /// </summary>
+    /// <param name="card"></param>
     public void OnCardClick(BaseCard card)
     {
         if (!Selectable)
@@ -98,15 +128,8 @@ public partial class Hand : Node2D
         SelectCard(card);
     }
 
-    //method for moving the card to hand
-    //overloaded method
-    //overload 1:
     /// <summary>
-    /// if hand is full, do nothing
-    /// else:
-    /// reparent node to hand
-    /// animate moving card to proper position
-    /// flip card to current side
+    /// Moves card to this hand.
     /// </summary>
     /// <param name="card"></param>
     public bool MoveCardToHand(BaseCard card)
@@ -130,24 +153,37 @@ public partial class Hand : Node2D
         return true;
     }
 
+    /// <summary>
+    /// Repositions all cards to correct positions. Called when HandContainer's Child Order is Changed.
+    /// </summary>
     public void RepositionAllCards()
     {
-        foreach(BaseCard card in HandContainer.GetChildren())
+        foreach (BaseCard card in HandContainer.GetChildren())
         {
-            MoveCard(card,card.GetIndex());
+            MoveCard(card, card.GetIndex());
         }
     }
 
+    /// <summary>
+    /// Positions card to provided index position.
+    /// </summary>
+    /// <param name="card"></param>
+    /// <param name="newPos"></param>
     public void MoveCard(BaseCard card, int newPos)
     {
-        if(card.GetParent()!=HandContainer)
+        if (card.GetParent() != HandContainer)
         {
             return;
         }
-        card.Position = new Vector2(newPos * CardPositionHorizonalOffset,card.Position.Y);
+        card.Position = new Vector2(newPos * CardPositionHorizonalOffset, card.Position.Y);
 
     }
 
+    /// <summary>
+    /// Removes card from this hand. Also removes it from SelectedCards list, resets its position, and disconnects its click signal. Returns the removed card.
+    /// </summary>
+    /// <param name="card"></param>
+    /// <returns></returns>
     public BaseCard RemoveCard(BaseCard card)
     {
         card.Click -= OnCardClick;
@@ -157,9 +193,8 @@ public partial class Hand : Node2D
         return card;
     }
 
-    //method for removing all cards
     /// <summary>
-    /// for each child in HandContainer, remove
+    /// Removes all cards.
     /// </summary>
     public void RemoveAllCards()
     {
