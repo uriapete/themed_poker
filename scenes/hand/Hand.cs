@@ -60,8 +60,13 @@ public partial class Hand : Node2D
     /// </summary>
     public override void _Ready()
     {
+        //free placeholder sprite
         GetNode<Sprite2D>("HandSprite").QueueFree();
+
+        //init selected cards list
         SelectedCards = new List<BaseCard>();
+
+        //connect HandContainer.ChildOrderChanged signal to RepositionAllCards
         HandContainer.ChildOrderChanged += RepositionAllCards;
     }
 
@@ -134,22 +139,27 @@ public partial class Hand : Node2D
     /// <param name="card"></param>
     public bool MoveCardToHand(BaseCard card)
     {
+        //if hand is full, don't do anything
         if (CardCount >= CardLimit)
         {
             return false;
         }
+
+        //else:
+        //reparent the card to handcontainer
         card.Reparent(HandContainer);
+
+        //connect card's click signal to click handler
         card.Click += OnCardClick;
+
+        //animate card moving into position
         Tween tween = GetTree().CreateTween();
         tween.TweenProperty(card, "position", new Vector2((card.GetIndex() * CardPositionHorizonalOffset), 0), CardMoveTime);
 
-        switch (Side)
-        {
-            case BaseCard.Sides.front:
-                card.Flip(BaseCard.Sides.front); break;
-            case BaseCard.Sides.back:
-                card.Flip(BaseCard.Sides.back); break;
-        }
+        //flip card
+        card.Flip(Side);
+
+        //done
         return true;
     }
 
