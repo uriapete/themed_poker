@@ -58,17 +58,15 @@ public partial class Main : Node2D
 
     public async void DrawSelectedCards(Hand hand)
     {
-        int[] idxs = new int[hand.SelectedCards.Count];
-        int i = 0;
-        foreach(BaseCard card in hand.SelectedCards)
+        while(hand.SelectedCards.Count > 0)
         {
-            idxs[i++] = card.GetIndex();
+            BaseCard card = hand.SelectedCards[0];
             CardPile.Add(hand.RemoveCard(card));
         }
-        await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
-        foreach (int idx in idxs)
+        while (hand.CardCount < hand.CardLimit)
         {
-            hand.MoveCardToHand(SpawnCardInStack(), idx);
+        await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
+            hand.MoveCardToHand(SpawnCardInStack());
         }
     }
 
