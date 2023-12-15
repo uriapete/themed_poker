@@ -7,8 +7,8 @@ size = Vector2(160, 220)
 
 [node name="Hand" type="Node2D" node_paths=PackedStringArray("HandContainer")]
 script = ExtResource("1_yljmd")
-CardPositionHorizonalOffset = 170
 HandContainer = NodePath("HandCards")
+CardPositionHorizonalOffset = 170
 metadata/_edit_group_ = true
 
 [node name="HandSprite" type="Sprite2D" parent="."]
