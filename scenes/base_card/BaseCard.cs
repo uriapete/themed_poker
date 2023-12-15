@@ -92,7 +92,7 @@ public partial class BaseCard : Area2D
 
     //fn after first flip tween is done
     //this fn SHOULD NOT BE CALLED BY ANYTHING OTHER THAN BEGINFLIP'S TWEEN!!!
-    protected void FinishFlip()
+    protected async void FinishFlip()
     {
         //switch current side
         CurrentSide = (Sides)(-1 * (int)CurrentSide);
@@ -114,14 +114,8 @@ public partial class BaseCard : Area2D
         //scale the node back to normal
         tween.TweenProperty(this, "scale", Vector2.One, FlipDuration / 2);
 
-        //now run CompleteFlip once done
-        tween.Connect("finished", new Callable(this, MethodName.CompleteFlip));
-    }
-
-    //fn to complete the flip
-    //DO NOT CALL! ONLY THE TWEEN CREATED IN FINISHFLIP SHOULD CALL THIS!!!
-    protected void CompleteFlip()
-    {
+        //after the tween is done, reset Flipping to completely finish
+        await ToSignal(tween,Tween.SignalName.Finished);
         Flipping = false;
     }
 
