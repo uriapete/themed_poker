@@ -87,7 +87,7 @@ public partial class BaseCard : Area2D
         tween.TweenProperty(this, "scale", Vector2.Down, FlipDuration / 2);
 
         //run FinishFlip when done
-        tween.Connect("finished", new Callable(this, MethodName.FinishFlip));
+        tween.Finished += FinishFlip;
     }
 
     //fn after first flip tween is done
