@@ -4,10 +4,13 @@ using System.Collections.Generic;
 
 public partial class Hand : Node2D
 {
-    [ExportCategory("Hand Settings")]
+    //the summaries apparently only work before all [directives]
+    //including before [export] and [exportgroup],etc
+
     /// <summary>
     /// Value for the limit of cards that can be in a hand.
     /// </summary>
+    [ExportCategory("Hand Settings")]
     [Export] public UInt16 CardLimit { get; protected set; } = 5;
 
     /// <summary>
@@ -15,16 +18,16 @@ public partial class Hand : Node2D
     /// </summary>
     [Export] public float CardMoveTime { get; protected set; } = 0.5f;
 
-    [ExportGroup("Nodes")]
     /// <summary>
     /// Node that holds the cards.
     /// </summary>
+    [ExportGroup("Nodes")]
     [Export] public CanvasItem HandContainer { get; protected set; }
 
-    [ExportGroup("Card Positioning")]
     /// <summary>
     /// Value for the difference of horizontal positions between cards.
     /// </summary>
+    [ExportGroup("Card Positioning")]
     [Export] public UInt16 CardPositionHorizonalOffset { get; protected set; } = 160;
 
     /// <summary>
@@ -32,10 +35,10 @@ public partial class Hand : Node2D
     /// </summary>
     [Export] public float SelectedCardVerticalOffset { get; protected set; } = 120;
 
-    [ExportCategory("Current Hand State")]
     /// <summary>
     /// Value for which side the entire hand is.
     /// </summary>
+    [ExportCategory("Current Hand State")]
     [Export] public BaseCard.Sides Side { get; protected set; } = BaseCard.Sides.back;
 
     /// <summary>
