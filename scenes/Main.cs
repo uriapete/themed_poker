@@ -22,7 +22,7 @@ public partial class Main : Node2D
     [Export] public UInt16 NumberOfValues { get; private set; } = 6;
     [Export] public UInt16 CardsPerValue { get; private set; } = 5;
 
-    public List<BaseCard> Cards { get; private set; }
+    public BaseCard[] Cards { get; private set; }
     public List<BaseCard> CardPile {  get; private set; }
     public Random Rand { get; private set; }
 
@@ -44,12 +44,13 @@ public partial class Main : Node2D
         Rand = new Random(DateTime.Now.Millisecond);
         base._Ready();
         Cards = new List<BaseCard>();
+        Cards = new BaseCard[NumberOfValues*CardsPerValue];
         for (int i = 0; i < NumberOfValues; i++)
         {
             for (int j = 0; j < CardsPerValue; j++)
             {
                 BaseCard newCard=CardScene.Instantiate<BaseCard>();
-                newCard.Value=i; Cards.Add(newCard);
+                newCard.Value=i; Cards[(i*CardsPerValue)+j] = newCard;
             }
         }
         DrawHoldButton.Pressed += ExecuteGame;
