@@ -4,14 +4,23 @@ using System.Collections.Generic;
 
 public partial class Main : Node2D
 {
+    [ExportGroup("Packed Scenes")]
     [Export] public PackedScene CardScene { get;private set; }
+
+    [ExportGroup("Nodes")]
+    [Export] public BaseButton DrawHoldButton { get; private set; }
     [Export] public Node2D CardStack { get; private set; }
+
+    [ExportSubgroup("Hands")]
+    [Export] public Hand HouseHandNode { get; private set; }
+    [Export] public Hand PlayerHandNode { get; private set; }
+
+    [ExportGroup("Game Settings")]
+    [Export] public float DealCardDelay { get; private set; } = .1f;
+
+    [ExportSubgroup("Deck Settings")]
     [Export] public UInt16 NumberOfValues { get; private set; } = 6;
     [Export] public UInt16 CardsPerValue { get; private set; } = 5;
-    [Export] public Hand HouseHandNode { get;private set; }
-    [Export] public Hand PlayerHandNode { get; private set; }
-    [Export] public float DealCardDelay { get; private set; } = .1f;
-    [Export] public BaseButton DrawHoldButton { get; private set; }
 
     public List<BaseCard> Cards { get; private set; }
     public List<BaseCard> CardPile {  get; private set; }
