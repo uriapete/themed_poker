@@ -8,11 +8,11 @@
 [node name="Main" type="Node2D" node_paths=PackedStringArray("DrawHoldButton", "CardStack", "HouseHandNode", "PlayerHandNode")]
 script = ExtResource("1_15e3l")
 CardScene = ExtResource("2_b7l1x")
+DrawHoldButton = NodePath("HUD/DrawHoldButton")
 CardStack = NodePath("CardStack")
 HouseHandNode = NodePath("HouseHand")
 PlayerHandNode = NodePath("PlayerHand")
 DealCardDelay = 0.5
-DrawHoldButton = NodePath("HUD/DrawHoldButton")
 
 [node name="CardStack" parent="." instance=ExtResource("1_ajaik")]
 position = Vector2(190, 170)
