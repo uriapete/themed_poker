@@ -118,9 +118,13 @@ public partial class Main : Node2D
     /// <summary>
     /// Method that executes the game.
     /// </summary>
-    public void ExecuteGame()
+    public async void ExecuteGame()
     {
         DrawSelectedCards(PlayerHandNode);
+        AutoSelectCards(HouseHandNode, NumberOfValues - 2);
+        DrawSelectedCards(HouseHandNode);
+        await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
+        HouseHandNode.FlipAll(BaseCard.Sides.front);
     }
 
     public void AutoSelectCards(Hand hand, int preserveOverValue = 2)
