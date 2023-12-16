@@ -252,6 +252,7 @@ public partial class Main : Node2D
         //enable selections
 
         NewPile();
+        HouseHandNode.FlipAll(BaseCard.Sides.back);
         while(HouseHandNode.CardCount<HouseHandNode.CardLimit)
         {
             HouseHandNode.MoveCardToHand(SpawnCardInStack());
