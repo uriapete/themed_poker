@@ -129,6 +129,72 @@ public partial class Main : Node2D
         //save all values with >=2 cards
         //also save all values with value >=preserveOverValue
         //UNLESS there is at least cardcount-1 of a kind
+
+        //count lists
+        List<int> values = new List<int>();
+        List<int> valueCounts = new List<int>();
+
+        int almostAllInAKind = -1;
+
+        //for each card in hand...
+        foreach (BaseCard card in hand.HandContainer.GetChildren())
+        {
+            if (almostAllInAKind > -1) { break; }
+            bool valueCounted = false;
+
+            //if value is already part of list of values, increase it's count
+            for (int i = 0; i < values.Count && !valueCounted && almostAllInAKind < 0; i++)
+            {
+                int value = values[i];
+                if (value == card.Value)
+                {
+                    valueCounts[i]++;
+                    valueCounted = true;
+                    if (valueCounts[i] >= hand.CardCount - 1)
+                    {
+                        almostAllInAKind = value;
+                    }
+                    break;
+                }
+    }
+            //otherwise, add new value and count
+            if (!valueCounted)
+            {
+                values.Add(card.Value);
+                valueCounts.Add(1);
+            }
+        }
+
+        //if at least nearly all cards are one value, get the odd one out
+        //then return
+        if (almostAllInAKind > -1)
+        {
+            foreach (BaseCard card in hand.HandContainer.GetChildren())
+            {
+                if (card.Value != almostAllInAKind)
+                {
+                    hand.SelectCard(card);
+                }
+            }
+            return;
+        }
+
+        //select cards that are only one of a kind
+        for (int i = 0; i < values.Count; i++)
+        {
+            if (valueCounts[i] >= 2 || values[i]>=preserveOverValue)
+            {
+                continue;
+            }
+            int value = values[i];
+            foreach (BaseCard card in hand.HandContainer.GetChildren())
+            {
+                if (card.Value == value)
+                {
+                    hand.SelectCard(card);
+                }
+            }
+        }
     }
 
     /// <summary>
