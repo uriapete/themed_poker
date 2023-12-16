@@ -123,6 +123,14 @@ public partial class Main : Node2D
         DrawSelectedCards(PlayerHandNode);
     }
 
+    public void AutoSelectCards(Hand hand, int preserveOverValue = 2)
+    {
+        //do counts for all values
+        //save all values with >=2 cards
+        //also save all values with value >=preserveOverValue
+        //UNLESS there is at least cardcount-1 of a kind
+    }
+
     /// <summary>
     /// Method that takes out selected cards from hand and adds in new cards.
     /// </summary>
