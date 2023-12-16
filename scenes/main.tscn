@@ -19,6 +19,7 @@ position = Vector2(190, 170)
 
 [node name="HouseHand" parent="." instance=ExtResource("4_3lg1f")]
 position = Vector2(650, 170)
+SelectedCardVerticalOffset = 0.0
 
 [node name="PlayerHand" parent="." instance=ExtResource("4_3lg1f")]
 position = Vector2(650, 900)
