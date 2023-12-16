@@ -113,7 +113,7 @@ public partial class Hand : Node2D
     /// Either adds or removes selected card to/from the selected list, and positions it accordingly.
     /// </summary>
     /// <param name="card"></param>
-    protected void SelectCard(BaseCard card)
+    public void SelectCard(BaseCard card)
     {
         bool removed = SelectedCards.Remove(card);
         if (!removed)
