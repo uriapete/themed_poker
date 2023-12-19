@@ -122,9 +122,18 @@ public partial class Main : Node2D
     public async void ExecuteGame()
     {
         PlayerSelectionsEnabled = false;
-        DrawSelectedCards(PlayerHandNode);
+        Tween playerLastTween=await DrawSelectedCards(PlayerHandNode);
+        if (playerLastTween != null&&playerLastTween.IsRunning())
+        {
+            await ToSignal(playerLastTween, Tween.SignalName.Finished);
+        }
+        await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
         AutoSelectCards(HouseHandNode, NumberOfValues - 2);
-        DrawSelectedCards(HouseHandNode);
+        Tween houseLastTween=await DrawSelectedCards(HouseHandNode);
+        if(houseLastTween != null && houseLastTween.IsRunning())
+        {
+            await ToSignal(houseLastTween, Tween.SignalName.Finished);
+        }
         await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
         HouseHandNode.FlipAll(BaseCard.Sides.front);
     }
