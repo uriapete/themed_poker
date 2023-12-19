@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public partial class Main : Node2D
 {
@@ -204,9 +205,10 @@ public partial class Main : Node2D
 
     /// <summary>
     /// Method that takes out selected cards from hand and adds in new cards.
+    /// Returns the Tween that is animating moving the final card.
     /// </summary>
     /// <param name="hand"></param>
-    public async void DrawSelectedCards(Hand hand)
+    public async Task<Tween> DrawSelectedCards(Hand hand)
     {
         //remove all selected cards from hand
         //and add them to the pile
@@ -216,12 +218,15 @@ public partial class Main : Node2D
             CardPile.Add(hand.RemoveCard(card));
         }
 
+        Tween finalMoveTween=null;
+
         //then, fill the hand back up
         while (hand.CardCount < hand.CardLimit)
         {
         await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
-            hand.MoveCardToHand(SpawnCardInStack());
+            finalMoveTween=hand.MoveCardToHand(SpawnCardInStack());
         }
+        return finalMoveTween;
     }
 
     /// <summary>
