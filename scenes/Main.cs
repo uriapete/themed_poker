@@ -239,7 +239,7 @@ public partial class Main : Node2D
         newCard.Position = Vector2.Zero;
 
         //set card side
-        newCard.Flip(BaseCard.Sides.back);
+        newCard.QuickFlip(BaseCard.Sides.back);
 
         CardStack.AddChild(newCard);
         return newCard;
