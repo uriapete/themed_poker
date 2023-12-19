@@ -120,6 +120,7 @@ public partial class Main : Node2D
     /// </summary>
     public async void ExecuteGame()
     {
+        PlayerSelectionsEnabled = false;
         DrawSelectedCards(PlayerHandNode);
         AutoSelectCards(HouseHandNode, NumberOfValues - 2);
         DrawSelectedCards(HouseHandNode);
