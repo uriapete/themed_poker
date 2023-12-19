@@ -83,6 +83,18 @@ public partial class BaseCard : Area2D
 
             //set the value, stringifying the enum value
             animatedSprite2D.Animation = value.ToString();
+
+            //hide or show face value sprite depending on current side
+            switch (value)
+            {
+                case Sides.front:
+                    ValueDisplayNode.Show();
+                    break;
+                case Sides.back:
+                    ValueDisplayNode.Hide();
+                    break;
+            }
+        }
         }
     }
 
@@ -126,17 +138,6 @@ public partial class BaseCard : Area2D
     {
         //switch current side
         CurrentSide = (Sides)(-1 * (int)CurrentSide);
-
-        //hide or show face value sprite depending on current side
-        switch (CurrentSide)
-        {
-            case Sides.front:
-                ValueDisplayNode.Show();
-                break;
-            case Sides.back:
-                ValueDisplayNode.Hide();
-                break;
-        }
 
         //create the next tween
         Tween tween = GetTree().CreateTween();
