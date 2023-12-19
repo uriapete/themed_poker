@@ -140,16 +140,17 @@ public partial class Hand : Node2D
         SelectCard(card);
     }
 
+#nullable enable
     /// <summary>
     /// Moves card to this hand.
     /// </summary>
     /// <param name="card"></param>
-    public bool MoveCardToHand(BaseCard card)
+    public Tween? MoveCardToHand(BaseCard card)
     {
         //if hand is full, don't do anything
         if (CardCount >= CardLimit)
         {
-            return false;
+            return null;
         }
 
         //else:
@@ -167,8 +168,9 @@ public partial class Hand : Node2D
         card.Flip(Side);
 
         //done
-        return true;
+        return tween;
     }
+#nullable disable
 
     /// <summary>
     /// Repositions all cards to correct positions. Called when HandContainer's Child Order is Changed.
