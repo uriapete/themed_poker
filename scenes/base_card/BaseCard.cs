@@ -97,17 +97,24 @@ public partial class BaseCard : Area2D
         }
         }
 
+    /// <summary>
+    /// Method to quickly flip this card to the other side without tweening animations.
+    /// </summary>
     public void QuickFlip()
     {
         QuickFlip((Sides)(-1 * (int)CurrentSide));
     }
-    public void QuickFlip(Sides sides)
+    /// <summary>
+    /// Method to quickly flip this card to a side without tweening animations.
+    /// </summary>
+    /// <param name="sides"></param>
+    public void QuickFlip(Sides side)
     {
         if (Flipping)
         {
             return;
         }
-        CurrentSide = sides;
+        CurrentSide = side;
     }
 
     /// <summary>
