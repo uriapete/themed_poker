@@ -143,6 +143,7 @@ public partial class Hand : Node2D
 #nullable enable
     /// <summary>
     /// Moves card to this hand.
+    /// Returns the Tween that is animating moving the card if successful.
     /// </summary>
     /// <param name="card"></param>
     public Tween? MoveCardToHand(BaseCard card)
