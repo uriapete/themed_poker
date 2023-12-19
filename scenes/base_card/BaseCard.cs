@@ -96,6 +96,18 @@ public partial class BaseCard : Area2D
             }
         }
         }
+
+    public void QuickFlip()
+    {
+        QuickFlip((Sides)(-1 * (int)CurrentSide));
+    }
+    public void QuickFlip(Sides sides)
+    {
+        if (Flipping)
+        {
+            return;
+        }
+        CurrentSide = sides;
     }
 
     /// <summary>
