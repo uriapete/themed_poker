@@ -95,7 +95,7 @@ public partial class BaseCard : Area2D
                     break;
             }
         }
-        }
+    }
 
     /// <summary>
     /// Method to quickly flip this card to the other side without tweening animations.
