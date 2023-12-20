@@ -110,6 +110,18 @@ public partial class Hand : Node2D
     }
     
     /// <summary>
+    /// Method for handling when the Child Order of HandContainer changes.
+    /// </summary>
+    public void OnHandOrderChanged()
+    {
+        if (!RepositionOnHandOrderChanged)
+        {
+            return;
+        }
+        RepositionAllCards();
+    }
+    
+    /// <summary>
     /// Flips all cards over.
     /// </summary>
     public void FlipAll()
