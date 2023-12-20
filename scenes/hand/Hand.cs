@@ -122,6 +122,14 @@ public partial class Hand : Node2D
     }
     
     /// <summary>
+    /// Toggles whether or not the cards in the automatically repositions when the ChildOrder if HandContainer changes.
+    /// </summary>
+    public void ToggleRepositionOnHandOrderChanged()
+    {
+        RepositionOnHandOrderChanged = !RepositionOnHandOrderChanged;
+    }
+
+    /// <summary>
     /// Flips all cards over.
     /// </summary>
     public void FlipAll()
