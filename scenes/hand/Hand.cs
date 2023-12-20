@@ -97,8 +97,8 @@ public partial class Hand : Node2D
         //init selected cards list
         SelectedCards = new List<BaseCard>();
 
-        //connect HandContainer.ChildOrderChanged signal to RepositionAllCards
-        HandContainer.ChildOrderChanged += RepositionAllCards;
+        //connect HandContainer.ChildOrderChanged signal to appropriate method
+        HandContainer.ChildOrderChanged += OnHandOrderChanged;
     }
 
     /// <summary>
@@ -120,7 +120,7 @@ public partial class Hand : Node2D
         }
         RepositionAllCards();
     }
-    
+
     /// <summary>
     /// Toggles whether or not the cards in the automatically repositions when the ChildOrder if HandContainer changes.
     /// </summary>
