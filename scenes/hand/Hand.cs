@@ -52,6 +52,30 @@ public partial class Hand : Node2D
     public List<BaseCard> SelectedCards { get; protected set; }
 
     /// <summary>
+    /// Backing field for RepositionOnHandOrderChanged.
+    /// </summary>
+    private bool _RepositionOnHandOrderChanged = true;
+
+    /// <summary>
+    /// Property that controls whether or not cards in HandContainer reposition when the ChildOrder changes.
+    /// </summary>
+    public bool RepositionOnHandOrderChanged
+    {
+        get
+        {
+            return _RepositionOnHandOrderChanged;
+        }
+        set
+        {
+            _RepositionOnHandOrderChanged = value;
+            if (value)
+            {
+                RepositionAllCards();
+            }
+        }
+    }
+
+    /// <summary>
     /// Getter for how many cards are in this hand.
     /// </summary>
     public int CardCount
@@ -84,7 +108,7 @@ public partial class Hand : Node2D
     public override void _Process(double delta)
     {
     }
-
+    
     /// <summary>
     /// Flips all cards over.
     /// </summary>
