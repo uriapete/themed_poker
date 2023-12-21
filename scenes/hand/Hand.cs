@@ -59,7 +59,7 @@ public partial class Hand : Node2D
     /// <summary>
     /// Property that controls whether or not cards in HandContainer reposition when the ChildOrder changes.
     /// </summary>
-    public bool RepositionOnHandOrderChanged { get;protected set; }
+    public bool RepositionOnHandOrderChanged { get; protected set; }
 
     /// <summary>
     /// Getter for how many cards are in this hand.
@@ -94,47 +94,52 @@ public partial class Hand : Node2D
     public override void _Process(double delta)
     {
     }
-    
+
     /// <summary>
     /// Sorts the hand based on hand value (By amount of cards of value, then by value)
     /// </summary>
     /// <param name="numberOfValues"></param>
     public void SortHand(int numberOfValues)
     {
-        GD.Print("sort start");
         SetRepositionOnHandOrderChanged(false);
 
         //count all values
         //sort cards by value counts, then value itself
 
+        //count all values
+
         int[] valueCounts = new int[numberOfValues];
 
-        ushort countedValues =0;
+        ushort countedValues = 0;
 
         foreach (BaseCard card in HandContainer.GetChildren())
         {
             valueCounts[card.Value]++;
-            if (valueCounts[card.Value]<=1)
+            if (valueCounts[card.Value] <= 1)
             {
                 countedValues++;
             }
         }
 
-        List<int> sortedValueList= new List<int>();
+        //sort values
+        List<int> sortedValueList = new List<int>();
 
-        while (sortedValueList.Count<countedValues)
+        while (sortedValueList.Count < countedValues)
         {
             int valueMostCount = -1;
             for (int value = 0; value < numberOfValues; value++)
             {
+                //first set valueMostCount to first counted value
                 if (valueMostCount < 0)
                 {
-                    if (valueCounts[value] >0)
+                    if (valueCounts[value] > 0)
                     {
                         valueMostCount = value;
                     }
                     continue;
                 }
+
+                //reset valueMostCount to current value if current value has higher count, or if curr val has same count AND is a higher value
                 int count = valueCounts[value];
                 if (count < 1)
                 {
@@ -145,21 +150,21 @@ public partial class Hand : Node2D
                     valueMostCount = value;
                 }
             }
+            //add to list
             sortedValueList.Add(valueMostCount);
             valueCounts[valueMostCount] = -1;
         }
 
+        //for each value in the sorted list, move unsorted cards of that list to the end
         int unsortedItems = CardCount;
         foreach (var value in sortedValueList)
         {
-            GD.Print($"next value: {value}");
-            for (int cardIdx = 0; cardIdx <unsortedItems;)
+            for (int cardIdx = 0; cardIdx < unsortedItems;)
             {
                 BaseCard card = HandContainer.GetChild(cardIdx) as BaseCard;
                 if (card.Value == value)
                 {
                     HandContainer.MoveChild(card, -1);
-                    GD.Print($"movedcard: {card.Value}");
                     unsortedItems--;
                 }
                 else
@@ -171,7 +176,7 @@ public partial class Hand : Node2D
 
         SetRepositionOnHandOrderChanged(true);
     }
-    
+
     /// <summary>
     /// Method for handling when the Child Order of HandContainer changes.
     /// </summary>
@@ -190,7 +195,7 @@ public partial class Hand : Node2D
     /// <param name="value"></param>
     public void SetRepositionOnHandOrderChanged(bool value)
     {
-        RepositionOnHandOrderChanged=value;
+        RepositionOnHandOrderChanged = value;
         if (value)
         {
             RepositionAllCards();
