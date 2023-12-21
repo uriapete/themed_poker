@@ -145,9 +145,8 @@ public partial class Main : Node2D
         //also save all values with value >=preserveOverValue
         //UNLESS there is at least cardcount-1 of a kind
 
-        //count lists
-        List<int> values = new List<int>();
-        List<int> valueCounts = new List<int>();
+        //count array
+        int[] valueCounts = new int[NumberOfValues];
 
         int almostAllInAKind = -1;
 
@@ -155,28 +154,14 @@ public partial class Main : Node2D
         foreach (BaseCard card in hand.HandContainer.GetChildren())
         {
             if (almostAllInAKind > -1) { break; }
-            bool valueCounted = false;
 
-            //if value is already part of list of values, increase it's count
-            for (int i = 0; i < values.Count && !valueCounted && almostAllInAKind < 0; i++)
+            //increase count of value
+            valueCounts[card.Value]++;
+
+            //if value makes up pretty much all of hand, set almostAllInAKind
+            if (valueCounts[card.Value] >= hand.CardCount - 1)
             {
-                int value = values[i];
-                if (value == card.Value)
-                {
-                    valueCounts[i]++;
-                    valueCounted = true;
-                    if (valueCounts[i] >= hand.CardCount - 1)
-                    {
-                        almostAllInAKind = value;
-                    }
-                    break;
-                }
-    }
-            //otherwise, add new value and count
-            if (!valueCounted)
-            {
-                values.Add(card.Value);
-                valueCounts.Add(1);
+                almostAllInAKind = card.Value;
             }
         }
 
@@ -194,20 +179,13 @@ public partial class Main : Node2D
             return;
         }
 
-        //select cards that are only one of a kind
-        for (int i = 0; i < values.Count; i++)
+        //select cards that are only one of a kind AND less than int preserveOverValue
+        foreach(BaseCard card in hand.HandContainer.GetChildren())
         {
-            if (valueCounts[i] >= 2 || values[i]>=preserveOverValue)
+            int value = card.Value;
+            if (valueCounts[value] < 2 && value < preserveOverValue)
             {
-                continue;
-            }
-            int value = values[i];
-            foreach (BaseCard card in hand.HandContainer.GetChildren())
-            {
-                if (card.Value == value)
-                {
-                    hand.SelectCard(card);
-                }
+                hand.SelectCard(card);
             }
         }
     }
