@@ -135,6 +135,8 @@ public partial class Main : Node2D
             await ToSignal(houseLastTween, Tween.SignalName.Finished);
         }
         await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
+        HouseHandNode.SortHand(NumberOfValues);
+        PlayerHandNode.SortHand(NumberOfValues);
         HouseHandNode.FlipAll(BaseCard.Sides.front);
     }
 
