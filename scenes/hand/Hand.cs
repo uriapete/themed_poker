@@ -96,6 +96,83 @@ public partial class Hand : Node2D
     }
     
     /// <summary>
+    /// Sorts the hand based on hand value (By amount of cards of value, then by value)
+    /// </summary>
+    /// <param name="numberOfValues"></param>
+    public void SortHand(int numberOfValues)
+    {
+        GD.Print("sort start");
+        SetRepositionOnHandOrderChanged(false);
+
+        //count all values
+        //sort cards by value counts, then value itself
+
+        int[] valueCounts = new int[numberOfValues];
+
+        ushort countedValues =0;
+
+        foreach (BaseCard card in HandContainer.GetChildren())
+        {
+            valueCounts[card.Value]++;
+            if (valueCounts[card.Value]<=1)
+            {
+                countedValues++;
+            }
+        }
+
+        List<int> sortedValueList= new List<int>();
+
+        while (sortedValueList.Count<countedValues)
+        {
+            int valueMostCount = -1;
+            for (int value = 0; value < numberOfValues; value++)
+            {
+                if (valueMostCount < 0)
+                {
+                    if (valueCounts[value] >0)
+                    {
+                        valueMostCount = value;
+                    }
+                    continue;
+                }
+                int count = valueCounts[value];
+                if (count < 1)
+                {
+                    continue;
+                }
+                if (count > valueCounts[valueMostCount] || (count == valueCounts[valueMostCount] && value > valueMostCount))
+                {
+                    valueMostCount = value;
+                }
+            }
+            sortedValueList.Add(valueMostCount);
+            valueCounts[valueMostCount] = -1;
+        }
+
+        int unsortedItems = CardCount;
+        foreach (var value in sortedValueList)
+        {
+            GD.Print($"next value: {value}");
+            for (int cardIdx = 0; cardIdx <unsortedItems;)
+            {
+                BaseCard card = HandContainer.GetChild(cardIdx) as BaseCard;
+                if (card.Value == value)
+                {
+                    HandContainer.MoveChild(card, -1);
+                    GD.Print($"movedcard: {card.Value}");
+                    unsortedItems--;
+                }
+                else
+                {
+                    cardIdx++;
+                }
+            }
+        }
+
+        SetRepositionOnHandOrderChanged(true);
+    }
+    
+    /// <summary>
     /// Method for handling when the Child Order of HandContainer changes.
     /// </summary>
     public void OnHandOrderChanged()
