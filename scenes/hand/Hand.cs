@@ -116,6 +116,19 @@ public partial class Hand : Node2D
     }
 
     /// <summary>
+    /// Public setter method for RepositionOnHandOrderChanged.
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetRepositionOnHandOrderChanged(bool value)
+    {
+        RepositionOnHandOrderChanged=value;
+        if (value)
+        {
+            RepositionAllCards();
+        }
+    }
+
+    /// <summary>
     /// Flips all cards over.
     /// </summary>
     public void FlipAll()
