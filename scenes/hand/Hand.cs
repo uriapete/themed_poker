@@ -163,8 +163,7 @@ public partial class Hand : Node2D
     /// <summary>
     /// Sorts the hand based on hand value (By amount of cards of value, then by value)
     /// </summary>
-    /// <param name="numberOfValues"></param>
-    public void SortHand(int numberOfValues)
+    public void SortHand()
     {
         SetRepositionOnHandOrderChanged(false);
 
@@ -173,18 +172,9 @@ public partial class Hand : Node2D
 
         //count all values
 
-        int[] valueCounts = new int[numberOfValues];
-
-        ushort countedValues = 0;
-
-        foreach (BaseCard card in HandContainer.GetChildren())
-        {
-            valueCounts[card.Value]++;
-            if (valueCounts[card.Value] <= 1)
-            {
-                countedValues++;
-            }
-        }
+        HandValuesCount valuesCount = CountHandValues();
+        Dictionary<int, int> valueCounts=valuesCount.ValueCounts;
+        int countedValues=valueCounts.Count;
 
         //sort values
         List<int> sortedValueList = new List<int>();
@@ -192,12 +182,13 @@ public partial class Hand : Node2D
         while (sortedValueList.Count < countedValues)
         {
             int valueMostCount = -1;
-            for (int value = 0; value < numberOfValues; value++)
+            //for (int value = 0; value < numberOfValues; value++)
+            foreach (var (value,count) in valueCounts)
             {
                 //first set valueMostCount to first counted value
                 if (valueMostCount < 0)
                 {
-                    if (valueCounts[value] > 0)
+                    if (count > 0)
                     {
                         valueMostCount = value;
                     }
@@ -205,7 +196,6 @@ public partial class Hand : Node2D
                 }
 
                 //reset valueMostCount to current value if current value has higher count, or if curr val has same count AND is a higher value
-                int count = valueCounts[value];
                 if (count < 1)
                 {
                     continue;
