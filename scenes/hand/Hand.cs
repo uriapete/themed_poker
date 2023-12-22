@@ -108,6 +108,38 @@ public partial class Hand : Node2D
     }
 
     /// <summary>
+    /// Class that puts together info about the value counts of the hands.
+    /// </summary>
+    public class HandValuesCount
+    {
+        /// <summary>
+        /// Counts of card values.
+        /// </summary>
+        public Dictionary<int,int> ValueCounts { get; private set; }
+
+        /// <summary>
+        /// The value which makes up all or all but one of the cards. -1 if not applicable.
+        /// </summary>
+        public int AllButOneOrAllInAKind { get; private set; } = -1;
+
+        public HandValuesCount(Dictionary<int,int> valueCounts, int allButOneOrAllInAKind = -1)
+        {
+            ValueCounts = valueCounts;
+            AllButOneOrAllInAKind = allButOneOrAllInAKind;
+        }
+    }
+
+    /// <summary>
+    /// Method that counts the amount of cards of each value in card.
+    /// </summary>
+    /// <returns>Value counts in the form of a dictionary(card value as key, count as value) and the value that makes up all or all but one of the cards if applicable or -1 if not.</returns>
+    public HandValuesCount CountHandValues()
+    {
+        //for each card in hand, increase count of value
+        //also track if all or all but one of the cards are one value
+    }
+
+    /// <summary>
     /// Sorts the hand based on hand value (By amount of cards of value, then by value)
     /// </summary>
     /// <param name="numberOfValues"></param>
