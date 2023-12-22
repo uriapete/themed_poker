@@ -19,6 +19,11 @@ public partial class Hand : Node2D
     [Export] public float CardMoveTime { get; protected set; } = 0.5f;
 
     /// <summary>
+    /// Array containing names for the simple list of hand ranks.
+    /// </summary>
+    [Export] public string[] SimpleHandRankNames { get; protected set; } = { "Junk", "One Pair", "Two Pair", "Three Of a Kind", "Full House", "Four Of a Kind", "Five In a Kind", "Flush" };
+
+    /// <summary>
     /// Node that holds the cards.
     /// </summary>
     [ExportGroup("Nodes")]
