@@ -85,9 +85,7 @@ public partial class Main : Node2D
         }
     }
 
-    /// <summary>
-    /// Called when the node enters the scene tree for the first time.
-    /// </summary>
+    //Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         //set random to now.
@@ -108,10 +106,7 @@ public partial class Main : Node2D
         DrawHoldButton.Pressed += ExecuteGame;
     }
 
-    /// <summary>
-    /// Called every frame. 'delta' is the elapsed time since the previous frame.
-    /// </summary>
-    /// <param name="delta"></param>
+    //Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
     }
@@ -121,25 +116,49 @@ public partial class Main : Node2D
     /// </summary>
     public async void ExecuteGame()
     {
+        //disable player selections
         PlayerSelectionsEnabled = false;
-        Tween playerLastTween=await DrawSelectedCards(PlayerHandNode);
-        if (playerLastTween != null&&playerLastTween.IsRunning())
+
+        //draw selected cards of player
+        Tween playerLastTween = await DrawSelectedCards(PlayerHandNode);
+
+        //wait for it to finish animating
+        if (playerLastTween != null && playerLastTween.IsRunning())
         {
             await ToSignal(playerLastTween, Tween.SignalName.Finished);
         }
+
+        //small delay
         await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
+
+        //computer selects house cards
         AutoSelectCards(HouseHandNode, NumberOfValues - 2);
-        Tween houseLastTween=await DrawSelectedCards(HouseHandNode);
-        if(houseLastTween != null && houseLastTween.IsRunning())
+
+        //draw selected cards of house
+        Tween houseLastTween = await DrawSelectedCards(HouseHandNode);
+
+        //wait for finish animation
+        if (houseLastTween != null && houseLastTween.IsRunning())
         {
             await ToSignal(houseLastTween, Tween.SignalName.Finished);
         }
+
+        //small delay
         await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
+
+        //sort both hands
         HouseHandNode.SortHand();
         PlayerHandNode.SortHand();
+
+        //flip all
         HouseHandNode.FlipAll(BaseCard.Sides.front);
     }
 
+    /// <summary>
+    /// Method for the computer to select cards.
+    /// </summary>
+    /// <param name="hand">Hand to select cards from.</param>
+    /// <param name="preserveOverValue">Minimum value to hold cards regardless of only being one of a kind.</param>
     public void AutoSelectCards(Hand hand, int preserveOverValue = 2)
     {
         //do counts for all values
@@ -147,10 +166,10 @@ public partial class Main : Node2D
         //also save all values with value >=preserveOverValue
         //UNLESS there is at least cardcount-1 of a kind
 
-        Hand.HandValuesCount valueCountInfo=hand.CountHandValues();
+        Hand.HandValuesCount valueCountInfo = hand.CountHandValues();
 
         //count array
-        Dictionary<int,int> valueCounts = valueCountInfo.ValueCounts;
+        Dictionary<int, int> valueCounts = valueCountInfo.ValueCounts;
 
         int almostAllInAKind = valueCountInfo.AllButOneOrAllInAKind;
 
@@ -169,7 +188,7 @@ public partial class Main : Node2D
         }
 
         //select cards that are only one of a kind AND less than int preserveOverValue
-        foreach(BaseCard card in hand.HandContainer.GetChildren())
+        foreach (BaseCard card in hand.HandContainer.GetChildren())
         {
             int value = card.Value;
             if (valueCounts[value] < 2 && value < preserveOverValue)
@@ -183,7 +202,7 @@ public partial class Main : Node2D
     /// Method that takes out selected cards from hand and adds in new cards.
     /// Returns the Tween that is animating moving the final card.
     /// </summary>
-    /// <param name="hand"></param>
+    /// <param name="hand">Hand to take out and fill from.</param>
     public async Task<Tween> DrawSelectedCards(Hand hand)
     {
         //remove all selected cards from hand
@@ -194,13 +213,13 @@ public partial class Main : Node2D
             CardPile.Add(hand.RemoveCard(card));
         }
 
-        Tween finalMoveTween=null;
+        Tween finalMoveTween = null;
 
         //then, fill the hand back up
         while (hand.CardCount < hand.CardLimit)
         {
-        await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
-            finalMoveTween=hand.MoveCardToHand(SpawnCardInStack());
+            await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
+            finalMoveTween = hand.MoveCardToHand(SpawnCardInStack());
         }
         return finalMoveTween;
     }
@@ -208,7 +227,7 @@ public partial class Main : Node2D
     /// <summary>
     /// Method that spawns in new cards from the stack.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>The new card node/scene.</returns>
     public BaseCard SpawnCardInStack()
     {
         //take a card from top of pile
@@ -238,7 +257,7 @@ public partial class Main : Node2D
 
         NewPile();
         HouseHandNode.FlipAll(BaseCard.Sides.back);
-        while(HouseHandNode.CardCount<HouseHandNode.CardLimit)
+        while (HouseHandNode.CardCount < HouseHandNode.CardLimit)
         {
             HouseHandNode.MoveCardToHand(SpawnCardInStack());
             PlayerHandNode.MoveCardToHand(SpawnCardInStack());
