@@ -72,6 +72,9 @@ public partial class Hand : Node2D
         }
     }
 
+    /// <summary>
+    /// Enum for simple hand ranks.
+    /// </summary>
     public enum SimpleHandRank
     {
         Junk,
@@ -84,9 +87,7 @@ public partial class Hand : Node2D
         Flush,
     }
 
-    /// <summary>
-    /// Called when the node enters the scene tree for the first time.
-    /// </summary>
+    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         //free placeholder sprite
@@ -99,10 +100,7 @@ public partial class Hand : Node2D
         HandContainer.ChildOrderChanged += OnHandOrderChanged;
     }
 
-    /// <summary>
-    /// Called every frame. 'delta' is the elapsed time since the previous frame.
-    /// </summary>
-    /// <param name="delta"></param>
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
     }
@@ -115,14 +113,14 @@ public partial class Hand : Node2D
         /// <summary>
         /// Counts of card values.
         /// </summary>
-        public Dictionary<int,int> ValueCounts { get; private set; }
+        public Dictionary<int, int> ValueCounts { get; private set; }
 
         /// <summary>
         /// The value which makes up all or all but one of the cards. -1 if not applicable.
         /// </summary>
         public int AllButOneOrAllInAKind { get; private set; } = -1;
 
-        public HandValuesCount(Dictionary<int,int> valueCounts, int allButOneOrAllInAKind = -1)
+        public HandValuesCount(Dictionary<int, int> valueCounts, int allButOneOrAllInAKind = -1)
         {
             ValueCounts = valueCounts;
             AllButOneOrAllInAKind = allButOneOrAllInAKind;
@@ -157,9 +155,13 @@ public partial class Hand : Node2D
                 allButOneOrAllInAKind = card.Value;
             }
         }
-        return new HandValuesCount(valueCounts,allButOneOrAllInAKind);
+        return new HandValuesCount(valueCounts, allButOneOrAllInAKind);
     }
 
+    /// <summary>
+    /// Method that evaluates the hand into a simple rank.
+    /// </summary>
+    /// <returns>Simple hand rank enum value.</returns>
     public SimpleHandRank GetHandValue()
     {
         return SimpleHandRank.Junk;
@@ -178,8 +180,8 @@ public partial class Hand : Node2D
         //count all values
 
         HandValuesCount valuesCount = CountHandValues();
-        Dictionary<int, int> valueCounts=valuesCount.ValueCounts;
-        int countedValues=valueCounts.Count;
+        Dictionary<int, int> valueCounts = valuesCount.ValueCounts;
+        int countedValues = valueCounts.Count;
 
         //sort values
         List<int> sortedValueList = new List<int>();
@@ -188,7 +190,7 @@ public partial class Hand : Node2D
         {
             int valueMostCount = -1;
             //for (int value = 0; value < numberOfValues; value++)
-            foreach (var (value,count) in valueCounts)
+            foreach (var (value, count) in valueCounts)
             {
                 //first set valueMostCount to first counted value
                 if (valueMostCount < 0)
@@ -276,7 +278,7 @@ public partial class Hand : Node2D
     /// <summary>
     /// Flips all cards to provided side.
     /// </summary>
-    /// <param name="side"></param>
+    /// <param name="side">Side to flip cards to.</param>
     public void FlipAll(BaseCard.Sides side)
     {
         Side = side;
@@ -289,7 +291,7 @@ public partial class Hand : Node2D
     /// <summary>
     /// Either adds or removes selected card to/from the selected list, and positions it accordingly.
     /// </summary>
-    /// <param name="card"></param>
+    /// <param name="card">Card to select.</param>
     public void SelectCard(BaseCard card)
     {
         bool removed = SelectedCards.Remove(card);
@@ -307,7 +309,7 @@ public partial class Hand : Node2D
     /// <summary>
     /// Selects card on click if hand is selectable.
     /// </summary>
-    /// <param name="card"></param>
+    /// <param name="card">Card that was clicked on.</param>
     public void OnCardClick(BaseCard card)
     {
         if (!Selectable)
@@ -322,7 +324,8 @@ public partial class Hand : Node2D
     /// Moves card to this hand.
     /// Returns the Tween that is animating moving the card if successful.
     /// </summary>
-    /// <param name="card"></param>
+    /// <param name="card">Card to move to this hand.</param>
+    /// <returns>The Tween that animates the card moving to this hand, or null if it fails.</returns>
     public Tween? MoveCardToHand(BaseCard card)
     {
         //if hand is full, don't do anything
@@ -364,8 +367,8 @@ public partial class Hand : Node2D
     /// <summary>
     /// Positions card to provided index position.
     /// </summary>
-    /// <param name="card"></param>
-    /// <param name="newPos"></param>
+    /// <param name="card">Card in hand to move.</param>
+    /// <param name="newPos">Index position to move the card to.</param>
     public void MoveCard(BaseCard card, int newPos)
     {
         if (card.GetParent() != HandContainer)
@@ -377,10 +380,10 @@ public partial class Hand : Node2D
     }
 
     /// <summary>
-    /// Removes card from this hand. Also removes it from SelectedCards list, resets its position, and disconnects its click signal. Returns the removed card.
+    /// Removes card from this hand (Not deleted, just removed from the hand's tree.). Also removes it from SelectedCards list, resets its position, and disconnects its click signal. Returns the removed card.
     /// </summary>
-    /// <param name="card"></param>
-    /// <returns></returns>
+    /// <param name="card">Card to remove.</param>
+    /// <returns>The removed card.</returns>
     public BaseCard RemoveCard(BaseCard card)
     {
         card.Click -= OnCardClick;
