@@ -137,6 +137,27 @@ public partial class Hand : Node2D
     {
         //for each card in hand, increase count of value
         //also track if all or all but one of the cards are one value
+
+        Dictionary<int, int> valueCounts = new();
+
+        int allButOneOrAllInAKind = -1;
+
+        foreach (BaseCard card in HandContainer.GetChildren())
+        {
+            if (!valueCounts.ContainsKey(card.Value))
+            {
+                valueCounts.Add(card.Value, 1);
+            }
+            else
+            {
+                valueCounts[card.Value]++;
+            }
+            if (valueCounts[card.Value] >= CardCount - 1)
+            {
+                allButOneOrAllInAKind = card.Value;
+            }
+        }
+        return new HandValuesCount(valueCounts,allButOneOrAllInAKind);
     }
 
     /// <summary>
