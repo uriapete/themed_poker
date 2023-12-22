@@ -72,6 +72,18 @@ public partial class Hand : Node2D
         }
     }
 
+    public enum SimpleHandRanks
+    {
+        Junk,
+        OnePair,
+        TwoPair,
+        ThreeInAKind,
+        FullHouse,
+        FourInAKind,
+        FiveInAKind,
+        Flush,
+    }
+
     /// <summary>
     /// Called when the node enters the scene tree for the first time.
     /// </summary>
