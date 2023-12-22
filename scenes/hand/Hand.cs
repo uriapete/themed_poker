@@ -160,6 +160,11 @@ public partial class Hand : Node2D
         return new HandValuesCount(valueCounts,allButOneOrAllInAKind);
     }
 
+    public SimpleHandRank GetHandValue()
+    {
+        return SimpleHandRank.Junk;
+    }
+
     /// <summary>
     /// Sorts the hand based on hand value (By amount of cards of value, then by value)
     /// </summary>
