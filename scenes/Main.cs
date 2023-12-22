@@ -147,25 +147,12 @@ public partial class Main : Node2D
         //also save all values with value >=preserveOverValue
         //UNLESS there is at least cardcount-1 of a kind
 
+        Hand.HandValuesCount valueCountInfo=hand.CountHandValues();
+
         //count array
-        int[] valueCounts = new int[NumberOfValues];
+        Dictionary<int,int> valueCounts = valueCountInfo.ValueCounts;
 
-        int almostAllInAKind = -1;
-
-        //for each card in hand...
-        foreach (BaseCard card in hand.HandContainer.GetChildren())
-        {
-            if (almostAllInAKind > -1) { break; }
-
-            //increase count of value
-            valueCounts[card.Value]++;
-
-            //if value makes up pretty much all of hand, set almostAllInAKind
-            if (valueCounts[card.Value] >= hand.CardCount - 1)
-            {
-                almostAllInAKind = card.Value;
-            }
-        }
+        int almostAllInAKind = valueCountInfo.AllButOneOrAllInAKind;
 
         //if at least nearly all cards are one value, get the odd one out
         //then return
