@@ -77,7 +77,7 @@ public partial class Hand : Node2D
         }
     }
 
-    public enum SimpleHandRanks
+    public enum SimpleHandRank
     {
         Junk,
         OnePair,
