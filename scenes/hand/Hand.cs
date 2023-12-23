@@ -190,12 +190,12 @@ public partial class Hand : Node2D
     }
 
     /// <summary>
-    /// Method that evaluates the hand into a simple rank.
+    /// Method that evaluates the hand.
     /// </summary>
-    /// <returns>Simple hand rank enum value.</returns>
-    public SimpleHandRank GetHandValue()
+    /// <returns>Simple hand rank and values of interest.</returns>
+    public SimpleHandValue GetHandValue(int maxValue=5)
     {
-        return SimpleHandRank.Junk;
+        return new();
     }
 
     /// <summary>
