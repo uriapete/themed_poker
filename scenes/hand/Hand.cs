@@ -116,14 +116,25 @@ public partial class Hand : Node2D
         public Dictionary<int, int> ValueCounts { get; private set; }
 
         /// <summary>
+        /// List of values with only one occurrance in the hand.
+        /// </summary>
+        public List<int> OneOffValues { get; private set; } = new();
+
+        /// <summary>
         /// The value which makes up all or all but one of the cards. -1 if not applicable.
         /// </summary>
         public int AllButOneOrAllInAKind { get; private set; } = -1;
 
-        public HandValuesCount(Dictionary<int, int> valueCounts, int allButOneOrAllInAKind = -1)
+        public HandValuesCount(Dictionary<int, int> valueCounts, int allButOneOrAllInAKind = -1, List<int> oneOffValues = null)
         {
             ValueCounts = valueCounts;
             AllButOneOrAllInAKind = allButOneOrAllInAKind;
+
+            if (oneOffValues != null)
+            {
+                OneOffValues = oneOffValues;
+            }
+
         }
     }
 
@@ -135,27 +146,32 @@ public partial class Hand : Node2D
     {
         //for each card in hand, increase count of value
         //also track if all or all but one of the cards are one value
+        //and track values with only once occurrance
 
         Dictionary<int, int> valueCounts = new();
 
         int allButOneOrAllInAKind = -1;
+
+        List<int> oneOffValues = new();
 
         foreach (BaseCard card in HandContainer.GetChildren())
         {
             if (!valueCounts.ContainsKey(card.Value))
             {
                 valueCounts.Add(card.Value, 1);
+                oneOffValues.Add(card.Value);
             }
             else
             {
                 valueCounts[card.Value]++;
+                oneOffValues.Remove(card.Value);
             }
             if (valueCounts[card.Value] >= CardCount - 1)
             {
                 allButOneOrAllInAKind = card.Value;
             }
         }
-        return new HandValuesCount(valueCounts, allButOneOrAllInAKind);
+        return new HandValuesCount(valueCounts, allButOneOrAllInAKind,oneOffValues);
     }
 
     /// <summary>
