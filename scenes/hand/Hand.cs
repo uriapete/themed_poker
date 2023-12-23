@@ -87,6 +87,21 @@ public partial class Hand : Node2D
         Flush,
     }
 
+    public class SimpleHandValue
+    {
+        public SimpleHandRank Rank {  get; protected set; }
+        public int[] Values { get; protected set; } = Array.Empty<int>();
+
+        public SimpleHandValue(SimpleHandRank rank=SimpleHandRank.Junk, int[] values = null)
+        {
+            Rank = rank;
+            if (values != null)
+            {
+                Values = values;
+            }
+        }
+    }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
