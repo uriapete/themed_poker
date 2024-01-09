@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://17uh7nnayp77" path="res://scenes/base_card/base_card.tscn" id="2_b7l1x"]
 [ext_resource type="PackedScene" uid="uid://btctlexwlwdlv" path="res://scenes/hand/hand.tscn" id="4_3lg1f"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("DrawHoldButton", "CardStack", "HouseHandNode", "PlayerHandNode")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("DrawHoldButton", "CardStack", "HouseHandNode", "PlayerHandNode", "DebugMenuLabel")]
 script = ExtResource("1_15e3l")
 CardScene = ExtResource("2_b7l1x")
 DrawHoldButton = NodePath("HUD/DrawHoldButton")
@@ -13,6 +13,7 @@ CardStack = NodePath("CardStack")
 HouseHandNode = NodePath("HouseHand")
 PlayerHandNode = NodePath("PlayerHand")
 DealCardDelay = 0.5
+DebugMenuLabel = NodePath("HUD/DebugMenuLabel")
 
 [node name="CardStack" parent="." instance=ExtResource("1_ajaik")]
 position = Vector2(190, 170)
@@ -43,3 +44,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "Draw/Hold"
+
+[node name="DebugMenuLabel" type="Label" parent="HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -271.0
+offset_right = 388.0
+offset_bottom = -114.0
+grow_vertical = 0
