@@ -106,6 +106,11 @@ public partial class Main : Node2D
     }
 
     /// <summary>
+    /// Signal which signifies a debug value was changed.
+    /// </summary>
+    [Signal] public delegate void DebugUpdateEventHandler();
+
+    /// <summary>
     /// Base, organized array of cards.
     /// </summary>
     public BaseCard[] Cards { get; private set; }
