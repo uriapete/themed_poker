@@ -60,6 +60,51 @@ public partial class Main : Node2D
     [ExportGroup("Debug")]
     [Export] public Label DebugMenuLabel { get; private set; }
 
+    private int _DebugValue;
+    /// <summary>
+    /// Value to change a card to in debug mode.
+    /// </summary>
+    private int DebugValue
+    {
+        get
+        {
+            return _DebugValue;
+        }
+        set
+        {
+            _DebugValue = value;
+            EmitSignal(SignalName.DebugUpdate);
+        }
+    }
+
+    private int _DebugCardID;
+    /// <summary>
+    /// ID of card to change in debug mode.
+    /// </summary>
+    private int DebugCardID
+    {
+        get { return _DebugCardID; }
+        set
+        {
+            _DebugCardID = value;
+            EmitSignal(SignalName.DebugUpdate);
+        }
+    }
+
+    private Hand _DebugHand;
+    /// <summary>
+    /// Hand to screw with in debug mode.
+    /// </summary>
+    private Hand DebugHand
+    {
+        get { return _DebugHand; }
+        set
+        {
+            _DebugHand = value;
+            EmitSignal(SignalName.DebugUpdate);
+        }
+    }
+
     /// <summary>
     /// Base, organized array of cards.
     /// </summary>
