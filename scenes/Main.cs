@@ -160,6 +160,15 @@ public partial class Main : Node2D
 
         //after all is ready, connect pressed signal of the Draw/Hold btn to game.exe
         DrawHoldButton.Pressed += ExecuteGame;
+
+        if (DebugMenuLabel.Visible)
+        {
+            DebugValue = 0;
+            DebugCardID = 0;
+            DebugHand = PlayerHandNode;
+            DebugMenuLabel.Text = $"value: {DebugValue}\ncardid: {DebugCardID}\nhand: {DebugHand.Name}";
+            DebugUpdate += UpdateDebugMenu;
+        }
     }
 
     //Called every frame. 'delta' is the elapsed time since the previous frame.
