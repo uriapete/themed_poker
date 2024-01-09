@@ -356,4 +356,9 @@ public partial class Main : Node2D
         CardPile = new List<BaseCard>(Cards);
         ShufflePile();
     }
+
+    public void UpdateDebugMenu()
+    {
+        DebugMenuLabel.Text = $"value: {DebugValue}\ncardid: {DebugCardID}\nhand: {DebugHand.Name}";
+    }
 }
