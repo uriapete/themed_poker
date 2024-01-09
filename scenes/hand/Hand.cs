@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class Hand : Node2D
 {
@@ -191,10 +192,178 @@ public partial class Hand : Node2D
 
     /// <summary>
     /// Method that evaluates the hand.
+    /// Checks for card ranks in order of rank values (from Flush to Junk)
     /// </summary>
     /// <returns>Simple hand rank and values of interest.</returns>
     public SimpleHandValue GetHandValue(int maxValue=5)
     {
+        ///hand evaluation priority:
+        ///flush or 5kind
+        ///4kind
+        ///full house (3kind&2kind)
+        ///3kind
+        ///2pair
+        ///1pair
+        
+        //basically the same order as ranks
+
+        //get value counts
+        HandValuesCount handValuesCountInfo=CountHandValues();
+        Dictionary<int, int> valueCounts = handValuesCountInfo.ValueCounts;
+
+        ///first checking for 5kind
+        ///checks if there is a card value that makes up the whole hand
+        ///AND there is only one value in the counts
+        if (valueCounts.ContainsValue(CardLimit) && valueCounts.Count == 1)
+        {
+            //getting 5kind value
+            int[] rankValue = { valueCounts.Keys.ToArray()[0] };
+
+            ///how the rank value ? operater works:
+            ///if the 5kind value is max then flush
+            ///otherwise, reg 5kind
+            return new(rankValue[0]==maxValue?SimpleHandRank.Flush:SimpleHandRank.FiveInAKind,rankValue);
+        }
+
+        ///now checking for 4kind
+        ///if all but one is one value
+        if (handValuesCountInfo.AllButOneOrAllInAKind > -1)
+        {
+            //var flr value of 4kind
+            int[] rankValue = new int[1];
+
+            ///checking each valuecount
+            ///for each valuecount, check if 4kind then set rankvalue
+            foreach (var (value,count) in valueCounts)
+            {
+                if (count >= 4)
+                {
+                    rankValue[0] = value;
+                    break;
+                }
+            }
+            return new(SimpleHandRank.FourInAKind,rankValue);
+        }
+
+        //now using amount of matched up values
+        ///NOTE: all five cards are matched up in both 5kinds and full houses, and 4 cards are matched up in both 4kinds and 2pairs
+        ///that's why 5kinds and 4kinds aren't checked here in this switch
+        switch (CardLimit-handValuesCountInfo.OneOffValues.Count)
+        {
+            //5 matched up cards -> full house
+            case 5:
+                {
+                    //values
+                    int[] rankValues = new int[2];
+
+                    //foreach valuecount
+                    foreach (var (value, count) in valueCounts)
+                    {
+                        //if valuecount makes up more than half the hand
+                        //then set it to the first value
+                        if (count > CardLimit / 2)
+                        {
+                            rankValues[0] = value;
+                        }
+                        //otherwise, set it to the second value
+                        else
+                        {
+                            rankValues[1] = value;
+                        }
+                    }
+                    return new(SimpleHandRank.FullHouse, rankValues);
+                }
+
+            //3 matched up cards -> 3kind
+            case 3:
+                {
+                    //value
+                    int[] rankValue = new int[1];
+
+                    //foreach valuecount
+                    foreach (var (value, count) in valueCounts)
+                    {
+                        ///if value count is 3, set the value
+                        if (count == 3)
+                        {
+                            rankValue[0] = value;
+                            break;
+                        }
+                    }
+                    return new(SimpleHandRank.ThreeInAKind, rankValue);
+                }
+
+            //4 matched up cards -> 2pair
+            case 4:
+                {
+                    //pairs list
+                    List<int> accountedPairs = new List<int>();
+
+                    //while still counting pairs
+                    while (accountedPairs.Count < 2)
+                    {
+                        //paired values need to be accounted for in order of value
+
+                        int highestValue = -1;
+                        foreach (var (value, count) in valueCounts)
+                        {
+                            //skip already accounted pairs
+                            if (accountedPairs.Contains(value))
+                            {
+                                continue;
+                            }
+                            
+                            //skip non pair values
+                            if (count<2)
+                            {
+                                continue;
+                            }
+
+                            //if first value, set and skip
+                            if (highestValue < 0)
+                            {
+                                highestValue = value;
+                                continue;
+                            }
+
+                            ///if curr count is higher than HV
+                            ///OR 
+                            if (value>highestValue)
+                            {
+                                highestValue = value;
+                                continue;
+                            }
+                        }
+
+                        //account value
+                        accountedPairs.Add(highestValue);
+                    }
+                    return new(SimpleHandRank.TwoPair, accountedPairs.ToArray());
+                }
+
+            //2 matched cards -> 1pair
+            case 2:
+                {
+                    //pair value
+                    int[] pair = new int[1];
+
+                    //foreach valuecount
+                    foreach (var (value, count) in valueCounts)
+                    {
+                        //if this is the pair, set pair value and break
+                        if (count >= 2)
+                        {
+                            pair[0] = value;
+                            break;
+                        }
+                    }
+                    return new(SimpleHandRank.OnePair, pair);
+                }
+            default:
+                break;
+        }
+
+        //if none of the above tests returned, we got junk lol
         return new();
     }
 
