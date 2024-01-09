@@ -55,6 +55,12 @@ public partial class Main : Node2D
     [Export] public UInt16 CardsPerValue { get; private set; } = 5;
 
     /// <summary>
+    /// Label to use as our debug menu.
+    /// </summary>
+    [ExportGroup("Debug")]
+    [Export] public Label DebugMenuLabel { get; private set; }
+
+    /// <summary>
     /// Base, organized array of cards.
     /// </summary>
     public BaseCard[] Cards { get; private set; }
