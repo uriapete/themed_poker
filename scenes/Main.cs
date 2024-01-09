@@ -174,6 +174,46 @@ public partial class Main : Node2D
     //Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
+        if (DebugMenuLabel.Visible)
+        {
+            if (Input.IsActionJustPressed("ui_accept"))
+            {
+                NewGame();
+            }
+            if (Input.IsActionJustPressed("ui_up"))
+            {
+                DebugValue++;
+            }
+            if (Input.IsActionJustPressed("ui_down"))
+            {
+                DebugValue--;
+            }
+            if (Input.IsActionJustPressed("ui_right"))
+            {
+                DebugCardID++;
+            }
+            if (Input.IsActionJustPressed("ui_left"))
+            {
+                DebugCardID--;
+            }
+            if (Input.IsActionJustPressed("ui_focus_next"))
+            {
+                if(DebugHand==PlayerHandNode)
+                {
+                    DebugHand = HouseHandNode;
+                }
+                else
+                {
+                    DebugHand = PlayerHandNode;
+                }
+            }
+            if (Input.IsActionJustPressed("ui_home"))
+            {
+                BaseCard debuggingCard = DebugHand.HandContainer.GetChild<BaseCard>(DebugCardID);
+                debuggingCard.Value = DebugValue;
+                debuggingCard.ValueDisplayNode.Call("RenderValue", debuggingCard.Value);
+            }
+        }
     }
 
     /// <summary>
