@@ -103,6 +103,17 @@ public partial class Hand : Node2D
         }
     }
 
+    /// <summary>
+    /// Gets appropriate simple rank string from it's enum.
+    /// Necessary as enums have naming restrictions that do not allow ranks to be fully expressed.
+    /// </summary>
+    /// <param name="rank">Rank to get string for.</param>
+    /// <returns>String of the given rank.</returns>
+    public string GetSimpleHandRankStr(SimpleHandRank rank)
+    {
+        return SimpleHandRankNames[(int)rank];
+    }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
