@@ -70,5 +70,14 @@ public partial class RankLabelParent : Control
     /// <param name="PlayerRank">The rank of the Player's hand, as a string.</param>
     public void DisplayRanks(string HouseRank,string PlayerRank)
     {
+        HouseRankLabel.Text = HouseRank;
+        PlayerRankLabel.Text = PlayerRank;
+
+        RankLabelsVisible=true;
+
+        Tween tween = GetTree().CreateTween().SetParallel();
+
+        tween.TweenProperty(HouseRankLabel, "position", new Vector2(OnScreenXPosition, HouseRankLabel.Position.Y),DisplayAnimationDuration);
+        tween.TweenProperty(PlayerRankLabel, "position", new Vector2(OnScreenXPosition, PlayerRankLabel.Position.Y),DisplayAnimationDuration);
     }
 }
