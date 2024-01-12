@@ -27,6 +27,11 @@ public partial class Main : Node2D
     [Export] public Node2D CardStack { get; private set; }
 
     /// <summary>
+    /// Node that will handle displaying hand ranks.
+    /// </summary>
+    [Export]public RankLabelParent HandRanksDisplay { get; private set; }
+
+    /// <summary>
     /// Hand node belonging to the House (AI).
     /// </summary>
     [ExportSubgroup("Hands")]
