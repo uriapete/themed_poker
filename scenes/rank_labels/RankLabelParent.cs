@@ -19,6 +19,12 @@ public partial class RankLabelParent : Control
     [Export]float OffScreenRestOffset {  get; set; }
 
     /// <summary>
+    /// How long the animation of the ranks sliding on screen will last in seconds.
+    /// </summary>
+    [Export(PropertyHint.Range,"0,5,or_greater")]
+    float DisplayAnimationDuration { get; set; } = 0.5f;
+    
+    /// <summary>
     /// Property that controls the visibility of both HouseRankLabel and PlayerRankLabel.
     /// </summary>
     public bool RankLabelsVisible
