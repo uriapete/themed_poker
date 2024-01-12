@@ -373,6 +373,7 @@ public partial class Main : Node2D
         //enable selections
 
         NewPile();
+        HandRanksDisplay.MoveDisplaysOffScreen();
         HouseHandNode.FlipAll(BaseCard.Sides.back);
         while (HouseHandNode.CardCount < HouseHandNode.CardLimit)
         {
