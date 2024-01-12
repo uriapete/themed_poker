@@ -49,4 +49,20 @@ public partial class RankLabelParent : Control
     public override void _Process(double delta)
     {
     }
+
+    /// <summary>
+    /// Hides rank displays and puts off-screen.
+    /// </summary>
+    public void MoveDisplaysOffScreen()
+    {
+    }
+
+    /// <summary>
+    /// Animates ranks siding on screen.
+    /// </summary>
+    /// <param name="HouseRank">The rank of the House's hand, as a string.</param>
+    /// <param name="PlayerRank">The rank of the Player's hand, as a string.</param>
+    public void DisplayRanks(string HouseRank,string PlayerRank)
+    {
+    }
 }
