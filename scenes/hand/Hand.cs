@@ -8,6 +8,12 @@ public partial class Hand : Node2D
     //the summaries apparently only work before all [directives]
     //including before [export] and [exportgroup],etc
 
+    //static vars on top for easier access
+    /// <summary>
+    /// Array containing names for the simple list of hand ranks.
+    /// </summary>
+    public static string[] SimpleHandRankNames { get; protected set; } = { "Junk", "One Pair", "Two Pairs", "Three Of a Kind", "Full House", "Four Of a Kind", "Five In a Kind", "Flush" };
+
     /// <summary>
     /// Value for the limit of cards that can be in a hand.
     /// </summary>
@@ -18,11 +24,6 @@ public partial class Hand : Node2D
     /// Value that controls how long cards take to move into position.
     /// </summary>
     [Export] public float CardMoveTime { get; protected set; } = 0.5f;
-
-    /// <summary>
-    /// Array containing names for the simple list of hand ranks.
-    /// </summary>
-    [Export] public string[] SimpleHandRankNames { get; protected set; } = { "Junk", "One Pair", "Two Pair", "Three Of a Kind", "Full House", "Four Of a Kind", "Five In a Kind", "Flush" };
 
     /// <summary>
     /// Node that holds the cards.
