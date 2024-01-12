@@ -260,6 +260,10 @@ public partial class Main : Node2D
         HouseHandNode.SortHand();
         PlayerHandNode.SortHand();
 
+        //get rank infos
+        Hand.SimpleHandValue HouseHandValue = HouseHandNode.GetHandValue(NumberOfValues - 1);
+        Hand.SimpleHandValue PlayerHandValue = PlayerHandNode.GetHandValue(NumberOfValues - 1);
+
         //flip all
         HouseHandNode.FlipAll(BaseCard.Sides.front);
     }
