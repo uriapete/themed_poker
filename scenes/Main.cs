@@ -276,7 +276,7 @@ public partial class Main : Node2D
     /// </summary>
     /// <param name="hand">Hand to select cards from.</param>
     /// <param name="preserveOverValue">Minimum value to hold cards regardless of only being one of a kind.</param>
-    public void AutoSelectCards(Hand hand, int preserveOverValue = 2)
+    public static void AutoSelectCards(Hand hand, int preserveOverValue = 2)
     {
         //do counts for all values
         //save all values with >=2 cards
