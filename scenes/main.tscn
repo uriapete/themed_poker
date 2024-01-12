@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://btctlexwlwdlv" path="res://scenes/hand/hand.tscn" id="4_3lg1f"]
 [ext_resource type="PackedScene" uid="uid://seg7uaqf0xx8" path="res://scenes/rank_labels/rank_label_parent.tscn" id="5_ml1uu"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("DrawHoldButton", "CardStack", "HouseHandNode", "PlayerHandNode", "DebugMenuLabel")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("DrawHoldButton", "CardStack", "HandRanksDisplay", "HouseHandNode", "PlayerHandNode", "DebugMenuLabel")]
 script = ExtResource("1_15e3l")
 CardScene = ExtResource("2_b7l1x")
 DrawHoldButton = NodePath("HUD/DrawHoldButton")
 CardStack = NodePath("CardStack")
+HandRanksDisplay = NodePath("HUD/RankLabelParent")
 HouseHandNode = NodePath("HouseHand")
 PlayerHandNode = NodePath("PlayerHand")
 DealCardDelay = 0.5
