@@ -14,6 +14,11 @@ public partial class RankLabelParent : Control
     [Export]Label PlayerRankLabel { get; set; }
     
     /// <summary>
+    /// Offset between the end of the screen and the labels when set offscreen.
+    /// </summary>
+    [Export]float OffScreenRestOffset {  get; set; }
+
+    /// <summary>
     /// Property that controls the visibility of both HouseRankLabel and PlayerRankLabel.
     /// </summary>
     public bool RankLabelsVisible
