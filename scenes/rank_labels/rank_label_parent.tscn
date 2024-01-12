@@ -5,7 +5,7 @@
 [sub_resource type="Theme" id="Theme_aexyp"]
 default_font_size = 64
 
-[node name="RankLabelParent" type="Control"]
+[node name="RankLabelParent" type="Control" node_paths=PackedStringArray("HouseRankLabel", "PlayerRankLabel")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -19,6 +19,8 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7occg")
+HouseRankLabel = NodePath("HouseRankLabel")
+PlayerRankLabel = NodePath("PlayerRankLabel")
 
 [node name="PlayerRankLabel" type="Label" parent="."]
 layout_mode = 1
