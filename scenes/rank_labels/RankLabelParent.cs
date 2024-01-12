@@ -61,6 +61,9 @@ public partial class RankLabelParent : Control
     /// </summary>
     public void MoveDisplaysOffScreen()
     {
+        RankLabelsVisible = false;
+        HouseRankLabel.Position=new Vector2(Size.X+OffScreenRestOffset,HouseRankLabel.Position.Y);
+        PlayerRankLabel.Position=new Vector2(0-PlayerRankLabel.Size.X-OffScreenRestOffset,PlayerRankLabel.Position.Y);
     }
 
     /// <summary>
