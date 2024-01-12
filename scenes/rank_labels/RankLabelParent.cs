@@ -48,6 +48,7 @@ public partial class RankLabelParent : Control
     public override void _Ready()
     {
         OnScreenXPosition = (HouseRankLabel.Position.X + PlayerRankLabel.Position.X) / 2;
+        MoveDisplaysOffScreen();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
