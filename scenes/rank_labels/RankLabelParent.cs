@@ -34,9 +34,15 @@ public partial class RankLabelParent : Control
         }
     }
 
+    /// <summary>
+    /// Property holding the X Position of both labels on screen. Should be set to their position as set on editor on _Ready.
+    /// </summary>
+    public float OnScreenXPosition { get; set; }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        OnScreenXPosition = (HouseRankLabel.Position.X+PlayerRankLabel.Position.X)/2;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
