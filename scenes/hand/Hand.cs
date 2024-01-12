@@ -110,7 +110,7 @@ public partial class Hand : Node2D
     /// </summary>
     /// <param name="rank">Rank to get string for.</param>
     /// <returns>String of the given rank.</returns>
-    public string GetSimpleHandRankStr(SimpleHandRank rank)
+    public static string GetSimpleHandRankStr(SimpleHandRank rank)
     {
         return SimpleHandRankNames[(int)rank];
     }
