@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://fpt4kiy0e160"]
+[gd_scene load_steps=6 format=3 uid="uid://fpt4kiy0e160"]
 
 [ext_resource type="Script" path="res://scenes/Main.cs" id="1_15e3l"]
 [ext_resource type="PackedScene" uid="uid://b2s8xrt5xcxgt" path="res://scenes/non_functional/card_stack.tscn" id="1_ajaik"]
 [ext_resource type="PackedScene" uid="uid://17uh7nnayp77" path="res://scenes/base_card/base_card.tscn" id="2_b7l1x"]
 [ext_resource type="PackedScene" uid="uid://btctlexwlwdlv" path="res://scenes/hand/hand.tscn" id="4_3lg1f"]
+[ext_resource type="PackedScene" uid="uid://seg7uaqf0xx8" path="res://scenes/rank_labels/rank_label_parent.tscn" id="5_ml1uu"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("DrawHoldButton", "CardStack", "HouseHandNode", "PlayerHandNode", "DebugMenuLabel")]
 script = ExtResource("1_15e3l")
@@ -28,6 +29,8 @@ Side = -1
 Selectable = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="RankLabelParent" parent="HUD" instance=ExtResource("5_ml1uu")]
 
 [node name="DrawHoldButton" type="Button" parent="HUD"]
 visible = false
