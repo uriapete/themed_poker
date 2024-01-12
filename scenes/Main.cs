@@ -266,6 +266,9 @@ public partial class Main : Node2D
 
         //flip all
         HouseHandNode.FlipAll(BaseCard.Sides.front);
+
+        //display ranks
+        HandRanksDisplay.DisplayRanks(Hand.GetSimpleHandRankStr(HouseHandValue.Rank), Hand.GetSimpleHandRankStr(PlayerHandValue.Rank));
     }
 
     /// <summary>
