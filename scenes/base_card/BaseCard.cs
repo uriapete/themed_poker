@@ -61,12 +61,10 @@ public partial class BaseCard : Area2D
         {
             if(value)
             {
-                BlinkingTimer.Timeout += ToggleBlink;
                 BlinkingTimer.Start();
             }
             else
             {
-                BlinkingTimer.Timeout -= ToggleBlink;
                 DisplayParent.Show();
                 BlinkingTimer.Stop();
             }
@@ -212,6 +210,7 @@ public partial class BaseCard : Area2D
         //it is up to the individual node script of ValueDisplayNode to have their value render fn implemented locally
         ValueDisplayNode.Call("RenderValue", Value);
         Flipping = false;
+        BlinkingTimer.Timeout += ToggleBlink;
     }
 
     /// <summary>
