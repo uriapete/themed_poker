@@ -21,6 +21,16 @@ public partial class BaseCard : Area2D
     [Export] public float FlipDuration { get; protected set; } = 0.2f;
 
     /// <summary>
+    /// Node that serves as the parent to all visual nodes for the card.
+    /// </summary>
+    [Export]public Node2D DisplayParent { get; protected set; }
+
+    /// <summary>
+    /// AnimatedSprite that is used to show the base of the card as well as control what side it's flipped to via its Animation setting.
+    /// </summary>
+    [Export]public AnimatedSprite2D Sprite { get; protected set; }
+
+    /// <summary>
     /// The node that displays the card's value.
     /// </summary>
     [Export] public CanvasItem ValueDisplayNode { get; protected set; }
