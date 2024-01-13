@@ -599,6 +599,7 @@ public partial class Hand : Node2D
     public BaseCard RemoveCard(BaseCard card)
     {
         card.Click -= OnCardClick;
+        card.Blinking = false;
         SelectedCards.Remove(card);
         HandContainer.RemoveChild(card);
         card.Position = Vector2.Zero;
