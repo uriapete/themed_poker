@@ -24,27 +24,31 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbtnw"]
-size = Vector2(160, 220)
-
 [sub_resource type="SystemFont" id="SystemFont_5ygoc"]
 font_names = PackedStringArray("Calibri")
 subpixel_positioning = 0
 
-[node name="BaseCard" type="Area2D" node_paths=PackedStringArray("ValueDisplayNode")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbtnw"]
+size = Vector2(160, 220)
+
+[node name="BaseCard" type="Area2D" node_paths=PackedStringArray("DisplayParent", "Sprite", "ValueDisplayNode", "BlinkingTimer")]
 script = ExtResource("1_330c5")
 FlipDuration = 0.15
-ValueDisplayNode = NodePath("ValueLabel")
+DisplayParent = NodePath("VisualContainer")
+Sprite = NodePath("VisualContainer/AnimatedSprite2D")
+ValueDisplayNode = NodePath("VisualContainer/ValueLabel")
+BlinkingTimer = NodePath("BlinkingTimer")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="BlinkingTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="VisualContainer" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VisualContainer"]
 sprite_frames = SubResource("SpriteFrames_qli0p")
 animation = &"back"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("RectangleShape2D_wbtnw")
-
-[node name="ValueLabel" type="Label" parent="."]
+[node name="ValueLabel" type="Label" parent="VisualContainer"]
 visible = false
 offset_left = -34.0
 offset_top = -54.0
@@ -58,6 +62,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1
 script = ExtResource("4_f7exu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_wbtnw")
 
 [connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseExited"]
