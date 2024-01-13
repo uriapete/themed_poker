@@ -624,11 +624,10 @@ public partial class Hand : Node2D
     {
         foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
         {
-            if (card.Value!=value)
+            if (card.Value==value)
             {
-                continue;
+                card.Blinking = true;
             }
-            card.Blinking = true;
         }
     }
 }
