@@ -615,4 +615,20 @@ public partial class Hand : Node2D
             RemoveCard(card);
         }
     }
+
+    /// <summary>
+    /// Makes cards of this value blink.
+    /// </summary>
+    /// <param name="value">Value to look in cards for to make blink.</param>
+    public void BlinkCardValuesOf(int value)
+    {
+        foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
+        {
+            if (card.Value!=value)
+            {
+                continue;
+            }
+            card.Blinking = true;
+        }
+    }
 }
