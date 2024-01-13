@@ -53,6 +53,31 @@ public partial class BaseCard : Area2D
     /// <param name="card"></param>
     [Signal] public delegate void ClickEventHandler(BaseCard card);
 
+    public bool Blinking { get
+        {
+            return !BlinkingTimer.IsStopped();
+        }
+        set
+        {
+            if(value)
+            {
+                BlinkingTimer.Timeout += ToggleBlink;
+                BlinkingTimer.Start();
+            }
+            else
+            {
+                BlinkingTimer.Timeout -= ToggleBlink;
+                DisplayParent.Show();
+                BlinkingTimer.Stop();
+            }
+        } 
+    }
+
+    protected void ToggleBlink()
+    {
+        DisplayParent.Visible=!DisplayParent.Visible;
+    }
+
     //enum for strong typing sides
     //all lower case to match animation names, which follow gdscript naming conventions
     //are signed for easy flipping
