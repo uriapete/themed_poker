@@ -37,6 +37,11 @@ public partial class BaseCard : Area2D
     [Export] public CanvasItem ValueDisplayNode { get; protected set; }
 
     /// <summary>
+    /// Timer used to control delay between visibility state changes while blinking.
+    /// </summary>
+    [Export]public Timer BlinkingTimer { get; protected set; }
+
+    /// <summary>
     /// Boolean that signifies if the mouse is inside the card node area.
     /// Changed via connected signal methods OnClickEntered/Exited.
     /// </summary>
