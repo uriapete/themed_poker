@@ -75,11 +75,8 @@ public partial class BaseCard : Area2D
     {
         get
         {
-            //get the node
-            AnimatedSprite2D animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-
             //parse the string anim value into sides
-            _ = Enum.TryParse(animatedSprite2D.Animation, out Sides result);
+            _ = Enum.TryParse(Sprite.Animation, out Sides result);
 
             //then result
             return result;
@@ -88,11 +85,8 @@ public partial class BaseCard : Area2D
         //we don't want just anything setting the anim, so protected it is
         protected set
         {
-            //get node
-            AnimatedSprite2D animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-
             //set the value, stringifying the enum value
-            animatedSprite2D.Animation = value.ToString();
+            Sprite.Animation = value.ToString();
 
             //hide or show face value sprite depending on current side
             switch (value)
