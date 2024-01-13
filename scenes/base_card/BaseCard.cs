@@ -23,6 +23,7 @@ public partial class BaseCard : Area2D
     /// <summary>
     /// Node that serves as the parent to all visual nodes for the card.
     /// </summary>
+    [ExportCategory("Node Paths")]
     [Export]public Node2D DisplayParent { get; protected set; }
 
     /// <summary>
