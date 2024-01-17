@@ -271,7 +271,14 @@ public partial class Main : Node2D
         HandRanksDisplay.DisplayRanks(Hand.GetSimpleHandRankStr(HouseHandValue.Rank), Hand.GetSimpleHandRankStr(PlayerHandValue.Rank));
 
         //if player and house have same rank, make deciding values blink
-        if(HouseHandValue.Rank==PlayerHandValue.Rank)
+        if
+            (
+                HouseHandValue.Rank == PlayerHandValue.Rank
+                ||
+                (HouseHandValue.Rank == Hand.SimpleHandRank.Flush && PlayerHandValue.Rank == Hand.SimpleHandRank.FiveInAKind)
+                ||
+                (HouseHandValue.Rank==Hand.SimpleHandRank.FiveInAKind&&PlayerHandValue.Rank==Hand.SimpleHandRank.Flush)
+            )
         {
             for(int i=0;i<HouseHandValue.Values.Length;i++)
             {
