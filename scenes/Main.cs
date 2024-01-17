@@ -242,7 +242,7 @@ public partial class Main : Node2D
         await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
 
         //computer selects house cards
-        AutoSelectCards(HouseHandNode, NumberOfValues - 2);
+        Hand.AutoSelectCards(HouseHandNode, NumberOfValues - 2);
 
         //draw selected cards of house
         Tween houseLastTween = await DrawSelectedCards(HouseHandNode);
@@ -283,50 +283,6 @@ public partial class Main : Node2D
                     PlayerHandNode.BlinkCardValuesOf(playerValue);
                     break;
                 }
-            }
-        }
-    }
-
-    /// <summary>
-    /// Method for the computer to select cards.
-    /// </summary>
-    /// <param name="hand">Hand to select cards from.</param>
-    /// <param name="preserveOverValue">Minimum value to hold cards regardless of only being one of a kind.</param>
-    public static void AutoSelectCards(Hand hand, int preserveOverValue = 2)
-    {
-        //do counts for all values
-        //save all values with >=2 cards
-        //also save all values with value >=preserveOverValue
-        //UNLESS there is at least cardcount-1 of a kind
-
-        Hand.HandValuesCount valueCountInfo = hand.CountHandValues();
-
-        //count array
-        Dictionary<int, int> valueCounts = valueCountInfo.ValueCounts;
-
-        int almostAllInAKind = valueCountInfo.AllButOneOrAllInAKind;
-
-        //if at least nearly all cards are one value, get the odd one out
-        //then return
-        if (almostAllInAKind > -1)
-        {
-            foreach (BaseCard card in hand.HandContainer.GetChildren())
-            {
-                if (card.Value != almostAllInAKind)
-                {
-                    hand.SelectCard(card);
-                }
-            }
-            return;
-        }
-
-        //select cards that are only one of a kind AND less than int preserveOverValue
-        foreach (BaseCard card in hand.HandContainer.GetChildren())
-        {
-            int value = card.Value;
-            if (valueCounts[value] < 2 && value < preserveOverValue)
-            {
-                hand.SelectCard(card);
             }
         }
     }
