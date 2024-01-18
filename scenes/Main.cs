@@ -320,6 +320,21 @@ public partial class Main : Node2D
                 }
             }
         }
+
+        Hand.SimpleHandValue winningValue = Hand.SimpleHandValue.WinningHandValue(HouseHandValue, PlayerHandValue);
+
+        if (winningValue == HouseHandValue)
+        {
+            WinnerLabel.Text = HouseWinString;
+        }
+        else if (winningValue==PlayerHandValue)
+        {
+            WinnerLabel.Text= PlayerWinString;
+        }
+        else
+        {
+            WinnerLabel.Text = TieString;
+        }
     }
 
     /// <summary>
