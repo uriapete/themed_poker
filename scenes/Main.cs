@@ -29,15 +29,15 @@ public partial class Main : Node2D
     /// <summary>
     /// Node that will handle displaying hand ranks.
     /// </summary>
-    [Export]public RankLabelParent HandRanksDisplay { get; private set; }
+    [Export] public RankLabelParent HandRanksDisplay { get; private set; }
 
     /// <summary>
     /// Label that will announce the winner.
     /// </summary>
-    [Export]public Label WinnerLabel { get; private set; }
+    [Export] public Label WinnerLabel { get; private set; }
 
     /// <summary>
-    /// Hand node belonging to the House (AI).
+    /// Hand node belonging to the House (Computer Player).
     /// </summary>
     [ExportSubgroup("Hands")]
     [Export] public Hand HouseHandNode { get; private set; }
@@ -51,7 +51,7 @@ public partial class Main : Node2D
     /// Delay in seconds between card deals.
     /// </summary>
     [ExportGroup("Game Settings")]
-    [Export] public float DealCardDelay { get; private set; } = .1f;
+    [Export(PropertyHint.Range, "0,1,or_greater")] public float DealCardDelay { get; private set; } = .1f;
 
     /// <summary>
     /// Delay in seconds between hand values being revealed and the winner being announced.
@@ -231,7 +231,7 @@ public partial class Main : Node2D
             }
             if (Input.IsActionJustPressed("ui_focus_next"))
             {
-                if(DebugHand==PlayerHandNode)
+                if (DebugHand == PlayerHandNode)
                 {
                     DebugHand = HouseHandNode;
                 }
@@ -296,7 +296,7 @@ public partial class Main : Node2D
         HouseHandNode.FlipAll(BaseCard.Sides.front);
 
         //display ranks
-        Tween handRankDisplayTween= HandRanksDisplay.DisplayRanks(Hand.GetSimpleHandRankStr(HouseHandValue.Rank), Hand.GetSimpleHandRankStr(PlayerHandValue.Rank));
+        Tween handRankDisplayTween = HandRanksDisplay.DisplayRanks(Hand.GetSimpleHandRankStr(HouseHandValue.Rank), Hand.GetSimpleHandRankStr(PlayerHandValue.Rank));
 
         //if player and house have same rank, make deciding values blink
         if
@@ -305,14 +305,14 @@ public partial class Main : Node2D
                 ||
                 (HouseHandValue.Rank == Hand.SimpleHandRank.Flush && PlayerHandValue.Rank == Hand.SimpleHandRank.FiveInAKind)
                 ||
-                (HouseHandValue.Rank==Hand.SimpleHandRank.FiveInAKind&&PlayerHandValue.Rank==Hand.SimpleHandRank.Flush)
+                (HouseHandValue.Rank == Hand.SimpleHandRank.FiveInAKind && PlayerHandValue.Rank == Hand.SimpleHandRank.Flush)
             )
         {
-            for(int i=0;i<HouseHandValue.Values.Length;i++)
+            for (int i = 0; i < HouseHandValue.Values.Length; i++)
             {
                 int houseValue = HouseHandValue.Values[i];
-                int playerValue= PlayerHandValue.Values[i];
-                if(houseValue!=playerValue)
+                int playerValue = PlayerHandValue.Values[i];
+                if (houseValue != playerValue)
                 {
                     HouseHandNode.BlinkCardValuesOf(houseValue);
                     PlayerHandNode.BlinkCardValuesOf(playerValue);
@@ -321,27 +321,30 @@ public partial class Main : Node2D
             }
         }
 
+        //get winning value
         Hand.SimpleHandValue winningValue = Hand.SimpleHandValue.WinningHandValue(HouseHandValue, PlayerHandValue);
 
+        //change winner announcing text accordingly
         if (winningValue == HouseHandValue)
         {
             WinnerLabel.Text = HouseWinString;
         }
-        else if (winningValue==PlayerHandValue)
+        else if (winningValue == PlayerHandValue)
         {
-            WinnerLabel.Text= PlayerWinString;
+            WinnerLabel.Text = PlayerWinString;
         }
         else
         {
             WinnerLabel.Text = TieString;
         }
 
+        //wait for handrankdisplay to finish
         if (handRankDisplayTween.IsRunning())
         {
             await ToSignal(handRankDisplayTween, Tween.SignalName.Finished);
         }
 
-        //small delay
+        //small delay for anticipation
         await ToSignal(GetTree().CreateTimer(WinnerAnnounceDelay, false), SceneTreeTimer.SignalName.Timeout);
 
         WinnerLabel.Show();
