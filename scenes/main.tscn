@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://fpt4kiy0e160"]
+[gd_scene load_steps=8 format=3 uid="uid://fpt4kiy0e160"]
 
 [ext_resource type="Script" path="res://scenes/Main.cs" id="1_15e3l"]
 [ext_resource type="PackedScene" uid="uid://b2s8xrt5xcxgt" path="res://scenes/non_functional/card_stack.tscn" id="1_ajaik"]
@@ -6,12 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://btctlexwlwdlv" path="res://scenes/hand/hand.tscn" id="4_3lg1f"]
 [ext_resource type="PackedScene" uid="uid://seg7uaqf0xx8" path="res://scenes/rank_labels/rank_label_parent.tscn" id="5_ml1uu"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("DrawHoldButton", "CardStack", "HandRanksDisplay", "HouseHandNode", "PlayerHandNode", "DebugMenuLabel")]
+[sub_resource type="SystemFont" id="SystemFont_aieg2"]
+
+[sub_resource type="Theme" id="Theme_dr7xd"]
+default_font = SubResource("SystemFont_aieg2")
+default_font_size = 92
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("DrawHoldButton", "CardStack", "HandRanksDisplay", "WinnerLabel", "HouseHandNode", "PlayerHandNode", "DebugMenuLabel")]
 script = ExtResource("1_15e3l")
 CardScene = ExtResource("2_b7l1x")
 DrawHoldButton = NodePath("HUD/DrawHoldButton")
 CardStack = NodePath("CardStack")
 HandRanksDisplay = NodePath("HUD/RankLabelParent")
+WinnerLabel = NodePath("HUD/WinnerLabel")
 HouseHandNode = NodePath("HouseHand")
 PlayerHandNode = NodePath("PlayerHand")
 DealCardDelay = 0.5
@@ -30,6 +37,24 @@ Side = -1
 Selectable = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="WinnerLabel" type="Label" parent="HUD"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -298.0
+offset_top = -64.5
+offset_right = 298.0
+offset_bottom = 64.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_dr7xd")
+text = "House Wins..."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RankLabelParent" parent="HUD" instance=ExtResource("5_ml1uu")]
 
