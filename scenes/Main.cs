@@ -59,6 +59,21 @@ public partial class Main : Node2D
     [Export(PropertyHint.Range, "0,3,or_greater")] public float WinnerAnnounceDelay { get; private set; } = 1f;
 
     /// <summary>
+    /// String to display on the WinnerLabel when the player wins.
+    /// </summary>
+    [Export] public string PlayerWinString { get; private set; } = "You Win!";
+
+    /// <summary>
+    /// String to display on the WinnerLabel when the house wins.
+    /// </summary>
+    [Export] public string HouseWinString { get; private set; } = "House Wins...";
+
+    /// <summary>
+    /// String to display on the WinnerLabel in the case of a Draw.
+    /// </summary>
+    [Export] public string TieString { get; private set; } = "Draw";
+
+    /// <summary>
     /// Total number of card values.
     /// </summary>
     [ExportSubgroup("Deck Settings")]
