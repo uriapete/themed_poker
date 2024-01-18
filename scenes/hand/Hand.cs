@@ -102,6 +102,39 @@ public partial class Hand : Node2D
                 Values = values;
             }
         }
+
+#nullable enable
+        public static SimpleHandValue? WinningHandValue(SimpleHandValue value1, SimpleHandValue value2)
+        {
+            if (value1.Rank > value2.Rank)
+            {
+                return value1;
+            }
+            else if (value1.Rank < value2.Rank)
+            {
+                return value2;
+            }
+
+            for (int i = 0; i < value1.Values.Length; i++)
+            {
+                int currVal1 = value1.Values[i];
+                int currVal2 = value2.Values[i];
+                if (currVal1 == currVal2)
+                {
+                    continue;
+                }
+                if (currVal1 > currVal2)
+                {
+                    return value1;
+                }
+                if (currVal2>currVal1)
+                {
+                    return value2;
+                }
+            }
+            return null;
+        }
+#nullable disable
     }
 
     /// <summary>
