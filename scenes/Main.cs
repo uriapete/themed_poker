@@ -188,6 +188,9 @@ public partial class Main : Node2D
             }
         }
 
+        WinnerLabel.Hide();
+        WinnerLabel.Text = "";
+
         //after all is ready, connect pressed signal of the Draw/Hold btn to game.exe
         DrawHoldButton.Pressed += ExecuteGame;
 
@@ -377,6 +380,8 @@ public partial class Main : Node2D
         //enable selections
 
         NewPile();
+        WinnerLabel.Hide();
+        WinnerLabel.Text = "";
         HandRanksDisplay.MoveDisplaysOffScreen();
         HouseHandNode.FlipAll(BaseCard.Sides.back);
         while (HouseHandNode.CardCount < HouseHandNode.CardLimit)
