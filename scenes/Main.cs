@@ -242,7 +242,7 @@ public partial class Main : Node2D
         await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
 
         //computer selects house cards
-        Hand.AutoSelectCards(HouseHandNode, NumberOfValues - 2);
+        HouseHandNode.AutoSelectCards(NumberOfValues - 2);
 
         //draw selected cards of house
         Tween houseLastTween = await DrawSelectedCards(HouseHandNode);

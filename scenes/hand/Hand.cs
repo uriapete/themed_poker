@@ -523,14 +523,14 @@ public partial class Hand : Node2D
     /// </summary>
     /// <param name="hand">Hand to select cards from.</param>
     /// <param name="preserveOverValue">Minimum value to hold cards regardless of only being one of a kind.</param>
-    public static void AutoSelectCards(Hand hand, int preserveOverValue = 2)
+    public void AutoSelectCards(int preserveOverValue = 2)
     {
         //do counts for all values
         //save all values with >=2 cards
         //also save all values with value >=preserveOverValue
         //UNLESS there is at least cardcount-1 of a kind
 
-        HandValuesCount valueCountInfo = hand.CountHandValues();
+        HandValuesCount valueCountInfo = CountHandValues();
 
         //count array
         Dictionary<int, int> valueCounts = valueCountInfo.ValueCounts;
@@ -541,23 +541,23 @@ public partial class Hand : Node2D
         //then return
         if (almostAllInAKind > -1)
         {
-            foreach (BaseCard card in hand.HandContainer.GetChildren())
+            foreach (BaseCard card in HandContainer.GetChildren())
             {
                 if (card.Value != almostAllInAKind)
                 {
-                    hand.SelectCard(card);
+                    SelectCard(card);
                 }
             }
             return;
         }
 
         //select cards that are only one of a kind AND less than int preserveOverValue
-        foreach (BaseCard card in hand.HandContainer.GetChildren())
+        foreach (BaseCard card in HandContainer.GetChildren())
         {
             int value = card.Value;
             if (valueCounts[value] < 2 && value < preserveOverValue)
             {
-                hand.SelectCard(card);
+                SelectCard(card);
             }
         }
     }
