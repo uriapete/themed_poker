@@ -32,6 +32,11 @@ public partial class Main : Node2D
     [Export]public RankLabelParent HandRanksDisplay { get; private set; }
 
     /// <summary>
+    /// Label that will announce the winner.
+    /// </summary>
+    [Export]public Label WinnerLabel { get; private set; }
+
+    /// <summary>
     /// Hand node belonging to the House (AI).
     /// </summary>
     [ExportSubgroup("Hands")]
