@@ -54,6 +54,11 @@ public partial class Main : Node2D
     [Export] public float DealCardDelay { get; private set; } = .1f;
 
     /// <summary>
+    /// Delay in seconds between hand values being revealed and the winner being announced.
+    /// </summary>
+    [Export(PropertyHint.Range, "0,3,or_greater")] public float WinnerAnnounceDelay { get; private set; } = 1f;
+
+    /// <summary>
     /// Total number of card values.
     /// </summary>
     [ExportSubgroup("Deck Settings")]
