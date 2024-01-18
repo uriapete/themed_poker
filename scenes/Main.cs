@@ -296,7 +296,7 @@ public partial class Main : Node2D
         HouseHandNode.FlipAll(BaseCard.Sides.front);
 
         //display ranks
-        HandRanksDisplay.DisplayRanks(Hand.GetSimpleHandRankStr(HouseHandValue.Rank), Hand.GetSimpleHandRankStr(PlayerHandValue.Rank));
+        Tween handRankDisplayTween= HandRanksDisplay.DisplayRanks(Hand.GetSimpleHandRankStr(HouseHandValue.Rank), Hand.GetSimpleHandRankStr(PlayerHandValue.Rank));
 
         //if player and house have same rank, make deciding values blink
         if
@@ -335,6 +335,16 @@ public partial class Main : Node2D
         {
             WinnerLabel.Text = TieString;
         }
+
+        if (handRankDisplayTween.IsRunning())
+        {
+            await ToSignal(handRankDisplayTween, Tween.SignalName.Finished);
+        }
+
+        //small delay
+        await ToSignal(GetTree().CreateTimer(WinnerAnnounceDelay, false), SceneTreeTimer.SignalName.Timeout);
+
+        WinnerLabel.Show();
     }
 
     /// <summary>
