@@ -528,24 +528,30 @@ public partial class Hand : Node2D
         //do counts for all values
         //save all values with >=2 cards
         //also save all values with value >=preserveOverValue
-        //UNLESS there is at least cardcount-1 of a kind
+        //UNLESS there is exactly 1 oneoff value
 
         HandValuesCount valueCountInfo = CountHandValues();
 
         //count array
         Dictionary<int, int> valueCounts = valueCountInfo.ValueCounts;
 
-        int almostAllInAKind = valueCountInfo.AllButOneOrAllInAKind;
+        List<int> oneOffVals=valueCountInfo.OneOffValues;
 
-        //if at least nearly all cards are one value, get the odd one out
+        if (valueCounts.Count==1)
+        {
+            return;
+        }
+
+        //if there is only one oneoff, get the odd one out
         //then return
-        if (almostAllInAKind > -1)
+        if (oneOffVals.Count==1)
         {
             foreach (BaseCard card in HandContainer.GetChildren())
             {
-                if (card.Value != almostAllInAKind)
+                if (card.Value == oneOffVals[0])
                 {
                     SelectCard(card);
+                    return;
                 }
             }
             return;
