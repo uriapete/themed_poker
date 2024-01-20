@@ -61,7 +61,7 @@ public partial class Hand : Node2D
     /// <summary>
     /// Property that controls whether or not cards in HandContainer reposition when the ChildOrder changes.
     /// </summary>
-    public bool RepositionOnHandOrderChanged { get; protected set; } = true;
+    public bool RepositionOnHandOrderChanged { get; set; } = true;
 
     /// <summary>
     /// Getter for how many cards are in this hand.
