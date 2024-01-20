@@ -54,6 +54,16 @@ public partial class Main : Node2D
     [Export(PropertyHint.Range, "0,1,or_greater")] public float DealCardDelay { get; private set; } = .1f;
 
     /// <summary>
+    /// Duration of the animation for discarding cards.
+    /// </summary>
+    [Export(PropertyHint.Range, "0,2,or_greater")] public float DiscardAnimDuration { get; private set; } = .5f;
+
+    /// <summary>
+    /// The discarding card animation makes the cards go up and off the screen. This value is how much the cards will be displaced from their hands.
+    /// </summary>
+    [Export] public float DiscardTargetYPos { get; private set; } = 1080;
+
+    /// <summary>
     /// Delay in seconds between hand values being revealed and the winner being announced.
     /// </summary>
     [Export(PropertyHint.Range, "0,3,or_greater")] public float WinnerAnnounceDelay { get; private set; } = 1f;
@@ -359,15 +369,41 @@ public partial class Main : Node2D
     {
         //remove all selected cards from hand
         //and add them to the pile
-        while (hand.SelectedCards.Count > 0)
+
+        //array for selected cards
+        BaseCard[] selectedCards = hand.SelectedCards.ToArray();
+
+        //tween
+        Tween finalMoveTween = GetTree().CreateTween();
+
+        //all cards will come up at the same time
+        finalMoveTween.SetParallel(true);
+
+        //move each selected card off the screen
+        foreach (BaseCard card in selectedCards)
         {
-            BaseCard card = hand.SelectedCards[0];
-            CardPile.Add(hand.RemoveCard(card));
+            card.Reparent(this);
+            finalMoveTween.TweenProperty(card, "position", new Vector2(card.Position.X, card.Position.Y - DiscardTargetYPos), DiscardAnimDuration);
         }
 
-        Tween finalMoveTween = null;
+        //wait for cards to move off screen
+        if (finalMoveTween.IsRunning())
+        {
+            await ToSignal(finalMoveTween, Tween.SignalName.Finished);
+        }
+
+        //remove out cards
+        foreach (BaseCard card in selectedCards)
+        {
+            CardPile.Add(card);
+            RemoveChild(card);
+        }
+
+        //reset tween
+        finalMoveTween = null;
 
         //then, fill the hand back up
+        //return latest tween
         while (hand.CardCount < hand.CardLimit)
         {
             await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
