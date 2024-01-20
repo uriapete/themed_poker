@@ -693,20 +693,30 @@ public partial class Hand : Node2D
 
     }
 
+#nullable enable
     /// <summary>
-    /// Removes card from this hand (Not deleted, just removed from the hand's tree.). Also removes it from SelectedCards list, resets its position, and disconnects its click signal. Returns the removed card.
+    /// Removes card from this hand (Not deleted, just removed from the hand's tree.). Also removes it from SelectedCards list, resets its position (if specified), and disconnects its click signal. Returns the removed card.
     /// </summary>
     /// <param name="card">Card to remove.</param>
+    /// <param name="targetParent">Optional: The node to reparent the card to.</param>
     /// <returns>The removed card.</returns>
-    public BaseCard RemoveCard(BaseCard card)
+    public BaseCard RemoveCard(BaseCard card, Node? targetParent=null)
     {
         card.Click -= OnCardClick;
         card.Blinking = false;
         SelectedCards.Remove(card);
+        if (targetParent==null)
+        {
         HandContainer.RemoveChild(card);
         card.Position = Vector2.Zero;
+        }
+        else
+        {
+            card.Reparent(targetParent);
+        }
         return card;
     }
+#nullable disable
 
     /// <summary>
     /// Removes all cards.
