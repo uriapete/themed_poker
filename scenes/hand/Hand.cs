@@ -639,8 +639,9 @@ public partial class Hand : Node2D
     /// Returns the Tween that is animating moving the card if successful.
     /// </summary>
     /// <param name="card">Card to move to this hand.</param>
+    /// <param name="newIdx">Optional: New index to move the new card to. Disabled (-1) by default.</param>
     /// <returns>The Tween that animates the card moving to this hand, or null if it fails.</returns>
-    public Tween? MoveCardToHand(BaseCard card)
+    public Tween? MoveCardToHand(BaseCard card,int newIdx=-1)
     {
         //if hand is full, don't do anything
         if (CardCount >= CardLimit)
@@ -651,6 +652,10 @@ public partial class Hand : Node2D
         //else:
         //reparent the card to handcontainer
         card.Reparent(HandContainer);
+        if (newIdx > -1)
+        {
+            HandContainer.MoveChild(card, newIdx);
+        }
 
         //connect card's click signal to click handler
         card.Click += OnCardClick;
