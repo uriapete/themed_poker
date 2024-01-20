@@ -370,8 +370,11 @@ public partial class Main : Node2D
         //remove all selected cards from hand
         //and add them to the pile
 
+        hand.RepositionOnHandOrderChanged = false;
+
         //array for selected cards
         BaseCard[] selectedCards = hand.SelectedCards.ToArray();
+        int[] selectedCardsIdxs= new int[selectedCards.Length];
 
         //tween
         Tween finalMoveTween = GetTree().CreateTween();
@@ -380,9 +383,12 @@ public partial class Main : Node2D
         finalMoveTween.SetParallel(true);
 
         //move each selected card off the screen
-        foreach (BaseCard card in selectedCards)
+        //foreach (BaseCard card in selectedCards)
+        for (int i = selectedCards.Length-1; i>=0;i--)
         {
-            card.Reparent(this);
+            BaseCard card = selectedCards[i];
+            selectedCardsIdxs[i] = card.GetIndex();
+            hand.RemoveCard(card, targetParent: this);
             finalMoveTween.TweenProperty(card, "position", new Vector2(card.Position.X, card.Position.Y - DiscardTargetYPos), DiscardAnimDuration);
         }
 
@@ -404,11 +410,12 @@ public partial class Main : Node2D
 
         //then, fill the hand back up
         //return latest tween
-        while (hand.CardCount < hand.CardLimit)
+        for (int i = 0; hand.CardCount < hand.CardLimit; i++)
         {
             await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
-            finalMoveTween = hand.MoveCardToHand(SpawnCardInStack());
+            finalMoveTween = hand.MoveCardToHand(SpawnCardInStack(), i<selectedCards.Length? selectedCardsIdxs[i]:-1);
         }
+        hand.RepositionOnHandOrderChanged = true;
         return finalMoveTween;
     }
 
