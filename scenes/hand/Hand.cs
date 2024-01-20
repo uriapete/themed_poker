@@ -542,7 +542,26 @@ public partial class Hand : Node2D
         bool removed = SelectedCards.Remove(card);
         if (!removed)
         {
+            if (
+                SelectedCards.Count <= 0
+                ||
+                SelectedCards[SelectedCards.Count-1].GetIndex() < card.GetIndex()
+            )
+            {
             SelectedCards.Add(card);
+            }
+            else
+            {
+                for (int i = 0; i < SelectedCards.Count; i++)
+                {
+                    int cardIdx = SelectedCards[i].GetIndex();
+                    if (card.GetIndex()<cardIdx)
+                    {
+                        SelectedCards.Insert(i, card);
+                        break;
+                    }
+                }
+            }
             card.Position = new Vector2(card.Position.X, card.Position.Y - SelectedCardVerticalOffset);
         }
         else
