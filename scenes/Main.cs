@@ -370,6 +370,11 @@ public partial class Main : Node2D
         //remove all selected cards from hand
         //and add them to the pile
 
+        if (hand.SelectedCards.Count <= 0)
+        {
+            return null;
+        }
+
         hand.RepositionOnHandOrderChanged = false;
 
         //array for selected cards
