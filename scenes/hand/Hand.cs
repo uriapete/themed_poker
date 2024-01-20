@@ -91,10 +91,10 @@ public partial class Hand : Node2D
 
     public class SimpleHandValue
     {
-        public SimpleHandRank Rank {  get; protected set; }
+        public SimpleHandRank Rank { get; protected set; }
         public int[] Values { get; protected set; } = Array.Empty<int>();
 
-        public SimpleHandValue(SimpleHandRank rank=SimpleHandRank.Junk, int[] values = null)
+        public SimpleHandValue(SimpleHandRank rank = SimpleHandRank.Junk, int[] values = null)
         {
             Rank = rank;
             if (values != null)
@@ -127,7 +127,7 @@ public partial class Hand : Node2D
                 {
                     return value1;
                 }
-                if (currVal2>currVal1)
+                if (currVal2 > currVal1)
                 {
                     return value2;
                 }
@@ -232,7 +232,7 @@ public partial class Hand : Node2D
                 allButOneOrAllInAKind = card.Value;
             }
         }
-        return new HandValuesCount(valueCounts, allButOneOrAllInAKind,oneOffValues);
+        return new HandValuesCount(valueCounts, allButOneOrAllInAKind, oneOffValues);
     }
 
     /// <summary>
@@ -240,7 +240,7 @@ public partial class Hand : Node2D
     /// Checks for card ranks in order of rank values (from Flush to Junk)
     /// </summary>
     /// <returns>Simple hand rank and values of interest.</returns>
-    public SimpleHandValue GetHandValue(int maxValue=5)
+    public SimpleHandValue GetHandValue(int maxValue = 5)
     {
         ///hand evaluation priority:
         ///flush or 5kind
@@ -249,11 +249,11 @@ public partial class Hand : Node2D
         ///3kind
         ///2pair
         ///1pair
-        
+
         //basically the same order as ranks
 
         //get value counts
-        HandValuesCount handValuesCountInfo=CountHandValues();
+        HandValuesCount handValuesCountInfo = CountHandValues();
         Dictionary<int, int> valueCounts = handValuesCountInfo.ValueCounts;
 
         ///first checking for 5kind
@@ -267,7 +267,7 @@ public partial class Hand : Node2D
             ///how the rank value ? operater works:
             ///if the 5kind value is max then flush
             ///otherwise, reg 5kind
-            return new(rankValue[0]==maxValue?SimpleHandRank.Flush:SimpleHandRank.FiveInAKind,rankValue);
+            return new(rankValue[0] == maxValue ? SimpleHandRank.Flush : SimpleHandRank.FiveInAKind, rankValue);
         }
 
         ///now checking for 4kind
@@ -279,7 +279,7 @@ public partial class Hand : Node2D
 
             ///checking each valuecount
             ///for each valuecount, check if 4kind then set rankvalue
-            foreach (var (value,count) in valueCounts)
+            foreach (var (value, count) in valueCounts)
             {
                 if (count >= 4)
                 {
@@ -287,13 +287,13 @@ public partial class Hand : Node2D
                     break;
                 }
             }
-            return new(SimpleHandRank.FourInAKind,rankValue);
+            return new(SimpleHandRank.FourInAKind, rankValue);
         }
 
         //now using amount of matched up values
         ///NOTE: all five cards are matched up in both 5kinds and full houses, and 4 cards are matched up in both 4kinds and 2pairs
         ///that's why 5kinds and 4kinds aren't checked here in this switch
-        switch (CardLimit-handValuesCountInfo.OneOffValues.Count)
+        switch (CardLimit - handValuesCountInfo.OneOffValues.Count)
         {
             //5 matched up cards -> full house
             case 5:
@@ -357,9 +357,9 @@ public partial class Hand : Node2D
                             {
                                 continue;
                             }
-                            
+
                             //skip non pair values
-                            if (count<2)
+                            if (count < 2)
                             {
                                 continue;
                             }
@@ -373,7 +373,7 @@ public partial class Hand : Node2D
 
                             ///if curr count is higher than HV
                             ///OR 
-                            if (value>highestValue)
+                            if (value > highestValue)
                             {
                                 highestValue = value;
                                 continue;
@@ -545,17 +545,17 @@ public partial class Hand : Node2D
             if (
                 SelectedCards.Count <= 0
                 ||
-                SelectedCards[SelectedCards.Count-1].GetIndex() < card.GetIndex()
+                SelectedCards[SelectedCards.Count - 1].GetIndex() < card.GetIndex()
             )
             {
-            SelectedCards.Add(card);
+                SelectedCards.Add(card);
             }
             else
             {
                 for (int i = 0; i < SelectedCards.Count; i++)
                 {
                     int cardIdx = SelectedCards[i].GetIndex();
-                    if (card.GetIndex()<cardIdx)
+                    if (card.GetIndex() < cardIdx)
                     {
                         SelectedCards.Insert(i, card);
                         break;
@@ -587,16 +587,16 @@ public partial class Hand : Node2D
         //count array
         Dictionary<int, int> valueCounts = valueCountInfo.ValueCounts;
 
-        List<int> oneOffVals=valueCountInfo.OneOffValues;
+        List<int> oneOffVals = valueCountInfo.OneOffValues;
 
-        if (valueCounts.Count==1)
+        if (valueCounts.Count == 1)
         {
             return;
         }
 
         //if there is only one oneoff, get the odd one out
         //then return
-        if (oneOffVals.Count==1)
+        if (oneOffVals.Count == 1)
         {
             foreach (BaseCard card in HandContainer.GetChildren())
             {
@@ -641,7 +641,7 @@ public partial class Hand : Node2D
     /// <param name="card">Card to move to this hand.</param>
     /// <param name="newIdx">Optional: New index to move the new card to. Disabled (-1) by default.</param>
     /// <returns>The Tween that animates the card moving to this hand, or null if it fails.</returns>
-    public Tween? MoveCardToHand(BaseCard card,int newIdx=-1)
+    public Tween? MoveCardToHand(BaseCard card, int newIdx = -1)
     {
         //if hand is full, don't do anything
         if (CardCount >= CardLimit)
@@ -662,7 +662,7 @@ public partial class Hand : Node2D
 
         //animate card moving into position
         Tween tween = GetTree().CreateTween();
-        tween.TweenProperty(card, "position", new Vector2((card.GetIndex() * CardPositionHorizonalOffset), 0), CardMoveTime);
+        tween.TweenProperty(card, "position", new Vector2(card.GetIndex() * CardPositionHorizonalOffset, 0), CardMoveTime);
 
         //flip card
         card.Flip(Side);
@@ -705,15 +705,15 @@ public partial class Hand : Node2D
     /// <param name="card">Card to remove.</param>
     /// <param name="targetParent">Optional: The node to reparent the card to.</param>
     /// <returns>The removed card.</returns>
-    public BaseCard RemoveCard(BaseCard card, Node? targetParent=null)
+    public BaseCard RemoveCard(BaseCard card, Node? targetParent = null)
     {
         card.Click -= OnCardClick;
         card.Blinking = false;
         SelectedCards.Remove(card);
-        if (targetParent==null)
+        if (targetParent == null)
         {
-        HandContainer.RemoveChild(card);
-        card.Position = Vector2.Zero;
+            HandContainer.RemoveChild(card);
+            card.Position = Vector2.Zero;
         }
         else
         {
@@ -742,7 +742,7 @@ public partial class Hand : Node2D
     {
         foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
         {
-            if (card.Value==value)
+            if (card.Value == value)
             {
                 card.Blinking = true;
             }
