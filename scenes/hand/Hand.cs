@@ -702,14 +702,13 @@ public partial class Hand : Node2D
         tween.TweenProperty(card, "position", new Vector2(newPos * CardPositionHorizonalOffset, card.Position.Y), CardMoveTime/2);
     }
 
-#nullable enable
     /// <summary>
     /// Removes card from this hand (Not deleted, just removed from the hand's tree.). Also removes it from SelectedCards list, resets its position (if specified), and disconnects its click signal. Returns the removed card.
     /// </summary>
     /// <param name="card">Card to remove.</param>
     /// <param name="targetParent">Optional: The node to reparent the card to.</param>
     /// <returns>The removed card.</returns>
-    public BaseCard RemoveCard(BaseCard card, Node? targetParent = null)
+    public BaseCard RemoveCard(BaseCard card, Node targetParent = null)
     {
         card.Click -= OnCardClick;
         card.Blinking = false;
@@ -725,7 +724,6 @@ public partial class Hand : Node2D
         }
         return card;
     }
-#nullable disable
 
     /// <summary>
     /// Removes all cards.
