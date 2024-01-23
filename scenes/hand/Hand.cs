@@ -537,9 +537,10 @@ public partial class Hand : Node2D
     /// Either adds or removes selected card to/from the selected list, and positions it accordingly.
     /// </summary>
     /// <param name="card">Card to select.</param>
-    public void SelectCard(BaseCard card)
+    public Tween SelectCard(BaseCard card)
     {
         bool removed = SelectedCards.Remove(card);
+        float newYPos = 0;
         if (!removed)
         {
             if (
@@ -562,12 +563,11 @@ public partial class Hand : Node2D
                     }
                 }
             }
-            card.Position = new Vector2(card.Position.X, card.Position.Y - SelectedCardVerticalOffset);
+            newYPos = card.Position.Y - SelectedCardVerticalOffset;
         }
-        else
-        {
-            card.Position = new Vector2(card.Position.X, 0);
-        }
+        Tween tween = GetTree().CreateTween();
+        tween.TweenProperty(card, "position", new Vector2(card.Position.X, newYPos),CardMoveTime/4);
+        return tween;
     }
 
     /// <summary>
