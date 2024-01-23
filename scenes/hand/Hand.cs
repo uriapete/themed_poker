@@ -21,9 +21,19 @@ public partial class Hand : Node2D
     [Export] public UInt16 CardLimit { get; protected set; } = 5;
 
     /// <summary>
-    /// Value that controls how long cards take to move into position.
+    /// Value that controls how long cards take to move into the hand and into position.
     /// </summary>
     [Export] public float CardMoveTime { get; protected set; } = 0.5f;
+
+    /// <summary>
+    /// Value that controls how long cards take to move when being sorted.
+    /// </summary>
+    [Export] public float CardSortTime { get; protected set; } = .25f;
+
+    /// <summary>
+    /// Value that controls how long cards take to move when being selected.
+    /// </summary>
+    [Export] public float CardSelectTime { get; protected set; } = .125f;
 
     /// <summary>
     /// Node that holds the cards.
@@ -566,7 +576,7 @@ public partial class Hand : Node2D
             newYPos = card.Position.Y - SelectedCardVerticalOffset;
         }
         Tween tween = GetTree().CreateTween();
-        tween.TweenProperty(card, "position", new Vector2(card.Position.X, newYPos),CardMoveTime/4);
+        tween.TweenProperty(card, "position", new Vector2(card.Position.X, newYPos),CardSelectTime);
         return tween;
     }
 
@@ -701,7 +711,7 @@ public partial class Hand : Node2D
         //create new tween if not supplied in args
         tween ??= GetTree().CreateTween();
 
-        tween.TweenProperty(card, "position", new Vector2(newPos * CardPositionHorizonalOffset, card.Position.Y), CardMoveTime / 2);
+        tween.TweenProperty(card, "position", new Vector2(newPos * CardPositionHorizonalOffset, card.Position.Y), CardSortTime);
 
         return tween;
     }
