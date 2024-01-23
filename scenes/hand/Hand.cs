@@ -675,13 +675,14 @@ public partial class Hand : Node2D
     /// <summary>
     /// Repositions all cards to correct positions. Called when HandContainer's Child Order is Changed.
     /// </summary>
-    public void RepositionAllCards()
+    public Tween RepositionAllCards()
     {
         Tween moveAnimTween = GetTree().CreateTween().SetParallel();
         foreach (BaseCard card in HandContainer.GetChildren())
         {
             MoveCard(card, card.GetIndex(),moveAnimTween);
         }
+        return moveAnimTween;
     }
 
     /// <summary>
