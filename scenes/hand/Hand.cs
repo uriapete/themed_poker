@@ -690,17 +690,19 @@ public partial class Hand : Node2D
     /// <param name="card">Card in hand to move.</param>
     /// <param name="newPos">Index position to move the card to.</param>
     /// <param name="tween">Optional: Tween to use to animate the card moving.</param>
-    public void MoveCard(BaseCard card, int newPos, Tween tween=null)
+    public Tween MoveCard(BaseCard card, int newPos, Tween tween=null)
     {
         if (card.GetParent() != HandContainer)
         {
-            return;
+            return null;
         }
 
         //create new tween if not supplied in args
         tween??= GetTree().CreateTween();
 
         tween.TweenProperty(card, "position", new Vector2(newPos * CardPositionHorizonalOffset, card.Position.Y), CardMoveTime/2);
+
+        return tween;
     }
 
     /// <summary>
