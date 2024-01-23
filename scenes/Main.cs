@@ -379,7 +379,7 @@ public partial class Main : Node2D
 
         //array for selected cards
         BaseCard[] selectedCards = hand.SelectedCards.ToArray();
-        int[] selectedCardsIdxs= new int[selectedCards.Length];
+        int[] selectedCardsIdxs = new int[selectedCards.Length];
 
         //tween
         Tween finalMoveTween = GetTree().CreateTween();
@@ -389,7 +389,7 @@ public partial class Main : Node2D
 
         //move each selected card off the screen
         //foreach (BaseCard card in selectedCards)
-        for (int i = selectedCards.Length-1; i>=0;i--)
+        for (int i = selectedCards.Length - 1; i >= 0; i--)
         {
             BaseCard card = selectedCards[i];
             selectedCardsIdxs[i] = card.GetIndex();
@@ -418,7 +418,7 @@ public partial class Main : Node2D
         for (int i = 0; hand.CardCount < hand.CardLimit; i++)
         {
             await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
-            finalMoveTween = hand.MoveCardToHand(SpawnCardInStack(), i<selectedCards.Length? selectedCardsIdxs[i]:-1);
+            finalMoveTween = hand.MoveCardToHand(SpawnCardInStack(), i < selectedCards.Length ? selectedCardsIdxs[i] : -1);
         }
         hand.RepositionOnHandOrderChanged = true;
         return finalMoveTween;
@@ -442,7 +442,10 @@ public partial class Main : Node2D
         //set card side
         newCard.QuickFlip(BaseCard.Sides.back);
 
+        //spawn card ingame
         CardStack.AddChild(newCard);
+
+        //return card
         return newCard;
     }
 
@@ -455,13 +458,24 @@ public partial class Main : Node2D
         //fill up all hands
         //enable selections
 
+        //reset the pile
         NewPile();
+
+        //hide the winner text if any
         WinnerLabel.Hide();
         WinnerLabel.Text = "";
+
+        //hide the hand rank displays
         HandRanksDisplay.MoveDisplaysOffScreen();
+
+        //flip househandnode back to backside
         HouseHandNode.FlipAll(BaseCard.Sides.back);
+
+        //prevent reposition of cards
         HouseHandNode.SetRepositionOnHandOrderChanged(false);
         PlayerHandNode.SetRepositionOnHandOrderChanged(false);
+
+        //deal cards
         while (HouseHandNode.CardCount < HouseHandNode.CardLimit)
         {
             HouseHandNode.MoveCardToHand(SpawnCardInStack());
@@ -469,8 +483,12 @@ public partial class Main : Node2D
 
             await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
         }
+
+        //allow card reposition again
         HouseHandNode.SetRepositionOnHandOrderChanged(true);
         PlayerHandNode.SetRepositionOnHandOrderChanged(true);
+
+        //allow player to select their cards
         PlayerSelectionsEnabled = true;
     }
 
