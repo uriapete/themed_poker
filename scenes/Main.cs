@@ -460,6 +460,8 @@ public partial class Main : Node2D
         WinnerLabel.Text = "";
         HandRanksDisplay.MoveDisplaysOffScreen();
         HouseHandNode.FlipAll(BaseCard.Sides.back);
+        HouseHandNode.SetRepositionOnHandOrderChanged(false);
+        PlayerHandNode.SetRepositionOnHandOrderChanged(false);
         while (HouseHandNode.CardCount < HouseHandNode.CardLimit)
         {
             HouseHandNode.MoveCardToHand(SpawnCardInStack());
@@ -467,6 +469,8 @@ public partial class Main : Node2D
 
             await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
         }
+        HouseHandNode.SetRepositionOnHandOrderChanged(true);
+        PlayerHandNode.SetRepositionOnHandOrderChanged(true);
         PlayerSelectionsEnabled = true;
     }
 
