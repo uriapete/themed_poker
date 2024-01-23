@@ -677,9 +677,10 @@ public partial class Hand : Node2D
     /// </summary>
     public void RepositionAllCards()
     {
+        Tween moveAnimTween = GetTree().CreateTween().SetParallel();
         foreach (BaseCard card in HandContainer.GetChildren())
         {
-            MoveCard(card, card.GetIndex());
+            MoveCard(card, card.GetIndex(),moveAnimTween);
         }
     }
 
