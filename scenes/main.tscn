@@ -33,6 +33,7 @@ SelectedCardVerticalOffset = 0.0
 
 [node name="PlayerHand" parent="." instance=ExtResource("4_3lg1f")]
 position = Vector2(650, 900)
+SelectedCardVerticalOffset = 60.0
 Side = -1
 Selectable = true
 
