@@ -215,7 +215,7 @@ public partial class Hand : Node2D
 
         List<int> oneOffValues = new();
 
-        foreach (BaseCard card in HandContainer.GetChildren())
+        foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
         {
             if (!valueCounts.ContainsKey(card.Value))
             {
@@ -342,7 +342,7 @@ public partial class Hand : Node2D
             case 4:
                 {
                     //pairs list
-                    List<int> accountedPairs = new List<int>();
+                    List<int> accountedPairs = new();
 
                     //while still counting pairs
                     while (accountedPairs.Count < 2)
@@ -429,7 +429,7 @@ public partial class Hand : Node2D
         int countedValues = valueCounts.Count;
 
         //sort values
-        List<int> sortedValueList = new List<int>();
+        List<int> sortedValueList = new();
 
         while (sortedValueList.Count < countedValues)
         {
@@ -515,7 +515,7 @@ public partial class Hand : Node2D
     public void FlipAll()
     {
         Side = (BaseCard.Sides)(-1 * (int)Side);
-        foreach (BaseCard card in HandContainer.GetChildren())
+        foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
         {
             card.Flip(Side);
         }
@@ -527,7 +527,7 @@ public partial class Hand : Node2D
     public void FlipAll(BaseCard.Sides side)
     {
         Side = side;
-        foreach (BaseCard card in HandContainer.GetChildren())
+        foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
         {
             card.Flip(side);
         }
@@ -545,7 +545,7 @@ public partial class Hand : Node2D
             if (
                 SelectedCards.Count <= 0
                 ||
-                SelectedCards[SelectedCards.Count - 1].GetIndex() < card.GetIndex()
+                SelectedCards[^1].GetIndex() < card.GetIndex()
             )
             {
                 SelectedCards.Add(card);
@@ -598,7 +598,7 @@ public partial class Hand : Node2D
         //then return
         if (oneOffVals.Count == 1)
         {
-            foreach (BaseCard card in HandContainer.GetChildren())
+            foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
             {
                 if (card.Value == oneOffVals[0])
                 {
@@ -610,7 +610,7 @@ public partial class Hand : Node2D
         }
 
         //select cards that are only one of a kind AND less than int preserveOverValue
-        foreach (BaseCard card in HandContainer.GetChildren())
+        foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
         {
             int value = card.Value;
             if (valueCounts[value] < 2 && value < preserveOverValue)
@@ -678,9 +678,9 @@ public partial class Hand : Node2D
     public Tween RepositionAllCards()
     {
         Tween moveAnimTween = GetTree().CreateTween().SetParallel();
-        foreach (BaseCard card in HandContainer.GetChildren())
+        foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
         {
-            MoveCard(card, card.GetIndex(),moveAnimTween);
+            MoveCard(card, card.GetIndex(), moveAnimTween);
         }
         return moveAnimTween;
     }
@@ -691,7 +691,7 @@ public partial class Hand : Node2D
     /// <param name="card">Card in hand to move.</param>
     /// <param name="newPos">Index position to move the card to.</param>
     /// <param name="tween">Optional: Tween to use to animate the card moving.</param>
-    public Tween MoveCard(BaseCard card, int newPos, Tween tween=null)
+    public Tween MoveCard(BaseCard card, int newPos, Tween tween = null)
     {
         if (card.GetParent() != HandContainer)
         {
@@ -699,9 +699,9 @@ public partial class Hand : Node2D
         }
 
         //create new tween if not supplied in args
-        tween??= GetTree().CreateTween();
+        tween ??= GetTree().CreateTween();
 
-        tween.TweenProperty(card, "position", new Vector2(newPos * CardPositionHorizonalOffset, card.Position.Y), CardMoveTime/2);
+        tween.TweenProperty(card, "position", new Vector2(newPos * CardPositionHorizonalOffset, card.Position.Y), CardMoveTime / 2);
 
         return tween;
     }
@@ -734,7 +734,7 @@ public partial class Hand : Node2D
     /// </summary>
     public void RemoveAllCards()
     {
-        foreach (BaseCard card in HandContainer.GetChildren())
+        foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
         {
             RemoveCard(card);
         }
