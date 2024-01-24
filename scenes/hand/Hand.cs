@@ -742,10 +742,12 @@ public partial class Hand : Node2D
     /// </summary>
     public void RemoveAllCards()
     {
+        SetRepositionOnHandOrderChanged(false);
         foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
         {
             RemoveCard(card);
         }
+        SetRepositionOnHandOrderChanged(true);
     }
 
     /// <summary>
