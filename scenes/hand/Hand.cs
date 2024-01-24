@@ -524,11 +524,7 @@ public partial class Hand : Node2D
     /// </summary>
     public void FlipAll()
     {
-        Side = (BaseCard.Sides)(-1 * (int)Side);
-        foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
-        {
-            card.Flip(Side);
-        }
+        FlipAll((BaseCard.Sides)(-1 * (int)Side));
     }
     /// <summary>
     /// Flips all cards to provided side.
