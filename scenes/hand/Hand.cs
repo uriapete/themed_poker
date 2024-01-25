@@ -510,13 +510,14 @@ public partial class Hand : Node2D
     /// Public setter method for RepositionOnHandOrderChanged.
     /// </summary>
     /// <param name="value"></param>
-    public void SetRepositionOnHandOrderChanged(bool value)
+    public Tween SetRepositionOnHandOrderChanged(bool value)
     {
         RepositionOnHandOrderChanged = value;
         if (value)
         {
-            RepositionAllCards();
+            return RepositionAllCards();
         }
+        return null;
     }
 
     /// <summary>
