@@ -64,6 +64,11 @@ public partial class Main : Node2D
     [Export] public float DiscardTargetYPos { get; private set; } = 1080;
 
     /// <summary>
+    /// The delay in seconds between the hands sorting and the hands flipping over.
+    /// </summary>
+    [Export(PropertyHint.Range, "0,2,or_greater")] public float SortFlipHandDelay { get; private set; } = .5f;
+
+    /// <summary>
     /// Delay in seconds between hand values being revealed and the winner being announced.
     /// </summary>
     [Export(PropertyHint.Range, "0,3,or_greater")] public float WinnerAnnounceDelay { get; private set; } = 1f;
