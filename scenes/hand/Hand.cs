@@ -677,7 +677,7 @@ public partial class Hand : Node2D
         tween.TweenProperty(card, "position", new Vector2(card.GetIndex() * CardPositionHorizonalOffset, 0), CardMoveTime);
 
         //flip card
-        card.Flip(Side);
+        _=card.Flip(Side);
 
         //done
         return tween;
