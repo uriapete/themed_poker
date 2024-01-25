@@ -681,12 +681,15 @@ public partial class Hand : Node2D
     /// <summary>
     /// Repositions all cards to correct positions. Called when HandContainer's Child Order is Changed.
     /// </summary>
-    public void RepositionAllCards()
+    /// <returns>The tween animating the last card to be animated.</returns>
+    public Tween RepositionAllCards()
     {
+        Tween lastTween = null;
         foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
         {
-            MoveCard(card, card.GetIndex());
+            lastTween=MoveCard(card, card.GetIndex());
         }
+        return lastTween;
     }
 
     /// <summary>
