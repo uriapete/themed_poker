@@ -33,7 +33,7 @@ size = Vector2(160, 220)
 
 [node name="BaseCard" type="Area2D" node_paths=PackedStringArray("DisplayParent", "Sprite", "ValueDisplayNode", "BlinkingTimer")]
 script = ExtResource("1_330c5")
-FlipDuration = 0.15
+FlipDuration = 0.4
 DisplayParent = NodePath("VisualContainer")
 Sprite = NodePath("VisualContainer/AnimatedSprite2D")
 ValueDisplayNode = NodePath("VisualContainer/ValueLabel")
