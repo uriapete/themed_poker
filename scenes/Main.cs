@@ -393,7 +393,6 @@ public partial class Main : Node2D
         {
             BaseCard card = selectedCards[i];
             selectedCardsIdxs[i] = card.GetIndex();
-            hand.RemoveCard(card, targetParent: this);
             finalMoveTween.TweenProperty(card, "position", new Vector2(card.Position.X, card.Position.Y - DiscardTargetYPos), DiscardAnimDuration);
         }
 
@@ -406,8 +405,8 @@ public partial class Main : Node2D
         //remove out cards
         foreach (BaseCard card in selectedCards)
         {
+            hand.RemoveCard(card);
             CardPile.Add(card);
-            RemoveChild(card);
         }
 
         //reset tween
