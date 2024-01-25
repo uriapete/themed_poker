@@ -160,45 +160,38 @@ public partial class BaseCard : Area2D
         {
             return;
         }
-        BeginFlip();
-        return;
-    }
-
-    /// <summary>
-    /// Protected method to start a flip.
-    /// </summary>
-    protected void BeginFlip()
-    {
         //set this bool so in case to stop something from running during flip
         Flipping = true;
 
         //create a tween for the animation
-        Tween tween = GetTree().CreateTween();
+        Tween tween1 = GetTree().CreateTween();
 
         //make this node x-scale to 0
-        tween.TweenProperty(this, "scale", Vector2.Down, FlipDuration / 2);
+        tween1.TweenProperty(this, "scale", Vector2.Down, FlipDuration / 2);
 
-        //run FinishFlip when done
-        tween.Finished += FinishFlip;
-    }
+        await ToSignal(tween1, Tween.SignalName.Finished);
 
-    /// <summary>
-    /// Protected method to finish a flip.
-    /// Should ONLY be connected to BeginFlip, DO NOT CALL.
-    /// </summary>
-    protected async void FinishFlip()
-    {
         //switch current side
         CurrentSide = (Sides)(-1 * (int)CurrentSide);
 
         //create the next tween
-        Tween tween = GetTree().CreateTween();
+        Tween tween2 = GetTree().CreateTween();
 
         //scale the node back to normal
-        tween.TweenProperty(this, "scale", Vector2.One, FlipDuration / 2);
+        tween2.TweenProperty(this, "scale", Vector2.One, FlipDuration / 2);
 
-        //after the tween is done, reset Flipping to completely finish
-        await ToSignal(tween, Tween.SignalName.Finished);
+        //after the tween2 is done, reset Flipping to completely finish
+        //await ToSignal(tween2, Tween.SignalName.Finished);
+
+        tween2.Finished += FinishFlip;
+    }
+
+    /// <summary>
+    /// Protected method to finish a flip.
+    /// Should ONLY be connected to Flip, DO NOT CALL.
+    /// </summary>
+    protected void FinishFlip()
+    {
         Flipping = false;
     }
 
