@@ -315,8 +315,12 @@ public partial class Main : Node2D
         Hand.SimpleHandValue HouseHandValue = HouseHandNode.GetHandValue(NumberOfValues - 1);
         Hand.SimpleHandValue PlayerHandValue = PlayerHandNode.GetHandValue(NumberOfValues - 1);
 
-        //flip all
-        HouseHandNode.FlipAll(BaseCard.Sides.front);
+        //flip all and wait for flip to finish
+        Tween lastFlipTween = await HouseHandNode.FlipAll(BaseCard.Sides.front);
+        if (lastFlipTween.IsRunning())
+        {
+            await ToSignal(lastFlipTween, Tween.SignalName.Finished);
+        }
 
         //display ranks
         Tween handRankDisplayTween = HandRanksDisplay.DisplayRanks(Hand.GetSimpleHandRankStr(HouseHandValue.Rank), Hand.GetSimpleHandRankStr(PlayerHandValue.Rank));
