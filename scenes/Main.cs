@@ -301,7 +301,15 @@ public partial class Main : Node2D
 
         //sort both hands
         HouseHandNode.SortHand();
-        PlayerHandNode.SortHand();
+        Tween playerSortLastTween=PlayerHandNode.SortHand();
+
+        if (playerSortLastTween.IsRunning())
+        {
+            await ToSignal(playerSortLastTween, Tween.SignalName.Finished);
+        }
+
+        //small delay for anticipation
+        await ToSignal(GetTree().CreateTimer(SortFlipHandDelay, false), SceneTreeTimer.SignalName.Timeout);
 
         //get rank infos
         Hand.SimpleHandValue HouseHandValue = HouseHandNode.GetHandValue(NumberOfValues - 1);
