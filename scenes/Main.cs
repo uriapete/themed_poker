@@ -481,7 +481,7 @@ public partial class Main : Node2D
         HandRanksDisplay.MoveDisplaysOffScreen();
 
         //flip househandnode back to backside
-        HouseHandNode.FlipAll(BaseCard.Sides.back);
+        _=HouseHandNode.FlipAll(BaseCard.Sides.back);
 
         //prevent reposition of cards
         HouseHandNode.SetRepositionOnHandOrderChanged(false);
