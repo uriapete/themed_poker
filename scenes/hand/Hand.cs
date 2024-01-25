@@ -425,7 +425,7 @@ public partial class Hand : Node2D
     /// <summary>
     /// Sorts the hand based on hand value (By amount of cards of value, then by value)
     /// </summary>
-    public void SortHand()
+    public Tween SortHand()
     {
         SetRepositionOnHandOrderChanged(false);
 
@@ -491,7 +491,7 @@ public partial class Hand : Node2D
             }
         }
 
-        SetRepositionOnHandOrderChanged(true);
+        return SetRepositionOnHandOrderChanged(true);
     }
 
     /// <summary>
