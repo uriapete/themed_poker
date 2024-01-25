@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 // BaseCard script, meant as a basic template for displayed cards
 // this will probs be inherited
@@ -153,12 +154,13 @@ public partial class BaseCard : Area2D
     /// <summary>
     /// Public function for flipping the card.
     /// </summary>
-    /// <param name="side"></param>
-    public void Flip(Sides side)
+    /// <param name="side">Side to flip the card to.</param>
+    /// <returns>The finishing Tween for the flipping animation.</returns>
+    public async Task<Tween> Flip(Sides side)
     {
         if (side == CurrentSide)
         {
-            return;
+            return null;
         }
         //set this bool so in case to stop something from running during flip
         Flipping = true;
@@ -184,6 +186,8 @@ public partial class BaseCard : Area2D
         //await ToSignal(tween2, Tween.SignalName.Finished);
 
         tween2.Finished += FinishFlip;
+
+        return tween2;
     }
 
     /// <summary>
