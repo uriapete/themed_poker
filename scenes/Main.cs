@@ -537,7 +537,8 @@ public partial class Main : Node2D
     /// <summary>
     /// Method that shuffles CardPile.
     /// </summary>
-    public void ShufflePile()
+    /// <returns>The Tween that animates the card stack shuffling.</returns>
+    public Tween ShufflePile()
     {
         Tween tween = CardStack.CreateTween();
 
@@ -579,6 +580,9 @@ public partial class Main : Node2D
             CardPile[i] = CardPile[swapWithIdx];
             CardPile[swapWithIdx] = currCard;
         }
+
+        //return the tween
+        return tween;
     }
 
     /// <summary>
