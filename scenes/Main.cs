@@ -588,11 +588,11 @@ public partial class Main : Node2D
     /// <summary>
     /// Method that resets CardPile.
     /// </summary>
-    public void NewPile()
+    public Tween NewPile()
     {
         RemoveAllCardsInPlay();
         CardPile = new List<BaseCard>(Cards);
-        ShufflePile();
+        return ShufflePile();
     }
 
     public void UpdateDebugMenu()
