@@ -490,9 +490,6 @@ public partial class Main : Node2D
         //fill up all hands
         //enable selections
 
-        //reset the pile
-        NewPile();
-
         //hide the winner text if any
         WinnerLabel.Hide();
         WinnerLabel.Text = "";
@@ -506,6 +503,9 @@ public partial class Main : Node2D
         //prevent reposition of cards
         HouseHandNode.SetRepositionOnHandOrderChanged(false);
         PlayerHandNode.SetRepositionOnHandOrderChanged(false);
+
+        //reset the pile and wait for anim to finish
+        await ToSignal(NewPile(), Tween.SignalName.Finished);
 
         //deal cards
         while (HouseHandNode.CardCount < HouseHandNode.CardLimit)
