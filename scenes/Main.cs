@@ -56,6 +56,7 @@ public partial class Main : Node2D
     /// <summary>
     /// Duration of the animation for discarding cards.
     /// </summary>
+    [ExportSubgroup("Discard Animation Settings","Discard")]
     [Export(PropertyHint.Range, "0,2,or_greater")] public float DiscardAnimDuration { get; private set; } = .5f;
 
     /// <summary>
@@ -92,6 +93,7 @@ public partial class Main : Node2D
     /// <summary>
     /// String to display on the WinnerLabel when the player wins.
     /// </summary>
+    [ExportSubgroup("Win Strings")]
     [Export] public string PlayerWinString { get; private set; } = "You Win!";
 
     /// <summary>
