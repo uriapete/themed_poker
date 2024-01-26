@@ -69,6 +69,22 @@ public partial class Main : Node2D
     [Export(PropertyHint.Range, "0,2,or_greater")] public float SortFlipHandDelay { get; private set; } = .5f;
 
     /// <summary>
+    /// The duration of a full step card stack rotation animation for shuffling.
+    /// </summary>
+    [ExportSubgroup("Shuffle Animation Settings", "ShuffleShake")]
+    [Export(PropertyHint.Range, "0,1,or_greater")] public float ShuffleShakeFullStepDuration = .1f;
+    
+    /// <summary>
+    /// Amount of steps for the card stack shuffling animation.
+    /// </summary>
+    [Export(PropertyHint.Range, "0,25,or_greater")] public ushort ShuffleShakeSteps = 4;
+
+    /// <summary>
+    /// How many degrees the card stack rotates during the animation.
+    /// </summary>
+    [Export(PropertyHint.Range, "0,180")] public float ShuffleShakeMaxDegrees = 15f;
+
+    /// <summary>
     /// Delay in seconds between hand values being revealed and the winner being announced.
     /// </summary>
     [Export(PropertyHint.Range, "0,3,or_greater")] public float WinnerAnnounceDelay { get; private set; } = 1f;
@@ -523,6 +539,39 @@ public partial class Main : Node2D
     /// </summary>
     public void ShufflePile()
     {
+        Tween tween = CardStack.CreateTween();
+
+        //for each step of the anim, add another animation to the tween.
+        for (int i = 0; i < ShuffleShakeSteps; i++)
+        {
+            float floatDuration;
+
+            //alternate rotation of stack
+            float shakeDeg = (i % 2) switch
+            {
+                0 => -ShuffleShakeMaxDegrees,
+                1 => ShuffleShakeMaxDegrees,
+                _ => ShuffleShakeMaxDegrees,
+            };
+
+            //have the step take half time on last or first steps
+            if (i==ShuffleShakeSteps-1)
+            {
+                shakeDeg = 0;
+                floatDuration = ShuffleShakeFullStepDuration / 2;
+            }else if (i == 0)
+            {
+                floatDuration = ShuffleShakeFullStepDuration / 2;
+            }
+            else
+            {
+                floatDuration = ShuffleShakeFullStepDuration;
+            }
+
+            tween.TweenProperty(CardStack, "rotation_degrees", shakeDeg, floatDuration);
+        }
+
+        //shuffle cards during animation
         for (int i = CardPile.Count - 1; i > 0; i--)
         {
             BaseCard currCard = CardPile[i];
