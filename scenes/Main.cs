@@ -334,7 +334,7 @@ public partial class Main : Node2D
         Hand.SimpleHandValue PlayerHandValue = PlayerHandNode.GetHandValue(NumberOfValues - 1);
 
         //flip all and wait for flip to finish
-        Tween lastFlipTween = await HouseHandNode.FlipAll(BaseCard.Sides.front);
+        Tween lastFlipTween = HouseHandNode.FlipAll(BaseCard.Sides.front);
         if (lastFlipTween.IsRunning())
         {
             await ToSignal(lastFlipTween, Tween.SignalName.Finished);
