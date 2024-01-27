@@ -156,38 +156,37 @@ public partial class BaseCard : Area2D
     /// </summary>
     /// <param name="side">Side to flip the card to.</param>
     /// <returns>The finishing Tween for the flipping animation.</returns>
-    public async Task<Tween> Flip(Sides side)
+    public Tween Flip(Sides? side=null)
     {
         if (side == CurrentSide)
         {
             return null;
         }
+
         //set this bool so in case to stop something from running during flip
         Flipping = true;
 
         //create a tween for the animation
-        Tween tween1 = GetTree().CreateTween();
+        Tween tween = GetTree().CreateTween();
 
         //make this node x-scale to 0
-        tween1.TweenProperty(this, "scale", Vector2.Down, FlipDuration / 2);
+        tween.TweenProperty(this, "scale", Vector2.Down, FlipDuration / 2);
 
-        await ToSignal(tween1, Tween.SignalName.Finished);
+        //await ToSignal(tween, Tween.SignalName.Finished);
 
         //switch current side
-        CurrentSide = (Sides)(-1 * (int)CurrentSide);
-
-        //create the next tween
-        Tween tween2 = GetTree().CreateTween();
+        tween.TweenCallback(Callable.From(() => { CurrentSide = (Sides)(-1 * (int)CurrentSide); }));
+        //CurrentSide = (Sides)(-1 * (int)CurrentSide);
 
         //scale the node back to normal
-        tween2.TweenProperty(this, "scale", Vector2.One, FlipDuration / 2);
+        tween.TweenProperty(this, "scale", Vector2.One, FlipDuration / 2);
 
         //after the tween2 is done, reset Flipping to completely finish
         //await ToSignal(tween2, Tween.SignalName.Finished);
 
-        tween2.Finished += FinishFlip;
+        tween.Finished += FinishFlip;
 
-        return tween2;
+        return tween;
     }
 
     /// <summary>
