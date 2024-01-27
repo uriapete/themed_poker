@@ -532,13 +532,20 @@ public partial class Main : Node2D
         //reset the pile and wait for anim to finish
         await ToSignal(NewPile(), Tween.SignalName.Finished);
 
+        Tween lastSpawnCardTween=null;
+
         //deal cards
         while (HouseHandNode.CardCount < HouseHandNode.CardLimit)
         {
             HouseHandNode.MoveCardToHand(SpawnCardInStack());
-            PlayerHandNode.MoveCardToHand(SpawnCardInStack());
+            lastSpawnCardTween=PlayerHandNode.MoveCardToHand(SpawnCardInStack());
 
             await ToSignal(GetTree().CreateTimer(DealCardDelay, false), SceneTreeTimer.SignalName.Timeout);
+        }
+
+        if (lastSpawnCardTween != null && lastSpawnCardTween.IsRunning())
+        {
+            await ToSignal(lastSpawnCardTween, Tween.SignalName.Finished);
         }
 
         //allow card reposition again
