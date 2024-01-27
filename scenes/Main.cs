@@ -54,6 +54,17 @@ public partial class Main : Node2D
     [Export(PropertyHint.Range, "0,1,or_greater")] public float DealCardDelay { get; private set; } = .1f;
 
     /// <summary>
+    /// String to display on DrawHoldButton when a card is selected.
+    /// </summary>
+    [ExportSubgroup("DrawHoldButton Strings", "DrawHoldButton")]
+    [Export] public string DrawHoldButtonSelectedString { get; private set; } = "Draw";
+
+    /// <summary>
+    /// String to display on DrawHoldButton when no card is selected.
+    /// </summary>
+    [Export] public string DrawHoldButtonNoneSelectedString { get; private set; } = "Hold";
+
+    /// <summary>
     /// Duration of the animation for discarding cards.
     /// </summary>
     [ExportSubgroup("Discard Animation Settings","Discard")]
