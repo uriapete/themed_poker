@@ -19,7 +19,7 @@ public partial class Main : Node2D
     /// BaseButton that will be used to execute the game.
     /// </summary>
     [ExportGroup("Nodes")]
-    [Export] public BaseButton DrawHoldButton { get; private set; }
+    [Export] public Button DrawHoldButton { get; private set; }
 
     /// <summary>
     /// Node to use for the spawn location for new cards.
