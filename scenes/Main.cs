@@ -238,6 +238,9 @@ public partial class Main : Node2D
         //after all is ready, connect pressed signal of the Draw/Hold btn to game.exe
         DrawHoldButton.Pressed += ExecuteGame;
 
+        //connect card select signal to method
+        PlayerHandNode.CardSelect+=OnPlayerCardSelect;
+
         if (DebugMenuLabel.Visible)
         {
             DebugValue = 0;
