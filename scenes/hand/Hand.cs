@@ -64,6 +64,8 @@ public partial class Hand : Node2D
     /// </summary>
     [Export] public bool Selectable { get; set; } = false;
 
+    [Signal] public delegate void CardSelectEventHandler();
+
     /// <summary>
     /// List for cards that are selected.
     /// </summary>
