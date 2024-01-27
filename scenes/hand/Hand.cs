@@ -525,7 +525,7 @@ public partial class Hand : Node2D
     /// Flips all cards over.
     /// Note: Returns a Task instead of just a Tween as to not mess with code/animation timing.
     /// </summary>
-    public Task<Tween> FlipAll()
+    public Tween FlipAll()
     {
         return FlipAll((BaseCard.Sides)(-1 * (int)Side));
     }
@@ -534,10 +534,10 @@ public partial class Hand : Node2D
     /// Note: Returns a Task instead of just a Tween as to not mess with code/animation timing.
     /// </summary>
     /// <param name="side">Side to flip cards to.</param>
-    public Task<Tween> FlipAll(BaseCard.Sides side)
+    public Tween FlipAll(BaseCard.Sides side)
     {
         Side = side;
-        Task<Tween> finalTween = null;
+        Tween finalTween = null;
         foreach (BaseCard card in HandContainer.GetChildren().Cast<BaseCard>())
         {
             finalTween=card.Flip(side);
