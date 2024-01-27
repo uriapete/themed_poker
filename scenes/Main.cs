@@ -293,6 +293,15 @@ public partial class Main : Node2D
         }
     }
 
+    public void OnPlayerCardSelect()
+    {
+        DrawHoldButton.Text = PlayerHandNode.SelectedCards.Count switch
+        {
+            0 => DrawHoldButtonNoneSelectedString,
+            _ => DrawHoldButtonSelectedString,
+        };
+    }
+
     /// <summary>
     /// Method that executes the game.
     /// </summary>
