@@ -546,6 +546,7 @@ public partial class Main : Node2D
         PlayerHandNode.SetRepositionOnHandOrderChanged(true);
 
         //allow player to select their cards
+        OnPlayerCardSelect();
         PlayerSelectionsEnabled = true;
     }
 
