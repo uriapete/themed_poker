@@ -581,6 +581,7 @@ public partial class Hand : Node2D
         }
         Tween tween = GetTree().CreateTween();
         tween.TweenProperty(card, "position", new Vector2(card.Position.X, newYPos),CardSelectTime);
+        EmitSignal(SignalName.CardSelect);
         return tween;
     }
 
