@@ -22,6 +22,9 @@ WinnerLabel = NodePath("HUD/WinnerLabel")
 HouseHandNode = NodePath("HouseHand")
 PlayerHandNode = NodePath("PlayerHand")
 DealCardDelay = 0.5
+ShuffleShakeFullStepDuration = 0.075
+ShuffleShakeSteps = 6
+ShuffleShakeMaxDegrees = 10.0
 DebugMenuLabel = NodePath("HUD/DebugMenuLabel")
 
 [node name="CardStack" parent="." instance=ExtResource("1_ajaik")]
