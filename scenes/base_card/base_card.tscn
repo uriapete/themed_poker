@@ -24,9 +24,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SystemFont" id="SystemFont_5ygoc"]
-font_names = PackedStringArray("Calibri")
-subpixel_positioning = 0
+[sub_resource type="Theme" id="Theme_gw2vg"]
+default_font_size = 128
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbtnw"]
 size = Vector2(160, 220)
@@ -50,13 +49,19 @@ animation = &"back"
 
 [node name="ValueLabel" type="Label" parent="VisualContainer"]
 visible = false
-offset_left = -34.0
-offset_top = -54.0
-offset_right = 31.0
-offset_bottom = 77.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -89.0
+offset_right = 32.5
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_gw2vg")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_5ygoc")
-theme_override_font_sizes/font_size = 128
 text = "E"
 horizontal_alignment = 1
 vertical_alignment = 1
