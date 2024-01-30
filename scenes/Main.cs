@@ -525,12 +525,12 @@ public partial class Main : Node2D
         //flip househandnode back to backside
         _=HouseHandNode.FlipAll(BaseCard.Sides.back);
 
+        //reset the pile and wait for anim to finish
+        await ToSignal(NewPile(), Tween.SignalName.Finished);
+
         //prevent reposition of cards
         HouseHandNode.SetRepositionOnHandOrderChanged(false);
         PlayerHandNode.SetRepositionOnHandOrderChanged(false);
-
-        //reset the pile and wait for anim to finish
-        await ToSignal(NewPile(), Tween.SignalName.Finished);
 
         Tween lastSpawnCardTween=null;
 
