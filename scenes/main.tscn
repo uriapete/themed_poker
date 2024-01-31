@@ -16,25 +16,27 @@ default_font_size = 92
 script = ExtResource("1_15e3l")
 CardScene = ExtResource("2_b7l1x")
 DrawHoldButton = NodePath("HUD/DrawHoldButton")
-CardStack = NodePath("CardStack")
+CardStack = NodePath("PlayLayer/CardStack")
 HandRanksDisplay = NodePath("HUD/RankLabelParent")
 WinnerLabel = NodePath("HUD/WinnerLabel")
-HouseHandNode = NodePath("HouseHand")
-PlayerHandNode = NodePath("PlayerHand")
+HouseHandNode = NodePath("PlayLayer/HouseHand")
+PlayerHandNode = NodePath("PlayLayer/PlayerHand")
 DealCardDelay = 0.5
 ShuffleShakeFullStepDuration = 0.075
 ShuffleShakeSteps = 6
 ShuffleShakeMaxDegrees = 10.0
 DebugMenuLabel = NodePath("HUD/DebugMenuLabel")
 
-[node name="CardStack" parent="." instance=ExtResource("1_ajaik")]
+[node name="PlayLayer" type="CanvasLayer" parent="."]
+
+[node name="CardStack" parent="PlayLayer" instance=ExtResource("1_ajaik")]
 position = Vector2(190, 170)
 
-[node name="HouseHand" parent="." instance=ExtResource("4_3lg1f")]
+[node name="HouseHand" parent="PlayLayer" instance=ExtResource("4_3lg1f")]
 position = Vector2(650, 170)
 SelectedCardVerticalOffset = 0.0
 
-[node name="PlayerHand" parent="." instance=ExtResource("4_3lg1f")]
+[node name="PlayerHand" parent="PlayLayer" instance=ExtResource("4_3lg1f")]
 position = Vector2(650, 900)
 SelectedCardVerticalOffset = 60.0
 Side = -1
