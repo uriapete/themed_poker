@@ -12,9 +12,11 @@
 default_font = SubResource("SystemFont_aieg2")
 default_font_size = 92
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("DrawHoldButton", "CardStack", "HandRanksDisplay", "WinnerLabel", "HouseHandNode", "PlayerHandNode", "DebugMenuLabel")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("CLPlayLayer", "CLHUDLayer", "DrawHoldButton", "CardStack", "HandRanksDisplay", "WinnerLabel", "HouseHandNode", "PlayerHandNode", "DebugMenuLabel")]
 script = ExtResource("1_15e3l")
 CardScene = ExtResource("2_b7l1x")
+CLPlayLayer = NodePath("PlayLayer")
+CLHUDLayer = NodePath("HUD")
 DrawHoldButton = NodePath("HUD/DrawHoldButton")
 CardStack = NodePath("PlayLayer/CardStack")
 HandRanksDisplay = NodePath("HUD/RankLabelParent")
