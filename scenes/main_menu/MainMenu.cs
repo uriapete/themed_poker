@@ -3,6 +3,11 @@ using System;
 
 public partial class MainMenu : Control
 {
+    /// <summary>
+    /// Scene to change to upon play.
+    /// </summary>
+    [Export]public PackedScene MainPlayScene { get;private set; }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
