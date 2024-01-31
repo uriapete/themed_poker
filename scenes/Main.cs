@@ -65,6 +65,11 @@ public partial class Main : Node2D
     [Export(PropertyHint.Range, "0,1,or_greater")] public float DealCardDelay { get; private set; } = .1f;
 
     /// <summary>
+    /// Delay in seconds between the end of one game and starting another.
+    /// </summary>
+    [Export(PropertyHint.Range, "0,5,or_greater")] public float GameEndDelay { get; private set; } = 2f;
+
+    /// <summary>
     /// String to display on DrawHoldButton when a card is selected.
     /// </summary>
     [ExportSubgroup("DrawHoldButton Strings", "DrawHoldButton")]
