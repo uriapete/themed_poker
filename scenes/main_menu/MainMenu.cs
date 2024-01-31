@@ -17,4 +17,12 @@ public partial class MainMenu : Control
     public override void _Process(double delta)
     {
     }
+
+    /// <summary>
+    /// Function to change the main menu to the gameplay scene.
+    /// </summary>
+    public void Play()
+    {
+        GetTree().ChangeSceneToPacked(MainPlayScene);
+    }
 }
