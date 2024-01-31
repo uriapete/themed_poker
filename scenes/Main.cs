@@ -16,9 +16,20 @@ public partial class Main : Node2D
     [Export] public PackedScene CardScene { get; private set; }
 
     /// <summary>
-    /// BaseButton that will be used to execute the game.
+    /// CanvasLayer for cards and other game elements.
     /// </summary>
     [ExportGroup("Nodes")]
+    [ExportSubgroup("CanvasLayers","CL")]
+    [Export]public CanvasLayer CLPlayLayer {  get; private set; }
+
+    /// <summary>
+    /// CanvasLayer for the HUD.
+    /// </summary>
+    [Export]public CanvasLayer CLHUDLayer { get; private set; }
+
+    /// <summary>
+    /// BaseButton that will be used to execute the game.
+    /// </summary>
     [Export] public Button DrawHoldButton { get; private set; }
 
     /// <summary>
