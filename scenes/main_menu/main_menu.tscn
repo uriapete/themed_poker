@@ -46,3 +46,5 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_4t0se")
 text = "Play"
+
+[connection signal="button_up" from="PlayButton" to="." method="Play"]
