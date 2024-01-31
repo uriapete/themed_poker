@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://psxidu1tl4d4"]
+[gd_scene load_steps=5 format=3 uid="uid://psxidu1tl4d4"]
 
 [ext_resource type="Script" path="res://scenes/main_menu/MainMenu.cs" id="1_kq13a"]
+[ext_resource type="PackedScene" uid="uid://fpt4kiy0e160" path="res://scenes/main.tscn" id="2_f0qds"]
 
 [sub_resource type="Theme" id="Theme_0y3me"]
 default_font_size = 128
@@ -16,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kq13a")
+MainPlayScene = ExtResource("2_f0qds")
 
 [node name="TitleLabel" type="Label" parent="."]
 layout_mode = 1
