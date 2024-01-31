@@ -432,6 +432,13 @@ public partial class Main : Node2D
         await ToSignal(GetTree().CreateTimer(WinnerAnnounceDelay, false), SceneTreeTimer.SignalName.Timeout);
 
         WinnerLabel.Show();
+
+        //if not debug, start a new game after a delay
+        if (!DebugMenuLabel.Visible)
+        {
+            SceneTreeTimer newGameTimer = GetTree().CreateTimer(GameEndDelay, processAlways: false);
+            newGameTimer.Timeout += NewGame;
+        }
     }
 
     /// <summary>
