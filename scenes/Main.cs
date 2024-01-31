@@ -265,6 +265,9 @@ public partial class Main : Node2D
             DebugMenuLabel.Text = $"value: {DebugValue}\ncardid: {DebugCardID}\nhand: {DebugHand.Name}";
             DebugUpdate += UpdateDebugMenu;
         }
+
+        //start new game on ready
+        NewGame();
     }
 
     //Called every frame. 'delta' is the elapsed time since the previous frame.
