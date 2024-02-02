@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlns0dkxplovx"]
+[gd_scene load_steps=5 format=3 uid="uid://dlns0dkxplovx"]
 
 [ext_resource type="Script" path="res://scenes/globals/global/Global.cs" id="1_41gad"]
+[ext_resource type="PackedScene" uid="uid://qh0rm5wvyc7" path="res://scenes/main_menu/main_menu.tscn" id="2_t0yao"]
+[ext_resource type="PackedScene" uid="uid://bmtrr02qm4xnh" path="res://scenes/licenses_screen/licenses_screen.tscn" id="3_i1xu0"]
+[ext_resource type="PackedScene" uid="uid://fpt4kiy0e160" path="res://scenes/main.tscn" id="4_3pjos"]
 
 [node name="Global" type="Node"]
 script = ExtResource("1_41gad")
+MainMenuScene = ExtResource("2_t0yao")
+LicensesScene = ExtResource("3_i1xu0")
+MainGameScene = ExtResource("4_3pjos")
