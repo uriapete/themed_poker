@@ -67,3 +67,4 @@ theme = SubResource("Theme_t1mlr")
 text = "Third-Party Licenses"
 
 [connection signal="button_up" from="PlayButton" to="." method="Play"]
+[connection signal="button_up" from="LicensesButton" to="." method="ToLicenses"]
