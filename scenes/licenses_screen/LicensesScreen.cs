@@ -17,6 +17,6 @@ public partial class LicensesScreen : CanvasLayer
 
     public void BackToMainMenu()
     {
-
+        GetTree().ChangeSceneToPacked(MainMenuScene);
     }
 }
