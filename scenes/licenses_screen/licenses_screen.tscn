@@ -17,3 +17,5 @@ offset_right = 268.0
 offset_bottom = 180.0
 theme = SubResource("Theme_evf25")
 text = "Back"
+
+[connection signal="button_up" from="BackButton" to="." method="BackToMainMenu"]
