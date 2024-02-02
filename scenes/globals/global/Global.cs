@@ -10,12 +10,12 @@ public partial class Global : Node
     /// <summary>
     /// Tree Path to the Global Autoload.
     /// </summary>
-    public static string TreePath { get; private set; }
+    public static Global CurrentInstance { get; private set; }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        TreePath = GetPath();
+        CurrentInstance = this;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
