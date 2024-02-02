@@ -3,6 +3,10 @@ using System;
 
 public partial class Global : Node
 {
+    [Export]public PackedScene MainMenuScene { get;private set; }
+    [Export]public PackedScene LicensesScene { get;private set; }
+    [Export]public PackedScene MainGameScene { get;private set; }
+
     /// <summary>
     /// Tree Path to the Global Autoload.
     /// </summary>
