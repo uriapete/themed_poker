@@ -3,6 +3,8 @@ using System;
 
 public partial class LicensesScreen : CanvasLayer
 {
+    [Export] public PackedScene MainMenuScene { get; private set; }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
