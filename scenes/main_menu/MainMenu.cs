@@ -30,4 +30,12 @@ public partial class MainMenu : Control
     {
         GetTree().ChangeSceneToPacked(MainPlayScene);
     }
+
+    /// <summary>
+    /// Changes the scene to the Licenses screen.
+    /// </summary>
+    public void ToLicenses()
+    {
+        GetTree().ChangeSceneToPacked(LicensesScene);
+    }
 }
