@@ -3,7 +3,13 @@ using System;
 
 public partial class LicensesScreen : CanvasLayer
 {
-    [Export] public PackedScene MainMenuScene { get; private set; }
+    public PackedScene MainMenuScene
+    {
+        get
+        {
+            return Global.CurrentInstance.MainMenuScene;
+        }
+    }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()

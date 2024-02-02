@@ -1,14 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmtrr02qm4xnh"]
+[gd_scene load_steps=3 format=3 uid="uid://bmtrr02qm4xnh"]
 
 [ext_resource type="Script" path="res://scenes/licenses_screen/LicensesScreen.cs" id="1_h7vo4"]
-[ext_resource type="PackedScene" uid="uid://psxidu1tl4d4" path="res://scenes/main_menu/main_menu.tscn" id="2_cklvh"]
 
 [sub_resource type="Theme" id="Theme_evf25"]
 default_font_size = 64
 
 [node name="LicensesScreen" type="CanvasLayer"]
 script = ExtResource("1_h7vo4")
-MainMenuScene = ExtResource("2_cklvh")
 
 [node name="BackButton" type="Button" parent="."]
 offset_left = 91.0
