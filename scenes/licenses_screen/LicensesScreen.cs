@@ -12,4 +12,9 @@ public partial class LicensesScreen : CanvasLayer
     public override void _Process(double delta)
     {
     }
+
+    public void BackToMainMenu()
+    {
+
+    }
 }
