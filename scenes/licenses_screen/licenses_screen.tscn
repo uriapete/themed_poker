@@ -1,3 +1,14 @@
-[gd_scene format=3 uid="uid://bmtrr02qm4xnh"]
+[gd_scene load_steps=2 format=3 uid="uid://bmtrr02qm4xnh"]
+
+[sub_resource type="Theme" id="Theme_evf25"]
+default_font_size = 64
 
 [node name="LicensesScreen" type="CanvasLayer"]
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 91.0
+offset_top = 91.0
+offset_right = 268.0
+offset_bottom = 180.0
+theme = SubResource("Theme_evf25")
+text = "Back"
