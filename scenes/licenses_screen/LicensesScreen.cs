@@ -3,6 +3,8 @@ using System;
 
 public partial class LicensesScreen : CanvasLayer
 {
+    [Export]public RichTextLabel LicenseTextDisplay { get;private set; }
+
     public PackedScene MainMenuScene
     {
         get
