@@ -8,8 +8,9 @@ default_font_size = 64
 [sub_resource type="Theme" id="Theme_s7iu3"]
 default_font_size = 24
 
-[node name="LicensesScreen" type="CanvasLayer"]
+[node name="LicensesScreen" type="CanvasLayer" node_paths=PackedStringArray("LicenseTextDisplay")]
 script = ExtResource("1_h7vo4")
+LicenseTextDisplay = NodePath("ScrollContainer/MainLicenseText")
 
 [node name="BackButton" type="Button" parent="."]
 offset_left = 91.0
