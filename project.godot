@@ -13,7 +13,8 @@ config_version=5
 config/name="Themed Poker"
 run/main_scene="res://scenes/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://poker-icon.png"
+config/windows_native_icon="res://poker-icon.ico"
 
 [autoload]
 
