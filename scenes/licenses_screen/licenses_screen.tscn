@@ -44,3 +44,4 @@ theme = SubResource("Theme_s7iu3")
 bbcode_enabled = true
 
 [connection signal="button_up" from="BackButton" to="." method="BackToMainMenu"]
+[connection signal="meta_clicked" from="ScrollContainer/MainLicenseText" to="." method="OpenLicenseLink"]
