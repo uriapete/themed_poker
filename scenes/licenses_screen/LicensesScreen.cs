@@ -30,6 +30,11 @@ public partial class LicensesScreen : CanvasLayer
     {
     }
 
+    public void OpenLicenseLink(string metaLink)
+    {
+        OS.ShellOpen(metaLink);
+    }
+
     public void BackToMainMenu()
     {
         GetTree().ChangeSceneToPacked(MainMenuScene);
