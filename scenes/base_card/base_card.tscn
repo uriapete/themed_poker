@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://17uh7nnayp77"]
+[gd_scene load_steps=11 format=3 uid="uid://17uh7nnayp77"]
 
 [ext_resource type="Script" path="res://scenes/base_card/BaseCard.cs" id="1_330c5"]
 [ext_resource type="Texture2D" uid="uid://d5qfenku4iod" path="res://assets/card_base/card_base_back.png" id="2_xnicw"]
 [ext_resource type="Texture2D" uid="uid://bhq1yjd7esv4s" path="res://assets/card_base/card_base_front.png" id="3_htrnb"]
 [ext_resource type="Script" path="res://scenes/base_card/ValueLabel.cs" id="4_f7exu"]
+[ext_resource type="Script" path="res://scenes/base_card/CardFace.cs" id="5_334lt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qli0p"]
 animations = [{
@@ -26,6 +27,13 @@ animations = [{
 
 [sub_resource type="Theme" id="Theme_gw2vg"]
 default_font_size = 128
+
+[sub_resource type="SystemFont" id="SystemFont_77gmi"]
+font_names = PackedStringArray("Calibri", "Sans-Serif")
+
+[sub_resource type="Theme" id="Theme_0lcoo"]
+default_font = SubResource("SystemFont_77gmi")
+default_font_size = 64
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbtnw"]
 size = Vector2(160, 220)
@@ -67,6 +75,34 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1
 script = ExtResource("4_f7exu")
+
+[node name="CardFace" type="Node2D" parent="VisualContainer"]
+script = ExtResource("5_334lt")
+
+[node name="FaceSprite" type="Sprite2D" parent="VisualContainer/CardFace"]
+
+[node name="ValueLabelBR" type="Label" parent="VisualContainer/CardFace"]
+offset_left = 69.0
+offset_top = 99.0
+offset_right = 100.0
+offset_bottom = 166.0
+rotation = 3.14159
+theme = SubResource("Theme_0lcoo")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ValueLabelTL" type="Label" parent="VisualContainer/CardFace"]
+offset_left = -69.0
+offset_top = -99.0
+offset_right = -38.0
+offset_bottom = -32.0
+theme = SubResource("Theme_0lcoo")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
