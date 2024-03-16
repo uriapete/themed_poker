@@ -1,10 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://17uh7nnayp77"]
+[gd_scene load_steps=16 format=3 uid="uid://17uh7nnayp77"]
 
 [ext_resource type="Script" path="res://scenes/base_card/BaseCard.cs" id="1_330c5"]
 [ext_resource type="Texture2D" uid="uid://d5qfenku4iod" path="res://assets/card_base/card_base_back.png" id="2_xnicw"]
 [ext_resource type="Texture2D" uid="uid://bhq1yjd7esv4s" path="res://assets/card_base/card_base_front.png" id="3_htrnb"]
-[ext_resource type="Script" path="res://scenes/base_card/ValueLabel.cs" id="4_f7exu"]
 [ext_resource type="Script" path="res://scenes/base_card/CardFace.cs" id="5_334lt"]
+[ext_resource type="Texture2D" uid="uid://ciihw86pklqgn" path="res://assets/card_faces/card_pome.png" id="6_7qi86"]
+[ext_resource type="Texture2D" uid="uid://b2coy4be07ol" path="res://assets/card_faces/card_shiba.png" id="7_y65pm"]
+[ext_resource type="Texture2D" uid="uid://cqmfhgm6l2une" path="res://assets/card_faces/card_shep.png" id="8_fq2j1"]
+[ext_resource type="Texture2D" uid="uid://dbyjiky7l7mw5" path="res://assets/card_faces/card_akita.png" id="9_dl53h"]
+[ext_resource type="Texture2D" uid="uid://hf2bnsh6rebd" path="res://assets/card_faces/card_samo.png" id="10_2p1fc"]
+[ext_resource type="Texture2D" uid="uid://njp2o5uty1ai" path="res://assets/card_faces/card_pyre.png" id="11_3lkdu"]
+[ext_resource type="Texture2D" uid="uid://cwdkqcfw5d5yt" path="res://poker-icon.png" id="11_c8t3w"]
+[ext_resource type="Theme" uid="uid://u4lv44gfisnt" path="res://scenes/base_card/value_label_theme.tres" id="12_p2d7i"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qli0p"]
 animations = [{
@@ -25,15 +32,64 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Theme" id="Theme_gw2vg"]
-default_font_size = 128
-
-[sub_resource type="SystemFont" id="SystemFont_77gmi"]
-font_names = PackedStringArray("Calibri", "Sans-Serif")
-
-[sub_resource type="Theme" id="Theme_0lcoo"]
-default_font = SubResource("SystemFont_77gmi")
-default_font_size = 64
+[sub_resource type="SpriteFrames" id="SpriteFrames_npfbe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_dl53h")
+}],
+"loop": true,
+"name": &"akita",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_c8t3w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7qi86")
+}],
+"loop": true,
+"name": &"pome",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_3lkdu")
+}],
+"loop": true,
+"name": &"pyre",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_2p1fc")
+}],
+"loop": true,
+"name": &"samo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_fq2j1")
+}],
+"loop": true,
+"name": &"shep",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_y65pm")
+}],
+"loop": true,
+"name": &"shiba",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbtnw"]
 size = Vector2(160, 220)
@@ -43,7 +99,7 @@ script = ExtResource("1_330c5")
 FlipDuration = 0.4
 DisplayParent = NodePath("VisualContainer")
 Sprite = NodePath("VisualContainer/AnimatedSprite2D")
-ValueDisplayNode = NodePath("VisualContainer/ValueLabel")
+ValueDisplayNode = NodePath("VisualContainer/CardFace")
 BlinkingTimer = NodePath("BlinkingTimer")
 
 [node name="BlinkingTimer" type="Timer" parent="."]
@@ -55,31 +111,33 @@ wait_time = 0.5
 sprite_frames = SubResource("SpriteFrames_qli0p")
 animation = &"back"
 
-[node name="ValueLabel" type="Label" parent="VisualContainer"]
+[node name="CardFace" type="Node2D" parent="VisualContainer" node_paths=PackedStringArray("FaceSprite", "Labels")]
 visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.5
-offset_top = -89.0
-offset_right = 32.5
-offset_bottom = 89.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_gw2vg")
+script = ExtResource("5_334lt")
+FaceSprite = NodePath("FaceSprite")
+ValueFaceNames = {
+0: "pome",
+1: "shiba",
+2: "shep",
+3: "akita",
+4: "samo",
+5: "pyre"
+}
+Labels = [NodePath("ValueLabelTL"), NodePath("ValueLabelBR")]
+
+[node name="FaceSprite" type="AnimatedSprite2D" parent="VisualContainer/CardFace"]
+sprite_frames = SubResource("SpriteFrames_npfbe")
+
+[node name="ValueLabelTL" type="Label" parent="VisualContainer/CardFace"]
+offset_left = -69.0
+offset_top = -99.0
+offset_right = -38.0
+offset_bottom = -32.0
+theme = ExtResource("12_p2d7i")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "E"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 1
-script = ExtResource("4_f7exu")
-
-[node name="CardFace" type="Node2D" parent="VisualContainer"]
-script = ExtResource("5_334lt")
-
-[node name="FaceSprite" type="Sprite2D" parent="VisualContainer/CardFace"]
 
 [node name="ValueLabelBR" type="Label" parent="VisualContainer/CardFace"]
 offset_left = 69.0
@@ -87,18 +145,7 @@ offset_top = 99.0
 offset_right = 100.0
 offset_bottom = 166.0
 rotation = 3.14159
-theme = SubResource("Theme_0lcoo")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "E"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ValueLabelTL" type="Label" parent="VisualContainer/CardFace"]
-offset_left = -69.0
-offset_top = -99.0
-offset_right = -38.0
-offset_bottom = -32.0
-theme = SubResource("Theme_0lcoo")
+theme = ExtResource("12_p2d7i")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "E"
 horizontal_alignment = 1
