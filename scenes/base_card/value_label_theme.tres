@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://u4lv44gfisnt"]
+
+[sub_resource type="SystemFont" id="SystemFont_77gmi"]
+font_names = PackedStringArray("Calibri", "Sans-Serif")
+
+[resource]
+default_font = SubResource("SystemFont_77gmi")
+default_font_size = 64
