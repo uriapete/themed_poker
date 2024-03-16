@@ -5,6 +5,7 @@ public partial class CardFace : Node2D
 {
     [Export]public AnimatedSprite2D FaceSprite { get;private set; }
     [Export]public Godot.Collections.Dictionary<int,string> ValueFaceNames { get; private set; }
+    [Export]public Godot.Collections.Array<Label> Labels { get; private set; }
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
